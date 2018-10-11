@@ -1,0 +1,3950 @@
+#include<iostream>
+using namespace std;
+typedef int BOOL;
+int main() {
+	BOOL bVar1;
+	bool bVar2;
+	bVar1 = (1 < 2) + (2 < 3);//정수형으로 취급해서 1을 출력!!
+	bVar2 = (1 <2) + (2 <3);//조건중 하나만 참이여도 1을출력
+	cout << "bVar1 : " << bVar1 << endl;
+	cout << "bvar2 : " << bVar2 << endl;
+	return 0;
+}
+
+
+
+
+
+
+#include<iostream>
+using namespace std;
+
+int main() {
+	int **p;
+	int i, j;
+	p = new int *[4];//p[0]~p[3]에는 주소값이 들어있음
+
+	for (i = 0; i < 4; i++)
+		p[i] = new int[5];
+	for (i = 0; i < 4; i++)
+		for (j = 0; j < 5; j++)
+			p[i][j] = i + j;
+	for (i = 0; i < 4; i++) {
+		for (j = 0; j < 5; j++)
+			cout << p[i][j] << "\t";
+		cout << endl;
+	}
+	for (i = 0; i < 4; i++)
+		delete[]p[i];
+	delete[]p;
+	return 0;
+}
+
+
+
+
+
+#include<iostream>
+using namespace std;
+int *GetArray(int n) {//동적메모리할당을 해주는 함수
+	int *p;
+	p = new int[n];
+	for (int i = 0; i < n; i++)
+		p[i] = i;
+	return p;
+}
+int main() {
+	int i;
+	int *pAry;
+	pAry = GetArray(5);
+	for (i = 0; i < 5; i++)
+		cout << pAry[i] << " ";
+	cout << endl;
+	delete[]pAry;
+}
+
+
+
+
+
+
+#include<iostream>
+using namespace std;
+int main() {
+	string str1 = "Hello";
+	string str2 = "world";
+	string str3;
+	int len;
+	//copy
+	str3 = str1;
+	cout << "str3:" << str3 << end1;
+
+	//strcat
+	str3 = str1 + str2;
+	cout << "str1+str2:" << str3 << end1;
+	//length
+	len = str3.size();
+	cout << "str3.size():" << len << end1;
+	//compare
+	string str4 = "Hello";
+	if (str1 == str4)
+		cout << "Same" << end1;
+	return 0;
+
+}
+
+
+
+
+
+#include<iostream>
+using namespace std;
+int main() {
+	string str("Welcome to the string wolrd in C++!!!");
+	char cstr[100];
+	strcpy(cstr, str.c_str());//strcpy함수를 ㅅ용하기위해서C-style문자열로 먼저 변환한다
+	cout << cstr << end1;//c_str()함수는 string객체가 가진 문자열의 주소를 반환한다****중요***const char* cstr=str.c_str()하면 문자열데이터까지공유!!!!
+	string str2(cstr);//C-style문자열을 복사하여 C++string을 만든다
+	cout << str2 << end1;
+	return 0;
+}
+
+
+
+
+
+
+
+#include<iostream>
+using namespace std;
+#define MAXWORDS 100
+int main() {
+	string words[MAXWORDS];
+	int nwords = 0;
+	while (nwords < MAXWORDS) {
+		cin >> words[nwords];//단어 입력받아저장하기
+		if (words[nwords].compare("exit") == 0)
+			break;
+		nwords++;
+	}
+}
+
+
+
+
+
+
+
+#include<iostream>//파일읽어오기
+#include<fstream>
+using namespace std;
+int main() {
+	ifstream in_file("table.txt");
+	ofstream out_file("output.txt");
+	string str;
+	while (!in_file.eof()) {
+		in_file >> str;
+		out_file << str;
+	}
+	in_file.close();
+	out_file.close();
+	return 0;
+}
+
+
+
+
+#include<iostream>
+using namespace std;
+int main() {
+	string line;
+	while (1) {
+		cout << "$ ";
+		getline(cin, line);//'\n'문자를 만날때까지 라인전체를 읽어준다.
+		if (line == "exit")
+			break;
+		cout << line << ":" << line.size() << end1;
+	}
+	return 0;
+}
+
+
+
+
+
+
+#include<iostream>//라인읽어오기
+using namespace std;
+int main() {
+	while (1) {
+		cout << "$ ";
+		string str = read_line_with_compression();
+		if (str == "exit")break;
+		cout << str << ":" << str.size() << end1;
+	}
+}
+string read_line_with_compression() {
+	char ch;
+	string str;
+	while (1) {
+		cin.get(ch);
+		if (ch == '\n')break;
+		if (!isspace(ch) || str.size() > 0 && !isspace(str.back()))
+			str += ch;
+	}
+	if (str.size() > 0 && isspace(str.back()))
+		str.back() = '\0';
+	return str;
+}
+
+
+
+
+
+
+그룹 액티비티
+1장
+1)
+scanf_s는 배열의 크기를 지정해야하므로 오버플로우가 발생하지않는다.
+
+배열의 이름을 매개변수로 넘겨주면 받는애는 배열임으로 모르고 단지 포인터(정수)로 생각한다.그러므로 넘겨받은 배열의 크기를 알수가 없다.
+
+
+2-1)
+//모든 메모리주소는 32bits정수이다.(=32bits OS에 따른 정수주소)
+//포인터 형태정의해주는이유:포인터저장된 주소에서 한번읽어올때 몇바이트씩 읽어오는지 알기위해
+//포인터값이 변하진않는다.
+//little endian:낮은자리수가 메모리주소의 시작점에 간다.
+
+#include<stdio.h>//출력:20,이유:함수에 20이 들어가서 30으로 바꼇을뿐이지 메인함수의 y값에는 영향을 주지못한다.
+void fun(int x) {
+	x = 30;
+}
+int main() {
+	int y = 20;
+	fun(y);
+	printf("%d", y);
+	return 0;
+}
+
+
+
+2-2)
+#include<stdio.h>//출력:30,이유:y의 주소를 참조해서 바꿨으므로 바뀔수있다.
+void fun(int *ptr) {
+	*ptr = 30;
+}
+int main() {
+	int y = 20;
+	fun(&y);
+	printf("%d", y);
+	return 0;
+}
+
+
+
+2-3)
+#include<stdio.h>//출력:0,0,5,5,6,6,이유:y의 주소를 참조해서 바꿨으므로 바뀔수있다.
+int main() {
+	int *ptr;
+	int x;
+	ptr = &x;
+	*ptr = 0;
+	printf(" x = %d\n", x);
+	printf(" *ptr = %d\n", *ptr);
+	*ptr += 5;
+	printf(" x= %d\n", x);
+	printf(" *ptr=%d\n", *ptr);
+	(*ptr)++;
+	printf(" x = %d\n", x);
+	printf(" *ptr = %d\n", *ptr);
+	return 0;
+}
+
+
+
+
+2-4)
+#include<stdio.h>//출력:12,4,3,4,이유:int형변수는 4바이트고,char형변수는 1바이트이다.또한 포인터형 변수는 배열의 첫번째칸의 주소만 정수형태로 저장됨로.
+int main() {
+	int arri[] = { 1,2,3 };
+	int *ptri = arri;
+	char arrc[] = { 1,2,3 };
+	char *ptrc = arrc;
+	printf("sizeof arri[]=%d\n", sizeof(arri));
+	printf("sizeof ptri=%d\n", sizeof(ptri));
+	printf("sizeof arrc[]=%d\n", sizeof(arrc));
+	printf("sizeof ptrc = %d\n", sizeof(ptrc));
+	return 0;
+}
+
+
+
+
+2-5)
+#include<stdio.h>//출력:90.5,3,이유:주소를 3칸증가함으로 배열에서 3칸뒤의 숫자가나올것이고 ,주소간 빼기는 배열에서 몇칸 차이 나는가를 의미하므로 3칸차이라서 3이 나온다.
+int main() {
+	float arr[5] = { 12.5,10.0,13.5,90.5,0.5 };
+	float *ptr1 = &arr[0];
+	float *ptr2 = ptr1 + 3;
+	printf("%f ", *ptr2);
+	printf("%d", ptr2 - ptr1);
+	return 0;
+}
+
+
+2-6)
+#include<stdio.h>//출력:5,20,이유:$$주소는 바이트단위로 나눠진다$$int형에서 한칸은 4바이트라서 5칸떨어지면 5이고,char형으로 바꾸면 한칸이 1바이트 이므로 정수형에서의 한칸이 4칸으로 쪼개지게되므로 정수형에서 5칸떨어지면 char형에서 20이된다.
+int main() {
+	int arr[] = { 10,20,30,40,50,60 };
+	int *ptr1 = arr;
+	int *ptr2 = arr + 5;
+	printf("Number of elements between two pointer are:%d", (ptr2 - ptr1));
+	printf("Number of bytes between two pointer are %d", (char*)ptr2 - (char*)ptr1);
+	return 0;
+}
+
+2-7)
+#include<stdio.h>//출력:513,이유:x는 한바이트씩 읽어오는데 512을 32비트로 나타낸 2진수 값에서 첫번째 바이트에 1을 넣고 2번째 바이트에 2(2진수로 10)를 넣으면 513의 2진수값이 나온다.
+int main() {
+	int a;
+	char *x;
+	x = (char*)&a;//한바이트씩 읽어옴
+	a = 512;
+	x[0] = 1;
+	x[1] = 2;
+	printf("%d\n", a);
+	return 0;
+}
+
+
+
+
+2-8)
+#include<stdio.h>//결과:10,이유:배열의 이름은 배열첫번째수의 주소를 나타내고 이는 정수로 4바이트를 차지한다.그러므로 arr_size는 1이 되기때문에 한번밖에 반복할수 없다.
+void fun(int arr[]) {
+	int arr_size = sizeof(arr) / sizeof(arr[0]);
+	for (int i = 0; i < arr_size; i++)
+		printf("%d ", arr[i]);
+}
+int main() {
+	int i;
+	int arr[4] = { 10,20,30,40 };
+	fun(arr);
+	return 0;
+}
+
+
+
+
+
+2-9)
+#include<stdio.h>//출력:0,2,이유:함수내에서 p가q의 주소를 가리키게되고 바뀐 p주소참조값이 2로 바뀌므로 최종적으로 q의 주소참조값이 바뀌게된다.
+void f(int *p, int *q) {
+	p = q;
+	*p = 2;
+}
+int i = 0, j = 1;
+int main() {
+	f(&i, &j);
+	printf("%d %d\n", i, j);
+	return 0;
+}
+
+
+
+
+
+
+C++
+-new와 new[]연산자를 이용하여 동적메모리할당을한다.
+-문자열을 두가지방식으로 다룬다.(string클래스로 표현된문자열이 추가됨-문자열을 하나의 데이터로 다룸)
+
+
+백슬래쉬를 인식하게 하고싶으면 "\\\\"이렇게 해야한다.
+백슬래쉬 자체로 의미가 있기 때문에(구글쳐보기)
+전역변수를 잘이용해야한다(너무 큰데이터를 만들면 안됩니당)
+
+
+
+#include<stdio.h>//문자열 배열포인터에 저장하기
+#include<string.h>
+#pragma warning(disable:4996)
+#define BUFFER_SIZE 100
+int main() {
+	char*words[100];
+	int n = 0;
+	char buffer[BUFFER_SIZE];
+	while (n < 4 && scanf("%s", buffer) != EOF) {
+		words[n++] = strdup(buffer);//buffer의 주소는 항상일정하므로 복제본을 만들어서 그 복제본의 주소를 리턴해줌.
+	}
+	for (int i = 0; i < 4; i++)
+		printf("%s\n", words[i]);
+}
+
+
+
+
+
+#include<stdio.h>//fgets에관하여
+#include<string.h>
+#include<stdlib.h>
+#pragma warning(disable:4996)
+#define BUFFER_SIZE 100
+int main() {
+	char buffer[40];
+	while (1) {
+		printf("$ ");
+		fgets(buffer, BUFFER_SIZE,stdin);//fgets:1)줄바꿈문자까지 읽어서 버퍼에 저장해줌(포함안하려면 마지막에 NULL문자 넣어줘야함),2)크기넘을경우 다음반복때 끊긴 그 다음부터 읽는다.(gets는 줄바꿈포함 안함but버퍼크기를 신경안쓰게됨)
+		buffer[strlen(buffer) - 1] = '\0';
+		printf("%s:%d\n", buffer, strlen(buffer));
+	}
+}
+
+
+
+
+
+#include<stdio.h>//한글자씩 읽기(강의연습문제1)
+#include<string.h>
+#include<stdlib.h>
+#pragma warning(disable:4996)
+#define BUFFER_SIZE 100
+int main() {
+	char buffer[40];
+	while (1) {
+		printf("$ ");
+		read_line(buffer, BUFFER_SIZE);
+		printf("%s:%d\n", buffer, strlen(buffer));
+	}
+}
+int read_line(char str[], int limit) {//limit넘으면 뒷부분은 무시!!!
+	int ch, i = 0;
+	while ((ch = getchar()) != '\n')
+		if (i < limit-1)
+			str[i++] = ch;
+	str[i] = '\0';
+	return i;
+}
+
+
+
+
+
+
+#pragma warning(disable:4996)//1강 강의 문제1
+#include<stdio.h>
+#include<string.h>
+#define BUFFERSIZE 100
+int read_line(char buffer[],int n) {
+	int ch, i = 0;
+	while ((ch = getchar()) != '\n')
+		if (i < n)
+			buffer[i++] = ch;
+	buffer[i] = '\0';//널문자를 넣어줘야함.
+	return i;//최대n인 buffer의 길이!!넘으면 그냥n으로 출력!!
+}
+int main() {
+	char buffer[BUFFERSIZE];
+	int len;
+	while (1) {
+		printf("$ ");
+		len = read_line(buffer, BUFFERSIZE);
+		printf("%s : %d\n", buffer,len);
+	}
+}
+
+
+
+
+
+
+#include<stdio.h>//압축하기
+#include<string.h>
+#include<stdlib.h>
+#pragma warning(disable:4996)
+#define BUFFER_SIZE 100
+int main() {
+	char line[80];
+	while (1) {
+		printf("$ :");
+		int length = read_line_compression(line, 80);
+		printf("%s : %d\n", line, length);
+	}
+}
+int read_line_compression(char compressed[], int limit) {
+	int ch, i = 0;
+	while ((ch = getchar()) != '\n') {
+		if (i < limit - 1 && (!isspace(ch) || i > 0 && !isspace(compressed[i - 1])))
+			compressed[i++] = ch;
+	}
+	if (i > 0 && isspace(compressed[i - 1]))//빈라인이 아니면서 마지막문자가 공백이면
+		i--;
+	compressed[i] = '\0';
+	return i;
+}
+
+
+
+
+
+
+for(int b=0;b<blank;b++){
+		sscanf(buffer, "%d", &number);
+		printf("%d\n", number);
+		sum += number;
+		strcpy(words, buffer);
+		for (int i = strlen(words); i < length; i++) {
+			words[i - strlen(words)] = words[i];
+			words[i - strlen(words)] = '\0';
+			length = strlen(words);
+			strcpy(buffer, words);
+		}
+	}
+5 2 5\0
+
+#pragma warning(disable:4996)//1강 강의 문제2
+#include<stdio.h>
+#include<string.h>
+#define BUFFERSIZE 100
+int read_line_with_compression(char str[],int n) {//불필요한 공백들을 제거한 압축된 문장의 길이
+	int ch, pre = '\0', i = 0;
+	while ((ch = getchar()) == ' ');//문장앞에 있는 공백들을 삭제
+	while ((ch = getchar()) != '\n') {//한문장안에서
+		if (i < n - 1 && (pre != ' ' || ch != ' '))
+			str[i++] = ch;
+		pre = ch;
+	}
+	//그문장이 끝나면
+	if (i > 0 && str[i - 1] == ' ')//문장의 끝에도 공백이 있을경우 삭제해야함
+	{
+		str[i - 1] = '\0';
+		return i - 1;
+	}
+	str[i] = '\0';//문장끝에 공백이 없을 경우 !!
+	return i;
+}
+----------------------------------------1강----------------------------------------------------------------
+
+
+
+
+
+
+01.입력으로  텍스트  파일harry.txt를  읽는다.  이  텍스트  파일은  오직  영문  소문자만으로  구성되어  있다.  이  파일에  등장하는  길이가  6이상인  모든  단어의  목록과  각  단어의  등장  빈도를  구하여  words.txt라는  이름의  파일로  출력하는  프로그램을  작성하라.  단어들은  사전식  순서로  정렬되어  출력되어야  한다.  출력  파일의  각  줄에  하나의  단어와  그  단어의  등장  빈도를  출력하라.    동일한  단어가  중복해서  출력되어서는  안된다. 
+ 
+#pragma warning(disable:4996)//1강 1번
+#include<stdio.h>
+#include<string.h>
+int main() {
+	FILE*fp_in = fopen("harry.txt", "r");
+	char *words[1000];
+	int n = 0;
+	char buffer[100];
+	while (fscanf(fp_in, "%s", buffer) != EOF) {
+		if (strlen(buffer) >= 6)
+			words[n++] = strdup(buffer);
+	}
+	fclose(fp_in);
+	int count[100] = { 0 };
+	char *tmp;
+	for (int i = n - 1; i>0; i--)
+		for (int j = 0; j < i; j++) {
+			if (strcmp(words[j], words[j + 1]) > 0) {
+				tmp = words[j]; words[j] = words[j + 1]; words[j + 1] = tmp;
+			}
+		}
+	int change = 0;
+	for (int i = 0; i < n; i++) {
+		for (int j = i + 1; j < n; j++)
+			if (strcmp(words[i], words[j]) == 0)
+				count[i]++;
+		for (int k = i + 1; count[i] != 0 && k < n - count[i]; k++)
+		{
+			words[k] = words[k + count[i]];
+		}
+		n = n - count[i];
+	}
+	FILE*fp_out = fopen("words.txt", "w");
+	for (int i = 0; i<n; i++)
+		fprintf(fp_out, "%s : %d\n", words[i], count[i] + 1);
+	fclose(fp_out);
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+#pragma warning(disable:4996)//1강에 1번
+#include<stdio.h>
+#include<string.h>
+#include<stdlib.h>
+#define BUFFER_SIZE 1000000
+char*words[BUFFER_SIZE];
+int count[BUFFER_SIZE];
+int n = 0;
+int main(void)
+{
+	FILE*fp = fopen("harry.txt", "r");
+
+	char buffer[BUFFER_SIZE];
+
+	while (fscanf(fp, "%s", buffer) != EOF) {
+		if (strlen(buffer) >= 6) {
+			if (n == 0) {
+				words[n] = strdup(buffer);
+				n++;
+			}
+
+			for (int i = n - 1; i >= 0; i--) {
+				if (strcmp(words[i], buffer) == 0) {
+					count[i]++;
+					break;
+				}
+				else if (strcmp(words[i], buffer) < 0) {
+					if (i == n - 1) {
+						words[i + 1] = strdup(buffer);
+						count[i + 1]++;
+						n++;
+						break;
+					}
+					else {
+						for (int j = n; j > i + 1; j--) {
+							words[j] = words[j - 1];
+							count[j] = count[j - 1];
+						}
+						words[i + 1] = strdup(buffer);
+						count[i + 1] = 1;
+						n++;
+						break;
+					}
+				}
+				else if (i == 0) {
+					for (int k = n; k > i; k--) {
+						words[k] = words[k - 1];
+						count[k] = count[k - 1];
+					}
+					words[i] = strdup(buffer);
+					count[i] = 1;
+					n++;
+					break;
+				}
+			}
+		}
+	}
+	fclose(fp);
+	FILE*out_fp = fopen("words.txt", "w");
+	for (int i = 0; i < n; i++) {
+		fprintf(out_fp, "%s : %d\n", words[i], count[i]);
+	}
+	fclose(out_fp);
+	return 0;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+02.입력으로  1번과  동일한  입력  파일  harry.txt를  읽는다.  이  파일의  어떤  라인도  공백문자까지  포함하여  길이가  80을  넘지는  않는다.  이  파일의  각  줄을  왼쪽과  오른쪽  줄맞춤해서  aligned.txt파일로  출력하는  프로그래을  작성하라.    각  라인의  길이는  정확하게  80이어야  하고,  왼쪽과  오른쪽에  여백이  없어야  하며,  단어들은  최대한  균등한  개수의  공백문자로  구분되어야  한다.  원래  파일의  라인은  유지되어야  한다.  즉  입력  파일에서  한  라인은  출력  파일에서도  한  라인으로  출력되어야  하며,  공백  라인은  공백라인으로  출력되어야  한다.  (출력  파일 aligned.txt의 예)
+#pragma warning(disable:4996)//1강 2번문제--2
+#include<stdio.h>
+#include<string.h>
+#include<stdlib.h>
+#define BUFFERSIZE 80
+FILE*fp = fopen("table.txt", "r");
+int read_line(char str[BUFFERSIZE], int limit) {
+	int ch, i = 0;
+	if ((ch = fgetc(fp)) == EOF)
+		return -1;
+	while ((ch = fgetc(fp)) != '\n')
+		if (i < limit - 1)
+			str[i++] = ch;
+	str[i] = '\0';
+	return i;
+}
+int main() {
+	FILE*fp_out = fopen("output.txt", "w");
+	char command_line[BUFFERSIZE];
+	char*token[100];
+	char delim[] = " ";
+	int length = 0, j, blank;
+	while (1) {
+		int hey = read_line(command_line, BUFFERSIZE);
+		if (hey == 0)//공백라인은 공백출력
+			fprintf(fp_out, "\n");
+		else if (hey == -1)
+			break;
+		else {
+			token[0] = strtok(command_line, delim);
+			for (j = 1; token[j] != NULL; j++) {
+				token[j] = strtok(NULL, delim);
+			}
+			for (int i = 0; i < j; i++)
+				length += strlen(token[i]);
+			blank = (80 - length) / (j - 1);
+			for (int i = 0; i < j; i++) {
+				fprintf(fp_out, "%s", token[i]);
+				for (int i = 0; i < blank; i++)
+					fprintf(fp_out, " ");
+			}
+			fprintf(fp_out, "\n");
+		}
+	}
+	fclose(fp);
+	fclose(fp_out);
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+#pragma warning(disable:4996)//1강 2번문제--2
+#include<stdio.h>
+#include<string.h>
+#include<stdlib.h>
+#define BUFFERSIZE 80
+int main() {
+	FILE*fp = fopen("input.txt", "r");
+	FILE*fp_out = fopen("output.txt", "w");
+	char command_line[BUFFERSIZE];
+	char*token[100];
+	char delim[] = " ";
+	int length = 0, j, blank;
+	while (1) {
+		fgets(command_line, 80, fp);
+		if (strlen(command_line) == 1)//공백라인은 공백출력
+			fprintf(fp_out, "\n");
+		else if (command_line == EOF)
+			break;
+		else {
+			token[0] = strtok(command_line, delim);
+			for (j = 1; token[j] != NULL; j++) {
+				token[j] = strtok(NULL, delim);
+			}
+			for (int i = 0; i < j; i++)
+				length += strlen(token[i]);
+			blank = (80 - length) / (j - 1);
+			for (int i = 0; i < j; i++) {
+				fprintf(fp_out, "%s", token[i]);
+				for (int i = 0; i < blank; i++)
+					fprintf(fp_out, " ");
+			}
+			fprintf(fp_out, "\n");
+		}
+	}
+	fclose(fp);
+	fclose(fp_out);
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+#pragma warning(disable:4996)//1강 2번(2018)(행맨게임)
+#include<stdio.h>
+#include<string.h>
+#include<stdlib.h>
+#include<time.h>
+int main() {
+	FILE*fp_in = fopen("harry.txt", "r");
+	int n = 0;
+	char buffer[100];
+	char *words[100];
+	while (fscanf(fp_in, "%s", buffer) != EOF) {
+		if (strlen(buffer) >= 6)
+			words[n++] = strdup(buffer);
+	}
+	fclose(fp_in);
+	int count[100] = { 0 };
+	char *tmp;
+	for (int i = n - 1; i>0; i--)
+		for (int j = 0; j < i; j++) {
+			if (strcmp(words[j], words[j + 1]) > 0) {
+				tmp = words[j]; words[j] = words[j + 1]; words[j + 1] = tmp;
+			}
+		}
+	int change = 0;
+	for (int i = 0; i < n; i++) {
+		for (int j = i + 1; j < n; j++)
+			if (strcmp(words[i], words[j]) == 0)
+				count[i]++;
+		for (int k = i + 1; count[i] != 0 && k < n - count[i]; k++)//같은것들 덮어써서 줄이기!!
+		{
+			words[k] = words[k + count[i]];
+		}
+		n = n - count[i];
+	}
+	while (1) {
+		int i;
+		srand(time(NULL));
+		i = rand() % n;
+		char potter[100];
+		strcpy(potter, words[i]);
+		for (int o = 0; o < strlen(words[i]); o++)
+			printf("*");
+		printf("\n");
+		int count[100] = { 0 };
+		while (1) {
+			int con = 0;
+			char alphabet;
+			printf("Guess an alphabet:");
+			scanf(" %c", &alphabet);
+			for (int l = 0; l < strlen(words[i]); l++) {
+				if (potter[l] == alphabet) 
+					count[l] = 1;
+			}
+			for (int j = 0; j < strlen(words[i]); j++) {
+				if (count[j] == 1) 
+					printf("%c", potter[j]);
+				else {
+					printf("*");
+					con++;
+				}
+			}
+			printf("\n");
+			if (con ==0)
+				break;
+		}
+		char answer[10];
+		printf("Try again (y/n)?");
+		scanf("%s", answer);
+		if (strcmp(answer, "n") == 0)
+			break;
+	}
+}
+
+
+
+
+
+
+
+
+
+
+#pragma warning(disable:4996)//1강에 2번
+#include<stdio.h>
+#include<string.h>
+#include<stdlib.h>
+#include<time.h>
+#define BUFFER_SIZE 1000000
+char*words[BUFFER_SIZE];
+int count[BUFFER_SIZE];
+int n = 0;
+int main(void)
+{
+	FILE*fp = fopen("harry.txt", "r");
+
+	char buffer[BUFFER_SIZE];
+
+	while (fscanf(fp, "%s", buffer) != EOF) {
+		if (strlen(buffer) >= 6) {
+			if (n == 0) {
+				words[n] = strdup(buffer);
+				n++;
+			}
+
+			for (int i = n - 1; i >= 0; i--) {
+				if (strcmp(words[i], buffer) == 0) {
+					count[i]++;
+					break;
+				}
+				else if (strcmp(words[i], buffer) < 0) {
+					if (i == n - 1) {
+						words[i + 1] = strdup(buffer);
+						count[i + 1]++;
+						n++;
+						break;
+					}
+					else {
+						for (int j = n; j > i + 1; j--) {
+							words[j] = words[j - 1];
+							count[j] = count[j - 1];
+						}
+						words[i + 1] = strdup(buffer);
+						count[i + 1] = 1;
+						n++;
+						break;
+					}
+				}
+				else if (i == 0) {
+					for (int k = n; k > i; k--) {
+						words[k] = words[k - 1];
+						count[k] = count[k - 1];
+					}
+					words[i] = strdup(buffer);
+					count[i] = 1;
+					n++;
+					break;
+				}
+			}
+		}
+	}
+	fclose(fp);
+	while (1) {
+		int i;
+		srand(time(NULL));
+		i = rand() % n;
+		char potter[100];
+		strcpy(potter, words[i]);
+		for (int o = 0; o < strlen(words[i]); o++)
+			printf("*");
+		printf("\n");
+		int count[100] = { 0 };
+		while (1) {
+			int con = 0;
+			char alphabet;
+			printf("Guess an alphabet:");
+			scanf(" %c", &alphabet);
+			for (int l = 0; l < strlen(words[i]); l++) {
+				if (potter[l] == alphabet)
+					count[l] = 1;
+			}
+			for (int j = 0; j < strlen(words[i]); j++) {
+				if (count[j] == 1)
+					printf("%c", potter[j]);
+				else {
+					printf("*");
+					con++;
+				}
+			}
+			printf("\n");
+			if (con == 0)
+				break;
+		}
+		char answer[10];
+		printf("Try again (y/n)?");
+		scanf("%s", answer);
+		if (strcmp(answer, "n") == 0)
+			break;
+	}
+	return 0;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+03.다음과  같은  형식의  입력  파일  table.txt를  읽어서  아래의  예와  같이  output.txt파일에  테이블  형식으로  출력하는  프로그램을  작성하라.  입력  파일에서  &는  칸을  구분하는  기호이고,  \\는  하나의  행이  끝나는  것을  표시한다.  \\와  &의  앞뒤에는  적어도  하나의  공백문자  혹은  개행문자가  존재한다.  불필요한  공백들은  제거한다.  
+
+#include<stdio.h>
+#include<string.h>
+#include<stdlib.h>
+#define BUFFER_SIZE 300
+#pragma warning(disable:4996)
+char *words[100];
+int index = 0;
+FILE*fp = fopen("tabular.txt", "r");
+FILE*fp_out = fopen("output.txt", "w");
+int read_line_compression(char compressed[300], int limit) {
+	int ch, i = 0;
+	while ((ch = fgetc(fp)) != '\\') {
+		if (ch == EOF)
+			return -1;
+		if (ch == '\n') {
+			compressed[i++] = ' ';
+			continue;
+		}
+		if (i < limit - 1 && (ch != ' ' || i > 0 && compressed[i - 1] != ' '))
+			compressed[i++] = ch;
+	}
+	for (int p = 1; p < i; p++)//줄바꿈문자를 공백으로 받아줬으므로 없애줘야한다.
+		compressed[p - 1] = compressed[p];
+	if (i > 0 && compressed[i - 1] == ' ')//빈라인이 아니면서 마지막문자가 공백이면
+		i--;
+	compressed[i] = '\0';
+	return i;
+}
+int main() {
+	int horizon = 0, vertical = 0;
+	fscanf(fp, "%d", &horizon);
+	fscanf(fp, "%d", &vertical);
+	char delim[] = "&";
+	int j = 0, y;
+	int max[4] = { 0 };
+	char *token[100];
+	int p;
+	while (1) {
+		char buf[BUFFER_SIZE];
+		char buffer[BUFFER_SIZE];
+		int length = read_line_compression(buf, BUFFER_SIZE);//압축한다.
+		token[j] = strtok(buf, delim);
+
+		if (strlen(token[0]) == 0)
+			continue;
+		//불필요한 공백을 없애준다.
+		strcpy(buffer, token[j]);
+		for (p = strlen(buffer) - 1; buffer[p] == ' '; p--);
+		p++;
+		buffer[p] = '\0';
+		strcpy(token[j], buffer);
+		//
+		//최대길이 단어를 찾는다
+		if (strlen(token[j]) > max[0])
+			max[0] = strlen(token[j]);
+		//
+		//저장
+		words[index] = strdup(token[j]);
+		while ((token[++j] = strtok(NULL, delim)) != NULL) {
+			//불필요한공백을 없애준다.
+			strcpy(buffer, token[j]);
+			for (p = strlen(buffer) - 1; buffer[p] == ' '; p--);
+			p++;
+			buffer[p] = '\0';
+			for (y = 1; y < strlen(buffer); y++)
+				buffer[y - 1] = buffer[y];
+			y--;
+			buffer[y] = '\0';
+			strcpy(token[j], buffer);
+			//
+			//최대 길이 단어를 찾는다
+			if (j % 4 == 1 && strlen(token[j]) > max[1])
+				max[1] = strlen(token[j]);
+			else if (j % 4 == 2 && strlen(token[j]) > max[2])
+				max[2] = strlen(token[j]);
+			else if (j % 4 == 3 && strlen(token[j]) > max[3])
+				max[3] = strlen(token[j]);
+			//
+			//저장
+			words[++index] = strdup(token[j]);
+		}
+		if (length == -1)
+			break;
+		words[++index] = strdup(token[j]);
+	}
+	for (int i = 0; i < 16; i++) {
+		fprintf(fp_out, "%s", words[i]);
+		for (int o = 0; o < max[i % 4] - strlen(words[i]) + 1; o++)
+			fprintf(fp_out, " ");
+		if (i % 4 == 3 && i != 15)
+			fprintf(fp_out, "\n");
+	}
+	fclose(fp);
+	fclose(fp_out);
+}
+
+
+
+------------------------------------------------2장------------------------------------------------
+그룹과제
+1)scanf,fscanf,sscanf는 키보드,파일,스트링으로부터 읽고자하는 변수의 형태를 지정해서 받을수있다
+4-1)
+이중포인터:누군가의 주소가들어가있는 변수의주소
+메인함수의 변수와 함수의 매계변수(메인함수의 복사본)는 별개의 변수임!
+단 함수내에서 참조에의한 호출을하면 메인함수의 변수를 가리킬수 있는 것!
+4-2)
+void* 타입 : 데이터크기를 모르므로 역참조 연산자체가 불가능함
+4-3)
+값에 의한 호출:실매게변수(메인함수에서),형식매계변수(함수에서 정의해주는)는 별개의 변수이다!
+4-5)
+p는 단지 포인터 변수이므로 바꿀수있지만
+arr은 포인터변수긴하지만 배열을가지므로 다른값으로 바꿀수없다
+4-6)
+배열연산자를 만나면 배열이름을 포인터로계산하고 인덱스를 더해서 자동으로계산
+a[i]=*(a+i)
+(p+4)[-1]=*(p+4-1)
+4-7)
+void* 타입 : 데이터크기를 모르므로 역참조 연산자체가 불가능함
+4-8)
+값에의한 호출:실제로 두변수가 같아지는것이 아니라 단지 값만같다는것.
+C언어는 값에의한 호출밖에 못함 그래서 포인터를 안쓰면 너무많은 복사본이 발생함
+C++은 포인터대신 참조에의한 호출 지원 (int&a하면 한변수의 별명이 2개가되는것.)
+
+
+
+
+
+1)
+gets함수는 줄바꿈문자까지 한라인으로 읽어오며 줄바꿈문자는 널문자로 바꾸어준다
+그리고 버퍼의 크기를 신경쓰지않는다
+fgets함수는 줄바꿈문자까지 한라인으로 읽어오며 그뒤에 널문자를 덧붙인다.(즉 줄바꿈문자까지 읽어옴)
+버퍼의 크기를 넘길경우 다음반복때 그다음 포인터부터 읽어온다.
+scanf함수는 키보드로부터 형식화된 입력을 공백('\n','\t',' ')을 기준으로 받아들이고 널문자를 덧붙인다
+
+       ex)
+#include <stdio.h>
+
+int main()
+{
+    int int1, int2;
+    char dd[15];
+    scanf("%d%[a-zA-Z]%d", &int1, &dd, &int);//문자열과 숫자열을 완벽히분리해서받을수있다.
+    printf("number : %d - %d", int1, int2);
+    printf("string : %s, dd);
+}
+		
+fscanf함수는 파일포인터로부터(파일객체로부터)공백('\n','\t',' ')을 기준으로 받아들이고 널문자를 덧붙인다
+
+
+2)
+sprintf함수는 표준화된 출력의 내용을 다른 string변수로 복사하기위해서 사용한다.복사될문자열의 크기는 지정하지못한다.
+ 비교:sprintf함수는 포인터 문자열을 합칠때 사용
+       strcat함수는 배열의 문자열을 합칠때 사용
+       ex)
+ char test[100];
+ char *t1 = "봉숭아", *t2 = " ", *t3 = "학당";
+ sprintf(test, "%s%s%s", t1, t2, t3); // 빈 배열 test 에 여러 문자열 집어넣기
+ puts(test);
+
+  // 결과: 봉숭아 학당
+
+
+동적메모리할당
+힙이라고 불리는 영역에 위치한다
+free()함수를 호출하여 명시적으로 반환하지않는한 계속유지된다.
+
+
+
+3)
+isspace함수는ctype.h해더를 필요로하며int isspace(int c)형태로 c가 공백문자인지아닌지 보여줌
+isdigit함수는 ctype.h해더와 stdlib.h해더를 필요로하며 isdigit(int c)의형태로 c가 10진수인지 아닌지 보여준다.
+isalpha함수는 ctype.h해더를 필요로하며 isalpha(int c)의형태로 c가 영문자인지 확인한다.
+
+
+
+4-1)
+#include<stdio.h>//출력:19,이유:
+int f(int x, int* py, int **ppz)
+{
+	int y, z;
+	**ppz += 1;//c값을 5로변경(x와c는 서로 다른주소를 가진다:영향못줌)
+	z = **ppz;//z값이 5로변경됨
+	*py += 2;//c값이 7로변경(x와c는 서로 다른주소를 가진다:영향못줌)
+	y = *py;//y값이 7을 가리키게된다
+	x += 3;//x값은 7이다.
+	return x + y + z;//7+7+5
+}
+int main() {
+	int c, *b, **a;
+	c = 4;
+	b = &c;
+	a = &b;
+	printf("%d ", f(c, b, a));
+	return 0;
+}
+
+
+
+
+4-2)
+#include<stdio.h>//컴파일러 에러가 발생한다
+int main() {
+	int a = 12;
+	void *ptr = (int*)&a;
+	printf("%d", *ptr);//void*타입의 포인터는 참조해제 될수 없기 때문이다.(int*)ptr로 바꾸어 주어야한다
+	return 0;
+}
+
+
+
+4-3)
+#include<stdio.h>
+void swap(char *x, char *y) {//함수안의 모든 변수들은 다 복사본이고 값에 의한 호출을 했으므로
+	//,메인함수의 실제 값을 참조하여 호출하지 않았기 때문에 메인함수에서 값은 변하지않는다.
+	char *t = x;
+	x = y;
+	y = t;
+}
+int main() {
+	char *x = "hello";
+	char *y = "helloworld";
+	char *t;
+	swap(x, y);
+	printf("(%s,%s)", x, y);
+	t = x;
+	x = y;
+	y = t;
+	printf("\n(%s,%s)", x, y);
+	return 0;
+}
+
+
+
+4-4)
+#include<stdio.h>//
+int main() {
+	char*ptr = "HelloWorld";
+	printf("%c\n", *&*&ptr);
+	return 0;
+}
+
+연산자 *는 참조 취소에 사용되며 연산자 &는 주소를 가져 오는 데 사용됩니다. 
+이 연산자들은 하나씩 사용되면 서로의 효과를 상쇄합니다. 
+위의 코드에서 ptr은 문자열 S의 첫 번째 문자를 가리키는 포인터입니다. 
+* ptr은 S, & * ptr은 S, * & * ptr의 주소를 다시 S, & * & p는 S의 주소, 마지막으로 * & * & ptr 'S'를 준다.
+
+4-5)
+#include<stdio.h>//출력:3 이유:
+int main() {
+	int arr[] = { 1,2,3,4,5 };
+	int *p = arr;
+	++*p;//첫번째요소의값을 증가시킨다(포인터연산자가 더 우선순위가 높으므로)
+	p += 2;//포인터가 배열의 세번째칸의 주소를 가리킨다.
+	printf("%d", *p);//포인터가 가리키고있는 세번째 주소값을 참조호출한다.
+	return 0;
+}
+
+4-6)
+#include<stdio.h>//출력:gh 이유:
+void f(char**);
+int main() {
+	char *argv[] = { "ab","cd","ef","gh","ij","kl" };
+	f(argv);
+	return 0;
+}
+void f(char **p) {
+	char *t;
+	t = (p += sizeof(int))[-1];
+	printf("%s\n", t);//세번째 주소값을 반환한다.
+}
+
+4-7)
+#include<stdio.h>//출력:컴파일러 에러 이유:
+int main() {
+	int var;
+	void *ptr = &var;//크기를모르기때문에(배열이될수없다)
+	*ptr = 5;//4바이트인 정수를 저장하거나
+	printf("var=%d and *ptr=%d", var, *ptr);//출력할수없다.
+	return 0;
+}
+
+
+
+4-8)
+#include<stdio.h>//출력:2016,이유:함수에서 값을 참조했으므로 메인함수는 영향을 줄수없다.
+void mystery(int *ptra, int *ptrb) {
+	int *temp;
+	temp = ptrb;
+	ptrb = ptra;
+	ptra = temp;
+}
+int main() {
+	int a = 2016, b = 0, c = 4, d = 42;
+	mystery(&a, &b);
+	if (a < c)
+		mystery(&c, &a);
+	mystery(&a, &b);
+	printf("%d\n", a);
+}
+
+
+
+
+#include<stdio.h>//2장 강의 첫번째문제
+#include<string.h>
+#pragma warning(disable:4996)
+#define BUFFER_SIZE 20
+char *names[100];
+char *numbers[100];
+int n = 0;
+int search(char *name) {//주소연산자끼리 비교해야하므로.
+	int i;
+	for (i = 0; i < n; i++) {
+		if (strcmp(name, names[i]) == 0)//
+			return i;
+	}
+	return -1;
+}
+void add() {
+	char buf1[BUFFER_SIZE], buf2[BUFFER_SIZE];
+	scanf("%s", buf1);
+	scanf("%s", buf2);
+	int i = n - 1;
+	while (i >= 0 && strcmp(names[i], buf1) > 0) {
+		names[i + 1] = names[i];
+		numbers[i + 1] = numbers[i];
+		i--;
+	}
+	names[i + 1] = strdup(buf1);
+	numbers[i + 1] = strdup(buf2);
+	n++;
+
+	printf("%s was added successfully.\n", buf1);
+}
+void remove() {
+	char buf[BUFFER_SIZE];
+	scanf("%s", buf);
+	int index = search(buf);//삭제될사람의 인덱스
+	if (index == -1) {
+		printf("No person named %s exists.\n", buf);
+		return;
+	}
+	int j = index;
+	for (; j < n - 1; j++) {
+		names[j] = names[j + 1];
+		numbers[j] = numbers[j + 1];
+	}
+	n--;
+	printf("%s was deleted successfully.\n", buf);
+}
+void find() {
+	char buf[BUFFER_SIZE];
+	scanf("%s", buf);
+	int index = search(buf);
+	if (index == -1)
+		printf("NO person named %s exists.\n", buf);
+	else
+		printf("%s\n", numbers[index]);
+}
+void status() {
+	int i;
+	for (i = 0; i < n; i++)
+		printf("%s %s\n", names[i], numbers[i]);
+	printf("Total %d person.\n", n);
+}
+int main() {
+	char command[BUFFER_SIZE];
+	while (1) {
+		printf("$ ");
+		scanf("%s", command);
+
+		if (strcmp(command, "add") == 0)
+			add();
+		else if (strcmp(command, "find") == 0)
+			find();
+		else if (strcmp(command, "status") == 0)
+			status();
+		else if (strcmp(command, "delete") == 0)
+			remove();
+		else if (strcmp(command, "exit") == 0)
+			break;
+	}
+	return 0;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+#include<stdio.h>//2장 강의 두번째문제
+#include<string.h>
+#pragma warning(disable:4996)
+#define BUFFER_SIZE 20
+char *names[100];
+char *numbers[100];
+int n = 0;
+int search(char *name) {//주소연산자끼리 비교해야하므로.
+	int i;
+	for (i = 0; i < n; i++) {
+		if (strcmp(name, names[i]) == 0)//
+			return i;
+	}
+	return -1;
+}
+void load() {
+	char filename[BUFFER_SIZE];
+	char buf1[BUFFER_SIZE];
+	char buf2[BUFFER_SIZE];
+	scanf("%s", filename);
+	FILE*fp = fopen(filename, "r");//
+	if (fp == NULL) {//어떤이유로든 파일을 여는데 실패했다는것.
+		printf("OPen failed.\n");
+		return;
+	}
+	while ((fscanf(fp, "%s", buf1) != EOF)) {
+		fscanf(fp, "%s", buf2);
+		names[n] = strdup(buf1);
+		numbers[n] = strdup(buf2);
+		n++;
+	}
+	fclose(fp);
+}
+void save() {
+	int  i;
+	char filename[BUFFER_SIZE];
+	char tmp[BUFFER_SIZE];
+	scanf("%s", tmp);//버린다.
+	scanf("%s", filename);
+	FILE*fp = fopen(filename, "w");//파일이름이 같으므로 덮어쓰는것이 된다.
+	if (fp == NULL) {
+		printf("Open filded.\n");
+		return;
+	}
+	for (i = 0; i < n; i++) {
+		fprintf(fp, "%s  %s", names[i], numbers[i]);
+	}
+	fclose(fp);
+}
+void add() {
+	char buf1[BUFFER_SIZE], buf2[BUFFER_SIZE];
+	scanf("%s", buf1);
+	scanf("%s", buf2);
+	int i = n - 1;
+	while (i >= 0 && strcmp(names[i], buf1) > 0) {
+		names[i + 1] = names[i];
+		numbers[i + 1] = numbers[i];
+		i--;
+	}
+	names[i + 1] = strdup(buf1);
+	numbers[i + 1] = strdup(buf2);
+	n++;
+	printf("%s was added successfully.\n", buf1);
+ }
+void remove() {
+	char buf[BUFFER_SIZE];
+	scanf("%s", buf);
+	int index = search(buf);//삭제될사람의 인덱스
+	if (index == -1) {
+		printf("No person named %s exists.\n", buf);
+		return;
+	}
+	int j = index;
+	for (; j < n - 1; j++) {
+		names[j]=names[j + 1];
+		numbers[j] = numbers[j + 1];
+	}
+	n--;
+	printf("%s was deleted successfully.\n", buf);
+}
+void find() {
+	char buf[BUFFER_SIZE];
+	scanf("%s", buf);
+	int index = search(buf);
+	if (index == -1)
+		printf("NO person named %s exists.\n", buf);
+	else
+		printf("%s\n", numbers[index]);
+}
+void status() {
+	int i;
+	for (i = 0; i < n; i++)
+		printf("%s %s\n", names[i], numbers[i]);
+	printf("Total %d person.\n", n);
+}
+int main() {
+	char buffer[BUFFER_SIZE];
+	while (1) {
+		printf("$ ");
+		scanf("%s", buffer);
+		if (strcmp(buffer, "read") == 0)
+			load();
+		else if (strcmp(buffer, "add") == 0)
+			add();
+		else if (strcmp(buffer, "find") == 0)
+			find();
+		else if (strcmp(buffer, "status") == 0)
+			status();
+		else if (strcmp(buffer, "delete") == 0)
+			remove();
+		else if (strcmp(buffer, "save") == 0)
+			save();
+		else if (strcmp(buffer, "exit") == 0)
+			break;
+	}
+	return 0;
+}
+
+
+
+
+
+
+
+
+char *strdup(char *s){
+	char *p;
+	p=(char*)malloc(strlen(s)+1);
+	if(p!=NULL)
+		strcpy(p,s);
+	retrun p;//주소값을 반환하는 함수임!!
+}
+
+
+
+
+
+
+
+#include<stdio.h>//2강 3번문제***********한 라인 단위로 입력받는다.단어 단위가 아님.************
+//구분문자(delimiter)-주로 " " 를 이용하여 하나의 긴문자열을 작은 문자열들로 자른다.
+//(*****strtok함수를 이용-구분자가 연속으로 나오면 하나로본다,
+//각 토큰의 시작 주소를 반환,
+//prinf할때 각토큰 마지막에 '\0'을 스스로삽입
+//BUT!!!큰따옴표사이에 있는 char*(문자포인터)경우 임의로 수정불가능하므로 strtok가 작동하지 않음
+//char [](문자배열)에서는 큰따옴표문장에서도 strtok가 작동가능
+//새로운 배열을생성하지않음 단지 NULL캐릭터 정도만 임의로 삽입할뿐임.,****)
+#include<string.h>//그리고 배열의 용량을 초과할경우 동적메모리할당으로 배열의크기를 키우겠다.
+#include<stdlib.h>
+#pragma warning(disable:4996)
+#define INIT_CAPACITY 3
+#define BUFFER_SIZE 20
+char **names;
+char **numbers;//char*타입의 배열의 이름이므로 char**타입의 변수이다.
+int capacity = INIT_CAPACITY;
+int n = 0;
+char delim[] = " ";//구분문자
+void init_directory();
+int read_line(char str[], int limit);
+void process_command();
+void load(char *fileName);
+void  save(char  *fileName);
+void  remove(char  *name);
+void  status();
+void  find(char  *name);
+int  search(char  *name);
+void  add(char  *  name, char  *  number);
+void  reallocate();
+int main() {
+	init_directory();//names 와numbers를 동적메모리로 할당.
+	process_command();
+	return 0;
+}
+void init_directory() {
+	names = (char**)malloc(INIT_CAPACITY * sizeof(char*));//malloc(내가할당할메모리의 바이트수:sizeof연산자를이용하는것이 바람직함.)
+	numbers = (char**)malloc(INIT_CAPACITY * sizeof(char*));
+}
+int read_line(char str[], int limit) {
+	int ch, i = 0;
+	while ((ch = getchar()) != '\n')//줄바꿈 문자가 나올때까지(무조건 한줄을 다읽음)-한라인이 매우길어도 다음호출때는 다음라인
+		if (i < limit - 1)//마지막은 널캐릭터이므로
+			str[i++] = ch;
+	str[i] = '\0';//마지막에 널캐릭터를 추가해준다.
+	return i;
+}
+//int read_line(char str[], int limit) {
+//	int ch, i = 0;
+//	while (i < limit - 1&&(ch = getchar()) != '\n')//한줄이 너무길때는 한줄을다 안 읽어서 다음호출때 같은라인의 남은 부분을 읽게된다. 
+//			str[i++] = ch;
+//	str[i] = '\0';//마지막에 널캐릭터를 추가해준다.
+//	return i;
+//}
+void process_command() {
+	char command_line[BUFFER_SIZE];//한라인을 통채로 읽어오기위한 버퍼
+	char *command, *argument1, *argument2;//각 라인에서 토큰들을 나누어 구분하기위한 배열들
+	while (1) {
+		printf("$ ");
+		if (read_line(command_line, BUFFER_SIZE) <= 0)//아무것도 없는줄
+			continue;
+		command = strtok(command_line, delim);
+		if (command == NULL)continue;
+		if (strcmp(command, "read") == 0) {
+			argument1 = strtok(NULL, delim);//두번째토근의 주소==문제에서 파일명이된다.
+			if (argument1 == NULL) {//파일명이없을경우!!!
+				printf("File name required.\n");
+				continue;
+			}
+			load(argument1);
+		}
+		else if (strcmp(command, "add") == 0) {
+			argument1 = strtok(NULL, delim);
+			argument2 = strtok(NULL, delim);
+			if (argument1 == NULL || argument2 == NULL) {
+				printf("Invaild argument.\n");
+				continue;
+			}
+			add(argument1, argument2);
+			printf("%s was added successfully.\n", argument1);
+		}
+		else if (strcmp(command, "find") == 0) {
+			argument1 = strtok(NULL, delim);
+			if (argument1 == NULL) {
+				printf("Invaild argument.\n");
+				continue;
+			}
+			find(argument1);
+		}
+		else if (strcmp(command, "status") == 0)
+			status();
+		else if (strcmp(command, "delete") == 0) {
+			argument1 = strtok(NULL, delim);
+			if (argument1 == NULL) {
+				printf("Invaild argument.\n");
+				continue;
+			}
+			remove(argument1);
+		}
+		else if (strcmp(command, "save") == 0) {
+			argument1 = strtok(NULL, delim);
+			argument2 = strtok(NULL, delim);
+			if (argument1 == NULL || strcmp(argument1, "as") != 0 || argument2 == NULL) {
+				printf("Invaild command format.\n");
+				continue;
+			}
+			save(argument2);
+		}
+		else if (strcmp(command, "exit") == 0)
+			break;
+	}
+}
+void load(char *fileName) {
+	char buf1[BUFFER_SIZE];
+	char buf2[BUFFER_SIZE];
+	FILE*fp = fopen(fileName, "r");
+	if (fp == NULL) {
+		printf("Open failed.\n");
+		return;
+	}
+	while ((fscanf(fp, "%s", buf1) != EOF)) {
+		fscanf(fp, "%s", buf2);
+		add(buf1, buf2);
+	}
+	fclose(fp);
+}
+void  save(char  *fileName) {
+	int  i;
+	FILE  *fp = fopen(fileName, "w");
+	if (fp == NULL) {
+		printf("Open  failed.\n");
+		return;
+	}
+	for (i = 0; i < n; i++) {
+		fprintf(fp, "%s  %s\n", names[i], numbers[i]);
+	}
+	fclose(fp);
+}
+void  remove(char  *name) {
+	int  i = search(name);    /*  returns  -1  if  not  exists  */
+	if (i == -1) {
+		printf("No  person  named  '%s'  exists.\n", name);
+		return;
+	}
+	int  j = i;
+	for (; j<n - 1; j++) {
+		names[j] = names[j + 1];
+		numbers[j] = numbers[j + 1];
+	}
+	n--;
+	printf("'%s'  was  deleted  successfully.  \n", name);
+}
+void  status() {
+	int  i;
+	for (i = 0; i<n; i++)
+		printf("%s    %s\n", names[i], numbers[i]);
+	printf("Total  %d  persons.\n", n);
+}
+void  find(char  *name) {
+	int  index = search(name);
+	if (index == -1)
+		printf("No  person  named  '%s'  exists.\n", name);
+	else
+		printf("%s\n", numbers[index]);
+}
+int  search(char  *name) {
+	int  i;
+	for (i = 0; i<n; i++) {
+		if (strcmp(name, names[i]) == 0) {
+			return  i;
+		}
+	}
+	return  -1;
+}
+void  add(char  *  name, char  *  number) {
+	if (n >= capacity)
+		reallocate();
+	int  i = n - 1;
+	while (i >= 0 && strcmp(names[i], name) > 0) {
+		names[i + 1] = names[i];
+		numbers[i + 1] = numbers[i];
+		i--;
+	}
+	names[i + 1] = strdup(name);
+	numbers[i + 1] = strdup(number);
+	n++;
+}
+void  reallocate() {
+	int  i;
+	capacity *= 2;
+	char  **tmp1 = (char  **)malloc(capacity * sizeof(char  *));
+	char  **tmp2 = (char  **)malloc(capacity * sizeof(char  *));
+	for (i = 0; i < n; i++) {
+		tmp1[i] = names[i];
+		tmp2[i] = numbers[i];
+	}
+	free(names);
+	free(numbers);
+	names = tmp1;
+	numbers = tmp2;
+}
+
+
+
+
+
+
+
+1. 입력으로 한 라인의 문자열을 받은 후 문자열에 등장하는 모든 정수들의 합을 구하여 출력하는 프로그 램을 작성하라. 예를 들어 문자열이 “saf d12shg+^&sh9h df+-()04 123sd” 이면 12+9+4+123=148 을 출력한다. 문자열에는 공백 문자가 포함될 수 있고 영문 알파벳과 기호들이 포함될 수 있다. 연속된 digit들은 반드시 하나의 정수로 해석해야 한다.
+
+#include<stdio.h>//2강에 1번
+#include<string.h>
+#include<ctype.h>
+#pragma warning(disable:4996)
+#define MAXWORDS 100
+int blank = 0;
+char *words[100];
+int read_line_compression(char str[100]) {
+	int ch;
+	int i = 0, sw = 0, j = 0;
+	while (1) {
+		ch = getchar();
+		if (ch == '\n')
+			break;
+		if (isdigit(ch)) {
+			str[i++] = ch;
+			sw = 1;
+		}
+		if (sw == 1 && !isdigit(ch)) {
+			str[i] = '\0';
+			words[j++] = strdup(str);
+			sw = 0;
+			i = 0;
+		}
+	}
+	return j;
+}
+int main() {
+	int number = 0, sum = 0, length, p = 0;
+	char buffer[MAXWORDS];
+	length = read_line_compression(buffer);
+	for (int b = 0; b < length; b++) {
+		sscanf(words[b], "%d", &number);
+		printf("%d+", number);
+		sum += number;
+	}
+	printf("=%d", sum);
+}
+
+
+
+
+
+
+
+
+02. 전화번호부 프로그램 v2에 다음과 같은 기능을 추가하라. 
+
+
+
+
+
+
+#include<stdio.h>//2장 강의 두번째문제//
+#include<string.h>
+#pragma warning(disable:4996)
+#define BUFFER_SIZE 20
+char *names[100];
+char *numbers[100];
+int n = 0;
+int search(char *name) {//주소연산자끼리 비교해야하므로.
+	int i;
+	for (i = 0; i < n; i++) {
+		if (strcmp(name, names[i]) == 0)//
+			return i;
+	}
+	return -1;
+}
+void load() {
+	char filename[BUFFER_SIZE];
+	char buf1[BUFFER_SIZE];
+	char buf2[BUFFER_SIZE];
+	scanf("%s", filename);
+	FILE*fp = fopen(filename, "r");//
+	if (fp == NULL) {//어떤이유로든 파일을 여는데 실패했다는것.
+		printf("OPen failed.\n");
+		return;
+	}
+	while ((fscanf(fp, "%s", buf1) != EOF)) {
+		fscanf(fp, "%s", buf2);
+		names[n] = strdup(buf1);
+		numbers[n] = strdup(buf2);
+		n++;
+	}
+	fclose(fp);
+}
+void save() {
+	int  i;
+	char filename[BUFFER_SIZE];
+	char tmp[BUFFER_SIZE];
+	scanf("%s", tmp);//버린다.
+	scanf("%s", filename);
+	FILE*fp = fopen(filename, "w");//파일이름이 같으므로 덮어쓰는것이 된다.
+	if (fp == NULL) {
+		printf("Open filded.\n");
+		return;
+	}
+	for (i = 0; i < n; i++) {
+		fprintf(fp, "%s  %s", names[i], numbers[i]);
+	}
+	fclose(fp);
+}
+void add() {
+	char buf1[BUFFER_SIZE], buf2[BUFFER_SIZE];
+	scanf("%s", buf1);
+	scanf("%s", buf2);
+	int i = n - 1;
+	while (i >= 0 && strcmp(names[i], buf1) > 0) {
+		names[i + 1] = names[i];
+		numbers[i + 1] = numbers[i];
+		i--;
+	}
+	names[i + 1] = strdup(buf1);
+	numbers[i + 1] = strdup(buf2);
+	n++;
+	printf("%s was added successfully.\n", buf1);
+}
+void remove() {
+	char buf[BUFFER_SIZE];
+	scanf("%s", buf);
+	int index = search(buf);//삭제될사람의 인덱스
+	if (index == -1) {
+		printf("No person named %s exists.\n", buf);
+		return;
+	}
+	int j = index;
+	for (; j < n - 1; j++) {
+		names[j] = names[j + 1];
+		numbers[j] = numbers[j + 1];
+	}
+	n--;
+	printf("%s was deleted successfully.\n", buf);
+}
+void find() {
+	char buf[BUFFER_SIZE];
+	scanf("%s", buf);
+	int index = search(buf);
+	if (index == -1)
+		printf("NO person named %s exists.\n", buf);
+	else
+		printf("%s\n", numbers[index]);
+}
+void status() {
+	int i;
+	for (i = 0; i < n; i++)
+		printf("%s %s\n", names[i], numbers[i]);
+	printf("Total %d person.\n", n);
+}
+void findall() {
+	char buf[BUFFER_SIZE],buffer[BUFFER_SIZE];
+	scanf("%s", buf);
+	int cut = 0;
+	for (int i = 0; i < n; i++) {
+		int count = 0;
+		strcpy(buffer, names[i]);
+		for (int j = 0; j < strlen(buf); j++) {
+			if (buf[j] == buffer[j])
+				count++;
+			if (count == strlen(buf))
+			{
+				cut++;
+				printf("%s %s\n", names[i], numbers[i]);
+			}
+		}	
+	}
+	printf("%d persons found.\n", cut);
+}
+void removeall() {
+	char buf[BUFFER_SIZE];
+	int ch = 0,a=0;
+	scanf("%s", buf);
+	int cut = 0;
+	int number = 0;
+	char answer[BUFFER_SIZE];
+	for (int i = 0; i < n;i++ ) {
+		int count = 0;
+		char buffer[BUFFER_SIZE];
+		strcpy(buffer, names[i]);
+		for (int j = 0; count <= strlen(buf) && j < strlen(buf); j++) {
+			if (buf[j] == buffer[j])
+				count++;
+			if (count == strlen(buf))
+			{
+				printf("Do you want to delete '%s'?", names[i]);
+				if (number == 0)
+					ch = getchar();
+				number++;
+				while ((ch = getchar()) != '\n')
+					answer[a++] = ch;
+				answer[a] = '\0';
+				if (strcmp(answer, "yes") == 0)
+				{
+					cut++;
+					printf("%s was deleted.\n", names[i]);
+					for (int o = i; o < n - 1; o++) {
+						names[o] = names[o + 1];
+						numbers[o] = numbers[o + 1];
+					}
+					i--;
+					n--;
+					a = 0;
+				}
+				else if (strcmp(answer, "yes") != 0 || strlen(answer)==0) {//
+					printf("%s was not deleted.\n", names[i]);
+					a = 0;
+				}
+			}
+		}
+	}
+	printf("%d persons deleted.\n", cut);
+}
+int main() {
+	char buffer[BUFFER_SIZE];
+	while (1) {
+		printf("$ ");
+		scanf("%s", buffer);
+		if (strcmp(buffer, "read") == 0)
+			load();
+		else if (strcmp(buffer, "add") == 0)
+			add();
+		else if (strcmp(buffer, "find") == 0)
+			find();
+		else if (strcmp(buffer, "findall") == 0)
+			findall();
+		else if (strcmp(buffer, "status") == 0)
+			status();
+		else if (strcmp(buffer, "delete") == 0)
+			remove();
+		else if (strcmp(buffer, "deleteall") == 0)
+			removeall();
+		else if (strcmp(buffer, "save") == 0)
+			save();
+		else if (strcmp(buffer, "exit") == 0)
+			break;
+	}
+	return 0;
+}
+
+
+
+
+
+
+
+
+3. 입력 파일 harry.txt를 읽는다. 이 파일을 좌우 정렬하여 aligned.txt 파일로 출력하는 프로그램을 작 성하라. 한 라인의 길이가 정확히 80 문자가 되도록 좌우 정렬한다. 문자의 개수가 부족하면 다음 라인의 단 어를 가져와서 80문자를 채워야한다. 단, 다음 단어를 가져오면 80문자가 초과되는 경우에는 단어들 사이 에 적절한 공백문자를 추가하여 80문자를 맞춘다. 공백 문자는 균등하게 분포되어야 한다. 특히 가장 마지 막 라인에 주의하라. (출력 파일의 예)
+
+
+#include<stdio.h>//2강에 3번//
+#include<string.h>
+#define MAX_LENGTH 81
+#pragma warning(disable:4996)
+FILE*fp = fopen("harry.txt", "r");
+FILE*fp_out = fopen("aligned.txt", "w");
+char *first[100000];
+int fir = 0;
+int read_line() {
+	int length = 0, num = 0, blank, last = 0;
+	char*words[100], buffer[100];
+	if (fir != 0 && strlen(first[fir - 1]) != 0) {
+		words[num] = first[fir - 1];
+		length += (strlen(words[num++]) + 1);
+	}
+	fscanf(fp, "%s", buffer);
+	while (length < MAX_LENGTH) {
+		words[num] = strdup(buffer);
+		length += (strlen(words[num++]) + 1);
+		if (fscanf(fp, "%s", buffer) == EOF) {
+			last = 1;
+			break;
+		}
+		if (strlen(buffer) >= (MAX_LENGTH - length)) {
+			break;
+		}
+	}
+	blank = MAX_LENGTH - length;
+	if (last == 1)
+		blank = 0;
+	int count = 0;
+	for (int i = 0; i < num; i++) {
+		fprintf(fp_out, "%s", words[i]);
+		if (i != num - 1)
+			fprintf(fp_out, " ");
+		if (blank > 0 && count < blank) {
+			fprintf(fp_out, " ");
+			count++;
+			length++;
+		}
+	}
+	if (last == 1)
+		return 1;
+	fprintf(fp_out, "\n");
+	first[fir++] = strdup(buffer);
+	return 0;
+}
+int main() {
+	int read = read_line();
+	while (1) {
+		if (read == 1)
+			break;
+		read = read_line();
+	}
+	fclose(fp);
+	fclose(fp_out);
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+#pragma warning(disable:4996)//건우 2강에 3번코드
+#include<stdio.h>
+#include<string.h>
+#define MAX 100
+
+void eighty_letters();
+
+int main(void)
+{
+   eighty_letters(); return 0;
+}
+
+void eighty_letters()
+{
+   FILE*in_fp = fopen("harry.txt", "r");
+   FILE*out_fp = fopen("aligned.txt", "w");
+
+   char* story[MAX];
+   char buffer[MAX];
+   int len, sum = 0, last = 0, sum2 = 0;
+   int i = 0;
+   while (1) {
+      if (fscanf(in_fp, "%s", buffer) != EOF) {
+         story[i] = strdup(buffer);
+         if (last == 0) {
+            if (sum <= 80) {
+               if (80 - sum <= strlen(story[i])) {
+                  last = 1;
+               }
+               len = strlen(story[i]) + 1;
+               sum += len; i++;
+            }
+         }
+         if (last == 1) {
+
+            int o = 81 - (sum - strlen(story[i - 1]));
+            for (int j = 0; j < i - 1; j++) {
+               fprintf(out_fp, "%s ", story[j]);
+               if (o > 0) {
+                  fprintf(out_fp, " ");
+                  o--;
+               }
+            }
+            fprintf(out_fp, "\n");
+            strcpy(story[0], story[i - 1]); i = 1; sum = strlen(story[0]) + 1; last = 0; continue;
+         }
+      }
+      if (fscanf(in_fp, "%s", buffer) == EOF) {
+         for (int j = 0; j < i; j++) {
+            fprintf(out_fp, "%s ", story[j]); 
+         }break;
+      }
+
+   }
+      fclose(in_fp);
+      fclose(out_fp);
+}
+
+
+
+
+
+
+
+
+--------------------------------3강--------------------------------------------------------
+그룹과제
+지역변수는 스택에 할당됨.(함수끝날때까지)
+동적메모리할당은 힙영역에 자리를 차지함.(free함수로 해제할때까지)
+값에의한호출을 잘기억해야함!!!!!
+
+1-(3)
+void포인터를char포인터타입으로 바꿔야함
+fun함수에서는 str_ref에 들어간 이중포인터가 str의 다음주소를 가리키도록하는데 매인함수랑은 연관이없다.
+
+1-(4)
+++가*보다 우선순위이다.그러나 ++가후위연산자일경우는 참조는 이전의 값을한다.
+#include<stdio.h>
+#include<stdlib.h>
+int main() {
+	int i;
+	int *ptr = (int *)malloc(5 * sizeof(int));
+	for (i = 0; i < 5; i++)
+		*(ptr + i) = i;
+	printf("%d ", *ptr++);//다음칸 배열을 가리키지만 ptr배열의 첫번째가 출력된다. 
+	printf("%d ", (*ptr)++);//그 값을 중가시키지만 이전의 ptr[1]을 출력한다.
+	printf("%d ", *ptr);//ptr[1]의 증가된 값을 출력한다.
+	printf("%d ", *++ptr);//인덱스값을 더하고 ptr[2]를 출력
+            printf("%d ",++*ptr);//ptr[2]가 가지는 값을 참조후 1증가시킨다.
+}
+
+1-(5) 
+프로그램이 유효하지 않습니다.
+"int * p;"를 "int * p = NULL;"로 바꾸고 널 포인터를 역 참조하려고 시도합니다.
+이것은 fun ()가 포인터의 복사본을 만들기 때문에 malloc ()이 호출 될 때 복사 된 포인터를 p가 아닌 메모리 위치로 설정합니다. 
+p는 fun ()를 호출하기 전과 후에 임의의 메모리를 가리키고, 역 참조 할 때 충돌합니다. 
+함수에서 포인터에 메모리를 추가하려면 포인터의 주소 (즉, 이중 포인터)를 전달해야합니다.
+한변수에 두가지의 주소로 지정되기 때문에 역참조할때 충돌이 일어난다.따라서 포인터에 메모리를 추가하려면 포인터의 주소를 전달해야합니다.
+#include<stdio.h>
+#include<stdlib.h>
+void fun(int *a) {
+	a = (int *)malloc(sizeof(int));
+}
+int main() {//p는 초기화가 안되었다.(랜덤값으로 가비지값이 주소가됨)
+	int *p;
+	fun(p);//함수와 영향없다,
+	*p = 6;//p의 주소가 초기화가 안되었기때문에 참조할수없다.
+	printf("%d\n", *p);
+	return 0;
+}
+
+1-(6)
+문자열의 끝이 표시되지 않으면 printf하기 어렵다
+str[]="GeekQuiz" : 수정가능
+str*="GeekQuiz" : string literal(수정이안되는 데이터)
+
+
+2
+-첫번째 함수
+지역변수의 주소를 반환하는데 지역변수는 그함수가 종료되면 스텍에서 사라진다.언제든지 없어질수 있다.
+무의미하다.
+-두번째 함수
+px라는 포인터 변수가 가지는 주소값은 무의미한 랜덤값.그 값을 주소로해석해서 거기에 숫자를 쓰라는데 이러면안됨.
+-세번째 함수
+malloc으로 할당받았으므로 힙영역에서 잘
+하여튼 잘작동함
+
+
+3
+//str*는 수정이불가능
+//str[ ]이렇게해도 배열의 크기가 지정되기때문에 배열의 범위를 벗어나게된다.
+//malloc하면 free해줘야함*****strdup썼을때도 free를 해줘야한다.
+
+
+
+
+
+
+
+#pragma warning(disable:4996)//전화번호부 4번쨰
+//구조체로 전화번호부 만들기(모든항목이 다존재하지않을 수도 있다.)
+//불필요한 공백은 자동으로 없애고 받아들인다.
+#include<stdio.h>
+#include<stdlib.h>
+#include<string.h>
+#define CAPACITY 100
+#define BUFFUR_LENGTH 100
+typedef struct person {
+	char *name;
+	char *number;
+	char * email;
+	char *group;
+}Person;
+Person directory[CAPACITY];
+int n = 0;//사람수
+int read_line(FILE*fp, char str[], int n) {//키보드(stdin)나 파일포인터(fp)로부터 다 가능함.파일이 매개변수
+	int ch, i = 0;
+	while ((ch = fgetc(fp)) != '\n'&&ch != EOF)//한라인이 한사람의 정보이다.
+		if (i < n)
+			str[i++] = ch;
+	str[i] = '\0';
+	return i;
+}
+int main() {
+	//이름이 두개이상의 단어로 구성될수 있다.
+	char command_line[BUFFUR_LENGTH];
+	char *command, *argument;
+	char name_str[BUFFUR_LENGTH];
+	while (1) {
+		printf("$ ");
+		if (read_line(stdin, command_line, BUFFUR_LENGTH) <= 0)//그냥 엔터만 쳤을때
+			continue;
+		command = strtok(command_line, " ");
+		if (strcmp(command, "read") == 0) {
+			argument = strtok(NULL, " ");//파일이름
+			if (argument == NULL) {
+				printf("Invaild arguments.\n");
+				continue;
+			}
+			load(argument);
+		}
+		else if (strcmp(command, "add") == 0) {
+			if (compose_name(name_str, BUFFUR_LENGTH) <= 0) {//불필요한 공백이 들어갈 확률있음
+				printf("Name required\n");
+				continue;
+			}
+			handle_add(name_str);
+		}
+		else if (strcmp(command, "find") == 0) {
+			if (compose_name(name_str, BUFFUR_LENGTH) <= 0) {
+				printf("Name requied\n");
+				continue;
+			}
+			find(name_str);
+		}
+		else if (strcmp(command, "status") == 0) {
+			status();
+		}
+		else if (strcmp(command, "delete") == 0) {
+			if (compose_name(name_str, BUFFUR_LENGTH) <= 0) {
+				printf("Invaild argument.\n");
+				continue;
+			}
+			remove(name_str);
+		}
+		else if (strcmp(command, "save") == 0) {
+			argument = strtok(NULL, " ");
+			if (strcmp(argument, "as") != 0) {
+				printf("Invaild argument.\n");
+				continue;
+			}
+			argument = strtok(NULL, " ");
+			if (argument == NULL) {
+				printf("Invaild argument.\n");
+				continue;
+			}
+			save(argument);
+		}
+		else if (strcmp(command, "exit") == 0)
+			break;
+	}
+	return 0;
+}
+void load(char *fileName) {
+	char buffer[BUFFUR_LENGTH];
+	char *name, *number, *email, *group;
+	FILE*fp = fopen(fileName, "r");
+	if (fp == NULL) {
+		printf("Open failed\n");
+		return;
+	}
+	while (1) {
+		if (read_line(fp, buffer, BUFFUR_LENGTH) <= 0)//더이상 읽을거리가 없다면
+			break;
+		name = strtok(buffer, "#");
+		number = strtok(NULL, "#");//없는경우에는 공백문자 하나만존재하는 string이된다.
+		email = strtok(NULL, "#");
+		group = strtok(NULL, "#");
+		add(name, number, email, group);
+	}
+	fclose(fp);
+}
+void add(char *name, char*number, char * email, char* group) {
+	int i = n - 1;
+	while (i >= 0 && strcmp(directory[i].name, name) > 0) {
+		directory[i + 1] = directory[i];
+		i--;
+	}
+	directory[i + 1].name = strdup(name);
+	directory[i + 1].number = strdup(number);
+	directory[i + 1].email = strdup(email);
+	directory[i + 1].group = strdup(group);
+
+	n++;
+}
+int compose_name(char str[], int limit) {//이름압축함수
+	char*ptr;
+	int length = 0;
+	ptr = strtok(NULL, " ");//첫번째토큰은 명령어
+	if (ptr == NULL)//이름이 없다
+		return 0;
+	strcpy(str, ptr);
+	length += strlen(ptr);
+	while ((ptr = strtok(NULL, " ")) != NULL) {
+		if (length + strlen(ptr) + 1 < limit) {//맨뒤 널캐릭터
+			str[length++] = ' ';//이름사이에는 한칸 띄어쓰기가 있어야함으로 널캐릭터를 공백문자로 바꿈
+			str[length] = '\0';
+			strcat(str, ptr);//두단어가 NULL로 끝나는 가정하에 작동함
+			length += strlen(ptr);
+		}
+	}
+	return length;
+}
+void handle_add(char *name) {
+	char number[BUFFUR_LENGTH], email[BUFFUR_LENGTH], group[BUFFUR_LENGTH];
+	char empty[] = " ";
+	printf(" Phone: ");
+	read_line(stdin, number, BUFFUR_LENGTH);
+	printf(" Email: ");
+	read_line(stdin, email, BUFFUR_LENGTH);
+	printf(" Group: ");
+	read_line(stdin, group, BUFFUR_LENGTH);
+	add(name, (char*)(strlen(number) > 0 ? number : empty), (char*)(strlen(email) > 0 ? email : empty), (char*)(strlen(group) > 0 ? group : empty));
+}
+void save(char *fileName) {
+	FILE*fp_out = fopen(fileName, "w");
+	if (fp_out == NULL) {
+		printf("Open failed\n");
+		return;
+	}
+	for (int i = 0; i < n; i++) {
+		fprintf(fp_out, "%s#", directory[i].name);
+		fprintf(fp_out, "%s#", directory[i].number);
+		fprintf(fp_out, "%s#", directory[i].email);
+		fprintf(fp_out, "%s#", directory[i].group);
+	}
+	fclose(fp_out);
+}
+int search(char*name) {
+	int i;
+	for (i = 0; i < n; i++) {
+		if (strcmp(name, directory[i].name) == 0) {
+			return i;
+		}
+	}
+	return -1;
+}
+void print_person(Person p) {
+	printf("%s:\n", p.name);
+	printf(" Phone:%s\n", p.number);
+	printf(" Email:%s\n", p.email);
+	printf(" Group:%s\n", p.group);
+}
+void remove(char *name) {
+	int i = search(name);
+	if (i == -1) {
+		printf("No person named'%s' exists.\n", name);
+		return;
+	}
+	int j = i;
+	for (; j < n - 1; j++) {
+		directory[j] = directory[j + 1];
+	}
+	n--;
+	printf("'%s'was deleted successfully\n", name);
+}
+void status() {
+	for (int i = 0; i < n; i++)
+		print_person(directory[i]);
+	printf("Total %d persons.\n", n);
+}
+void find(char*name) {
+	int index = search(name);
+	if (index == -1)
+		printf("No person named '%s' exists.", name);
+	else
+		print_person(directory[index]);
+}
+
+
+
+
+
+
+
+
+
+1. 입력으로 받은 문자열이 유효한 IP 주소인지 검사하는 프로그램을 작성하라. IP주소는 예를 들면 172.16.254.1처럼 4개의 0~255 사이의 정수가 소수점으로 구분된다. 입력으로 “임의의” 문자열을 받 아서 Yes 혹은 No로 출력한다. 
+
+#include<stdio.h>//3강에 1번
+#include<string.h>
+#include<ctype.h>
+#pragma warning(disable:4996)
+#define MAXWORDS 100
+int blank = 0;
+char *words[100];
+int read_line_compression(char str[100]) {
+	int ch;
+	int i = 0, sw = 0, j = 0;
+	while (1) {
+		ch = getchar();
+		if (isdigit(ch)) {
+			str[i++] = ch;
+			sw = 1;
+		}
+		if (sw == 1 && !isdigit(ch)) {
+			str[i] = '\0';
+			words[j++] = strdup(str);
+			sw = 0;
+			i = 0;
+		}
+		if (ch == '\n')
+			break;
+	}
+	return j;
+}
+int main() {
+	int number = 0, sum = 0, length;
+	char buffer[MAXWORDS];
+	length = read_line_compression(buffer);
+	for (int b = 0; b < length; b++) {
+		sscanf(words[b], "%d", &number);
+		if(0<=number&&number<=255)
+			sum += 1;
+	}
+	if (sum == length)
+		printf("Yes\n");
+	else
+		printf("NO\n");
+}
+
+
+
+
+2. 입력 파일 harry.txt를 읽는다. 이 파일을 좌우 정렬하여 aligned.txt 파일로 출력하는 프로그램을 작 성하라. 한 라인의 길이가 정확히 80 문자가 되도록 좌우 정렬한다. 문자의 개수가 부족하면 다음 라인 의 단어를 가져와서 80문자를 채워야한다. 단, 다음 단어를 가져오면 80문자가 초과되는 경우에는 단 어들 사이에 적절한 공백문자를 추가하여 80문자를 맞춘다. 공백 문자는 균등하게 분포되어야 한다. 입 력라인에서 공백라인이 있으면 공백라인을 그대로 출력하여 “단락"을 구분하여 출력한다. 각 단락의 마 지막 라인은 왼쪽 맞춤한다. (출력 파일의 예: 이 예는 실제로 출력해야할 파일의 앞 부분만 보여준다. 또한 손으로 만든 예이므로 실제 정답과 다소 다를 수 있다.) 
+
+
+#include<stdio.h>//3강에 2번//
+#include<string.h>
+#define MAX_LENGTH 81
+#pragma warning(disable:4996)
+FILE*fp = fopen("harry.txt", "r");
+FILE*fp_out = fopen("aligned.txt", "w");
+char *first[100000];
+int fir = 0;
+int read_line() {
+	int length = 0, num = 0, blank, last = 0,ch=0;
+	char*words[100], buffer[100];
+	if (fir != 0 && strlen(first[fir - 1]) != 0) {
+		words[num] = first[fir - 1];
+		length += (strlen(words[num++]) + 1);
+	}
+	fscanf(fp, "%s", buffer);
+	while (length < MAX_LENGTH) {
+		words[num] = strdup(buffer);
+		length += (strlen(words[num++]) + 1);
+		if ((ch = fgetc(fp)) == '\n') {
+			if ((ch = fgetc(fp)) == '\n') {//last=1일때가 단락띄워야할때
+				last = 1;
+				break;
+			}
+			fseek(fp, -1, SEEK_CUR);
+		}
+		if (fscanf(fp, "%s", buffer) == EOF) {
+			last = 2;//last=2는 문장을 아예 다읽었을때
+			break;
+		}
+		if (strlen(buffer) >= (MAX_LENGTH - length)) {
+			break;
+		}
+	}
+	blank = MAX_LENGTH - length;
+	if (last!=0)
+		blank = 0;
+	int count = 0;
+	for (int i = 0; i < num; i++) {
+		fprintf(fp_out, "%s", words[i]);
+		if (i != num - 1)
+			fprintf(fp_out, " ");
+		if (blank > 0 && count < blank) {
+			fprintf(fp_out, " ");
+			count++;
+			length++;
+		}
+	}
+	if (last == 1)
+		fprintf(fp_out, "\n");
+	if (last == 2)
+		return 1;
+	fprintf(fp_out, "\n");
+	if (last == 1)
+		strcpy(buffer,"\0");
+	first[fir++] = strdup(buffer);
+	return 0;
+}
+int main() {
+	int read = read_line();
+	while (1) {
+		if (read == 1)
+			break;
+		read = read_line();
+	}
+	fclose(fp);
+	fclose(fp_out);
+}
+
+
+
+-------------------------------------------------4강-----------------------------------------------------
+그룹과제
+1-1)
+G의주소가 매개변수로 넘어감
+씨랑 씨플플만 0을 거짓 1을 참으로보며,
+	      널문자도 아스코드값 0이라는 정수값으로 표현되기때문에 0이되면 거짓으로 판단된다.(논란의 여지 많음)
+포인터끼리 연산을 하면 주소 값들의 차이가 9가 되는것이다.
+1-2)
+E의 아스키토드 값-A의 아스키코드 값=4이므로 p에다가 4를 더한것과같다.
+주어진 주소를 출력할 문자열의 시작으로 보고 널문자 나올떄 까지 출력한다.
+1-3)
+p[3]을 *(p+3)으로 항상 변환해서 바꾸기 때문에.C언어의 구멍
+1-4)
+//맞는답
+#include<stdio.h>//출력:널문자,이유:첫번째에 널문자가 들어가기때문에 문자열이 끝나게된다.
+#include<string.h>
+int main() {
+	char p[20];
+	char *s = "string";
+	int length = strlen(s);
+	int i;
+	for (i = 0; i < length; i++)
+		p[i] = s[length - i-1];
+	p[i] = '\0';
+	printf("%s", p);
+}
+1-6)
+*str일떄 포인터가 다른배열을 가리킬수있고,크기는 4바이트이며,문자하나를 수정할순없다.
+그러나 str[100]배열의 이름이므로 다른 배열을 가리킬수없고,문자하나씩 수정할수 있다.
+1-7)
+*str이렇게하면 수정불가능
+1-9)
+구조체 안의 값을 미리 정해주는것도 안됨.배열의 크기지정필요
+ptr은 포인터변수이기 때문에 객체를 포인팅(동적메모리할당)시켜주어야 데이터를 쓸수 있다.
+할당을 시켜준다고 해도 씨언어는 그 값은 없다고 인식하기 때문에출력안됨
+
+씨언어는 명령어가 아니라 라이브러리함수이다.
+1-10)
+변수가 4의배수가 아닌 메모리 번지에 들어가면 CPU에 성능에 영향미침
+a다음에 3바이트는 버린다
+1-11)
+배열끼리 덮기는 안되는데
+구조체맴버상에서 배열끼리 덮는거는 된다.포인터라면 가능하지않다
+
+3)
+지역변수의 주소를 반환하는데 지역변수는 그함수가 종료되면 스텍에서 사라진다.언제든지 없어질수 있다.
+무의미하다.
+그러나 지역변수의 값을 리턴하면 그 값이 임시적으로 다른 곳에 복사가되고 그 값을 다른변수에 저장한다(return by capy)
+크기가 크면 두번복사해야하므로 선능에 영향을중수이ㅏㄷ.
+
+1-1)
+#include <stdio.h>//출력:9,이유:
+int fun(char *str1) {
+	char *str2 = str1;//str1[0]의 주소를str2에대입
+	while (*++str1);//str1이 널문자를 만날 때까지 더해준다.
+	return (str1 - str2);//str1이 맨마지막의 주소를 가리키게된다.
+}
+int main() {
+	char *str = "GeekQuiz";
+	printf("%d", fun(str));
+	return 0;
+}
+
+
+1-2)
+#include <stdio.h>//출력:2011
+int main() {
+	char c[] = "GATE2011";
+	char *p = c;//c[0]의 주소가 p에 저장된다.
+	printf("%s", p + p[3] - p[1]);//c[0]의 주소+c[3]의 주소-c[1]의 주소
+}
+
+
+
+
+1-3)
+#include <stdio.h>//출력:Quiz Quiz Quiz
+                       //u u u
+int main() {
+	char str[] = "GeeksQuiz"; 
+	printf("%s %s %s\n", &str[5], &5[str], str + 5);   //문자열에서 5번째주소값을 문자열로출력
+	printf("%c %c %c\n", *(str + 6), str[6], 6[str]); //문자열에서 5번째주소값을 문자로출력
+	return 0;
+}
+
+1-4)
+#include<stdio.h>//출력:널문자,이유:첫번째에 널문자가 들어가기때문에 문자열이 끝나게된다.
+#include<string.h>
+int main() {
+	char p[20];
+	char *s = "string";
+	int length = strlen(s);
+	int i;
+	for (i = 0; i < length; i++)
+		p[i] = s[length - i];
+	printf("%s", p);
+}
+
+
+
+
+
+1-5)
+#include<stdio.h>//출력:아무것도,이유 : 젤 마지막 널문자와 첫번째문자가 바뀌기 때문에 아무것도 출력되지 않는다.
+int main() {
+	char p[] = "geeksquiz";
+	char t;
+	int i, j;
+	for (i = 0, j = strlen(p); i < j; i++) {
+		t = p[i]; 
+		p[i] = p[j-i];
+		p[j - i] = t;
+	}
+	printf("%s", p);
+	return 0;
+
+}
+
+1-6)
+#include<stdio.h>//출력:sizeof(str1)=4,sizeof(str2)=10,이유:포인터의크기,배열의 크기
+int main() {
+	char *str1 = "GEEKSQUIZ";
+	char str2[]= "GEEKSQUIZ";
+	printf("sizeof(str1)=%d,sizeof(str2)=%d", sizeof(str1), sizeof(str2));
+	return 0;
+}
+
+
+
+1-7)
+#include<stdio.h>//출력:1204,이유:p가 2칸뒤의 주소를 가리키고 있으므로
+int main() {
+	char s1[7] = "1234", *p;
+	p = s1 + 2;
+	*p = '0';
+	printf("%s", s1);
+}
+
+1-8)
+#include<stdio.h>//출력:GeeksQuiz,이유:메모리할당을 해준후 넣고 싶은 문자를 넣고,strcat을 이용해서 두문자열을 붙여준다.
+#include<stdlib.h>
+#include<string.h>
+int main() {
+	char *s1 = (char*)malloc(50);
+	char *s2 = (char*)malloc(50);
+	strcpy(s1, "Geeks");
+	strcpy(s2, "Quiz");
+	strcat(s1, s2);
+	printf("%s", s1);
+	return 0;
+}
+
+
+
+1-9)
+#include<stdio.h>//출력안됨,이유=주소만 할당하고 메모리를 할당해주지 않았끼 때뭉
+#include<stdlib.h>
+#include<string.h>
+int main() {
+	struct site
+	{
+		char name[100] ;
+		int no_of_pages ;
+	};
+	struct site *ptr;
+	//ptr = (struct site*)malloc(sizeof(struct site));
+	//strcpy(ptr->name, "GeekQuiz");
+	//ptr->no_of_pages = 200;
+	printf("%d ", ptr->no_of_pages);
+	printf("%s", ptr->name);
+	//free(ptr);
+}
+
+
+
+
+1-10)
+#include<stdio.h>//출력:8,이유:구조체크기는 안에 변수중 가장 큰 사이즈를 기준으로해서 변수 개수만큼 곱한다.
+int main() {
+	struct site {
+		char a;
+		int b;
+	};
+	printf("%d", sizeof(struct site));
+	return 0;
+}
+
+
+
+1-11)
+#include<stdio.h>//출력:GeekQuiz,이유:
+#include<string.h>
+struct Test {
+	char str[20];
+};
+int main() {
+	struct Test str1, str2;
+	strcpy(str1.str, "GeekQuiz");
+	str2 = str1;
+	str1.str[0] = 'S';
+	printf("%s", str2.str);
+	return 0;
+}
+
+
+
+
+2)
+#include<stdio.h>//답:arr + 5
+#include<string.h>
+
+int main() {
+	char arr[] = "GeeksQuiz";
+	printf("%s", arr + 5);
+}
+
+
+
+
+3)
+#include<stdio.h>
+#include<string.h>
+#pragma warning(disable:4996)
+struct Q{
+	int q;
+	int z;
+};
+struct Q qq(int x,int y)
+{
+	struct Q a;
+	a.q = x;
+	a.z = y;
+	return a;
+};
+struct Q sum(struct Q a, struct Q b) {
+	struct Q S;
+	S.q = a.q + b.q;
+	S.z = a.z + b.z;
+	return S;
+}
+int main() {
+	int x, y;
+	struct Q wl,wl2,Sum;
+	scanf("%d%d", &x, &y);
+	wl = qq(x, y);
+	scanf("%d%d", &x, &y);
+	wl2 = qq(x, y);
+	Sum = sum(wl, wl2);
+	printf("%d+i%d", Sum.q, Sum.z);
+}
+
+
+
+
+
+#pragma warning(disable:4996)//전화번호부5
+//구조체로 전화번호부 만들기(모든항목이 다존재하지않을 수도 있다.)
+//불필요한 공백은 자동으로 없애고 받아들인다.
+#include<stdio.h>
+#include<stdlib.h>
+#include<string.h>
+#define BUFFUR_LENGTH 100
+#define INIT_CAPACITY 100
+typedef struct {
+	char *name;
+	char *number;
+	char * email;
+	char *group;
+}Person;
+Person **directory;//너무많은 복사본을 방지하기위해 주소만 저장함.배열 재할당을 위해 포인터변수로 둬야한다.포인터배열로두면 재할당못함
+int n = 0;//사람수
+int capacity;
+void init() {
+	directory = (Person**)malloc(INIT_CAPACITY * sizeof(Person*));
+	capacity = INIT_CAPACITY;
+	n = 0;
+}
+int read_line(FILE*fp, char str[], int n) {//키보드(stdin)나 파일포인터(fp)로부터 다 가능함.파일이 매개변수
+	int ch, i = 0;
+	while ((ch = fgetc(fp)) != '\n'&&ch != EOF)//한라인이 한사람의 정보이다.
+		if (i < n)
+			str[i++] = ch;
+	str[i] = '\0';
+	return i;
+}
+int main() {
+	//이름이 두개이상의 단어로 구성될수 있다.
+	char command_line[BUFFUR_LENGTH];
+	char *command, *argument;
+	char name_str[BUFFUR_LENGTH];
+	while (1) {
+		printf("$ ");
+		if (read_line(stdin, command_line, BUFFUR_LENGTH) <= 0)//그냥 엔터만 쳤을때
+			continue;
+		command = strtok(command_line, " ");
+		if (strcmp(command, "read") == 0) {
+			argument = strtok(NULL, " ");//파일이름
+			if (argument == NULL) {
+				printf("Invaild arguments.\n");
+				continue;
+			}
+			load(argument);
+		}
+		else if (strcmp(command, "add") == 0) {
+			if (compose_name(name_str, BUFFUR_LENGTH) <= 0) {//불필요한 공백이 들어갈 확률있음
+				printf("Name required\n");
+				continue;
+			}
+			handle_add(name_str);
+		}
+		else if (strcmp(command, "find") == 0) {
+			if (compose_name(name_str, BUFFUR_LENGTH) <= 0) {
+				printf("Name requied\n");
+				continue;
+			}
+			find(name_str);
+		}
+		else if (strcmp(command, "status") == 0) {
+			status();
+		}
+		else if (strcmp(command, "delete") == 0) {
+			if (compose_name(name_str, BUFFUR_LENGTH) <= 0) {
+				printf("Invaild argument.\n");
+				continue;
+			}
+			remove(name_str);
+		}
+		else if (strcmp(command, "save") == 0) {
+			argument = strtok(NULL, " ");
+			if (strcmp(argument, "as") != 0) {
+				printf("Invaild argument.\n");
+				continue;
+			}
+			argument = strtok(NULL, " ");
+			if (argument == NULL) {
+				printf("Invaild argument.\n");
+				continue;
+			}
+			save(argument);
+		}
+		else if (strcmp(command, "exit") == 0)
+			break;
+	}
+	return 0;
+}
+void load(char *fileName) {
+	char buffer[BUFFUR_LENGTH];
+	char *name, *number, *email, *group;
+	char *token;
+	FILE*fp = fopen(fileName, "r");
+	if (fp == NULL) {
+		printf("Open failed\n");
+		return;
+	}
+	while (1) {
+		if (read_line(fp, buffer, BUFFUR_LENGTH) <= 0)//더이상 읽을거리가 없다면
+			break;
+		name = strtok(buffer, "#");
+		token = strtok(NULL, "#");
+		if (strcmp(token, " ") == 0)
+			number = NULL;//존재하지않으면 그냥 널 캐릭터를 넣는다.
+		else
+			number = strdup(token);
+		token = strtok(NULL, "#");
+		if (strcmp(token, " ") == 0)
+			email = NULL;//존재하지않으면 그냥 널 캐릭터를 넣는다.
+		else
+			email = strdup(token);
+		token = strtok(NULL, "#");
+		if (strcmp(token, " ") == 0)
+			group = NULL;//존재하지않으면 그냥 널 캐릭터를 넣는다.
+		else
+			group = strdup(token);
+		add(strdup(name), number, email, group);
+	}
+	fclose(fp);
+}
+void add(char *name, char*number, char * email, char* group) {
+	if (n >= capacity)
+		reallocate();
+	int i = n - 1;
+	while (i >= 0 && strcmp(directory[i]->name, name) > 0) {
+		directory[i + 1] = directory[i];
+		i--;
+	}
+	directory[i + 1] = (Person*)malloc(sizeof(Person));//구조체 포인터임으로 빈칸에 포인터주소밖에 없으므로 구조체객체를 만들어서 그 객체에 데이터를 넣어주어야한다.
+	(*directory[i + 1]).name = name;
+	(*directory[i + 1]).number = number;
+	(*directory[i + 1]).email = email;
+	(*directory[i + 1]).group = group;
+
+	n++;
+}
+void reallocate() {
+	capacity *= 2;
+	Person **tmp = (Person**)malloc(capacity * sizeof(Person*));
+	for (int i = 0; i < n; i++)
+		tmp[i] = directory[i];
+	free(directory);//가비지가 가지는 힙영역을 다시 시스템에게 돌려준다.
+	directory = tmp;//directory가 새로운 배열의 주소를 가리키게 되는순간 원래있던 배열의 주소는 아무도 가지고 있지않게된다. 그래서 사용할수 있는 방법이 없게된다.=Garbage(쓰레기).
+}
+int compose_name(char str[], int limit) {//이름압축함수
+	char*ptr;
+	int length = 0;
+	ptr = strtok(NULL, " ");//첫번째토큰은 명령어
+	if (ptr == NULL)//이름이 없다
+		return 0;
+	strcpy(str, ptr);
+	length += strlen(ptr);
+	while ((ptr = strtok(NULL, " ")) != NULL) {
+		if (length + strlen(ptr) + 1 < limit) {//맨뒤 널캐릭터
+			str[length++] = ' ';//이름사이에는 한칸 띄어쓰기가 있어야함으로 널캐릭터를 공백문자로 바꿈
+			str[length] = '\0';
+			strcat(str, ptr);//두단어가 NULL로 끝나는 가정하에 작동함
+			length += strlen(ptr);
+		}
+	}
+	return length;
+}
+void handle_add(char *name) {
+	char number[BUFFUR_LENGTH], email[BUFFUR_LENGTH], group[BUFFUR_LENGTH];
+	char empty[] = " ";
+	printf(" Phone: ");
+	read_line(stdin, number, BUFFUR_LENGTH);
+	printf(" Email: ");
+	read_line(stdin, email, BUFFUR_LENGTH);
+	printf(" Group: ");
+	read_line(stdin, group, BUFFUR_LENGTH);
+	add(name, (char*)(strlen(number) > 0 ? number : empty), (char*)(strlen(email) > 0 ? email : empty), (char*)(strlen(group) > 0 ? group : empty));
+}
+void save(char *fileName) {
+	FILE*fp_out = fopen(fileName, "w");
+	if (fp_out == NULL) {
+		printf("Open failed\n");
+		return;
+	}
+	for (int i = 0; i < n; i++) {
+		fprintf(fp_out, "%s#", (*directory[i]).name);
+		fprintf(fp_out, "%s#", (*directory[i]).number);
+		fprintf(fp_out, "%s#", (*directory[i]).email);
+		fprintf(fp_out, "%s#", (*directory[i]).group);
+	}
+	fclose(fp_out);
+}
+int search(char*name) {
+	int i;
+	for (i = 0; i < n; i++) {
+		if (strcmp(name, (*directory[i]).name) == 0) {
+			return i;
+		}
+	}
+	return -1;
+}
+void print_person(Person *p) {
+	printf("%s:\n", (*p).name);//그 주소가 가리키는 구조체를 불러옴.별표연산자보다 쩜연산자가 우선순위 더높음->괄호 꼭해줘야함
+	printf(" Phone:%s\n", p->number);
+	printf(" Email:%s\n", p->email);
+	printf(" Group:%s\n", p->group);
+}
+void remove(char *name) {
+	int i = search(name);
+	if (i == -1) {
+		printf("No person named'%s' exists.\n", name);
+		return;
+	}
+	Person *p = directory[i];//찾은 사람의 구조체(동적할당받은 객체)의 주소
+	int j = i;
+	for (; j < n - 1; j++) {
+		directory[j] = directory[j + 1];
+	}
+	n--;
+	release_person(p);//단지 구조체 뿐만아니라 구조체에 매달린 문자열들도 다 free시켜줘야함
+	printf("'%s'was deleted successfully\n", name);
+}
+void release_person(Person *p) {
+	free(p->name);
+	if (p->number != NULL)free(p->number);
+	if (p->email != NULL)free(p->email);
+	if (p->group != NULL)free(p->group);
+	free(p);
+}
+void status() {
+	for (int i = 0; i < n; i++)
+		print_person(directory[i]);
+	printf("Total %d persons.\n", n);
+}
+void find(char*name) {
+	int index = search(name);
+	if (index == -1)
+		printf("No person named '%s' exists.", name);
+	else
+		print_person(directory[index]);
+}
+
+
+
+
+
+
+
+
+
+#include<stdio.h>//4강 1번
+#include<string.h>
+#define MAX 100
+#define MAX_TERMS 100
+#pragma warning(disable:4996)
+typedef struct {//다항식 하나의항
+	int coef;
+	int expo;
+}Term;
+typedef struct {//하나의 다항식 표현
+	char name;
+	int nbr_terms;
+	Term terms[MAX_TERMS];//항들을 저장하는 배열
+}Polynomial;
+Polynomial Polys[MAX];//다항식을 저장하는 배열
+int n = 0;
+int read_line(FILE*fp, char str[], int n) {//키보드(stdin)나 파일포인터(fp)로부터 다 가능함.파일이 매개변수
+	int ch, i = 0;
+	while ((ch = fgetc(fp)) != '\n'&&ch != EOF)//한라인이 한사람의 정보이다.
+		if (i < n)
+			str[i++] = ch;
+	str[i] = '\0';
+	return i;
+}
+
+void create(char *argument) {
+	for (int i = 0; i < n; i++)
+		if (Polys[i].name == *argument) {
+			printf("오류입니다.\n");
+			return;
+		}
+	Polys[n].name = *argument;
+	Polys[n++].nbr_terms = 0;
+}
+int seek(char *argument) {
+	int i;
+	for (i = 0; i < n; i++)
+		if (Polys[i].name == *argument)
+			return i;
+	return -1;
+}
+void add(char *argument, int argument2, int argument3) {
+	int num = seek(argument);
+	int buff1, buff2;
+	for (int i = 0; i< Polys[num].nbr_terms; i++)
+		if (Polys[num].terms[i].expo == argument3)
+		{
+			Polys[num].terms[i].coef += argument2;
+			return;
+		}
+	Polys[num].terms[Polys[num].nbr_terms].coef = argument2;
+	Polys[num].terms[Polys[num].nbr_terms++].expo = argument3;
+	for (int k = Polys[num].nbr_terms - 1; k >0; k--) {
+		if (Polys[num].terms[k].expo > Polys[num].terms[k - 1].expo)
+		{
+			buff1 = Polys[num].terms[k].coef; Polys[num].terms[k].coef = Polys[num].terms[k - 1].coef;
+			Polys[num].terms[k - 1].coef = buff1;
+			buff2 = Polys[num].terms[k].expo; Polys[num].terms[k].expo = Polys[num].terms[k - 1].expo;
+			Polys[num].terms[k - 1].expo = buff2;
+		}
+	}
+}
+void mult(char *argument, int argument2) {
+	int num = seek(argument);
+	for (int i = 0; i < Polys[num].nbr_terms; i++)
+		Polys[num].terms[i].coef *= argument2;
+}
+void calc(char *argument, int argument2) {
+	int num = seek(argument);
+	int sum, large = 0;
+	for (int j = 0; j <Polys[num].nbr_terms; j++) {
+		sum = 1;
+		for (int i = 0; i < Polys[num].terms[j].expo; i++)
+			sum *= argument2;
+		large += (sum*Polys[num].terms[j].coef);
+	}
+	printf("%d\n", large);
+}
+void print(char *argument) {
+	int num = seek(argument);
+	int cout = 0;
+	for (int i = 0; i <= Polys[num].nbr_terms; i++)
+	{
+		if (cout != 0 && Polys[num].nbr_terms != i) {
+			if (Polys[num].terms[i].coef>0)
+				printf("+");
+		}
+		cout++;
+		if (Polys[num].terms[i].coef != 0) {
+			if (Polys[num].terms[i].coef == -1)
+				printf("-");
+			else
+				printf("%d", Polys[num].terms[i].coef);
+		}
+		if (Polys[num].terms[i].expo != 0) {
+			printf("x");
+			if (Polys[num].terms[i].expo > 1)
+				printf("^%d", Polys[num].terms[i].expo);
+		}
+
+	}
+	printf("\n");
+}
+void printAll() {
+	for (int k = 0; k < n; k++) {
+		int cout = 0;
+		printf("%c(x) = ", Polys[k].name);
+		for (int i = 0; i <= Polys[k].nbr_terms; i++)
+		{
+			if (cout != 0 && Polys[k].nbr_terms != i) {
+				if (Polys[k].terms[i].coef>0)
+					printf("+");
+			}
+			cout++;
+			if (Polys[k].terms[i].coef != 0) {
+				if (Polys[k].terms[i].coef == -1)
+					printf("-");
+				else
+					printf("%d", Polys[k].terms[i].coef);
+			}
+			if (Polys[k].terms[i].expo != 0) {
+				printf("x");
+				if (Polys[k].terms[i].expo > 1)
+					printf("^%d", Polys[k].terms[i].expo);
+			}
+
+		}
+		printf("\n");
+	}
+}
+void diff(char*f, char *h) {
+	create(h);
+	int num = seek(f);
+	int num2 = seek(h);
+	for (int i = 0; Polys[num].terms[i].expo != 0; i++) {
+		Polys[num2].terms[Polys[num2].nbr_terms].coef = Polys[num].terms[i].coef*Polys[num].terms[i].expo;
+		Polys[num2].terms[Polys[num2].nbr_terms++].expo = Polys[num].terms[i].expo - 1;
+	}
+}
+int main() {
+	char buffer[100];
+	char *argument1, *argument2, argument3[100], f[100], h[100];
+	int argument4, argument5;
+	char delim[] = " ";
+	while (1) {
+		printf("$ ");
+		read_line(stdin, buffer, 100);
+		argument1 = strtok(buffer, delim);
+		if (strcmp(argument1, "create") == 0) {
+			argument2 = strtok(NULL, delim);
+			create(argument2);
+		}
+		else if (strcmp(argument1, "add") == 0) {
+			argument2 = strtok(NULL, "\0");
+			sscanf(argument2, "%s%d%d", argument3, &argument4, &argument5);
+			add(argument3, argument4, argument5);
+		}
+		else if (strcmp(argument1, "mult") == 0) {
+			argument2 = strtok(NULL, "\0");
+			sscanf(argument2, "%s%d", argument3, &argument4);
+			mult(argument3, argument4);
+		}
+		else if (strcmp(argument1, "calc") == 0) {
+			argument2 = strtok(NULL, "\0");
+			sscanf(argument2, "%s%d", argument3, &argument4);
+			calc(argument3, argument4);
+		}
+		else if (strcmp(argument1, "print") == 0) {
+			argument2 = strtok(NULL, " ");
+			if (strcmp(argument2, "all") == 0)
+				printAll();
+			else
+				print(argument2);
+		}
+		else if (strcmp(argument1, "diff") == 0) {
+			argument2 = strtok(NULL, "\0");
+			sscanf(argument2, "%s%s%s", f, argument3, h);
+			diff(f, h);
+		}
+		else if (strcmp(argument1, "exit") == 0) {
+			break;
+		}
+	}
+	return 0;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+#include<stdio.h>//4강 2번
+#include<string.h>
+#include<stdlib.h>
+#define MAX_TERMS 100
+#pragma warning(disable:4996)
+
+typedef struct {//다항식 하나의항
+	int coef;
+	int expo;
+}Term;
+
+typedef struct {//하나의 다항식 표현
+	char name;
+	int nbr_terms;
+	Term *terms[MAX_TERMS];//항들을 저장하는 배열
+}Polynomial;
+
+Polynomial *Polys[100];//다항식을 저장하는 배열
+
+int n = 0;
+
+int read_line(FILE*fp, char str[], int n) {//키보드(stdin)나 파일포인터(fp)로부터 다 가능함->파일이 매개변수
+	int ch, i = 0;
+	while ((ch = fgetc(fp)) != '\n'&&ch != EOF)//한라인이 한사람의 정보이다->
+		if (i < n)
+			str[i++] = ch;
+	str[i] = '\0';
+	return i;
+}
+void create(char *argument) {
+	Polys[n] = malloc(sizeof(Polynomial));
+	for (int i = 0; i < n; i++) {
+		if (Polys[i]->name==*argument) {
+			printf("오류입니다.\n");
+			return;
+		}
+	}
+	Polys[n]->name = *argument;
+	Polys[n++]->nbr_terms = 0;
+}
+int seek(char *argument) {
+	int i;
+	for (i = 0; i < n; i++) {
+		if (Polys[i]->name==*argument)
+			return i;
+	}
+	return -1;
+}
+void add(char *argument, int argument2, int argument3) {
+	int num = seek(argument);
+	int buff1, buff2;
+	for (int i = 0; i < Polys[num]->nbr_terms; i++) {
+		if (Polys[num]->terms[i]->expo == argument3)
+		{
+			Polys[num]->terms[i]->coef += argument2;
+			return;
+		}
+	}
+	Polys[num]->terms[Polys[num]->nbr_terms] = malloc(sizeof(Term));
+	Polys[num]->terms[Polys[num]->nbr_terms]->coef = argument2;
+	Polys[num]->terms[Polys[num]->nbr_terms++]->expo = argument3;
+	for (int k = Polys[num]->nbr_terms-1; k >0; k--) {
+		if (Polys[num]->terms[k]->expo > Polys[num]->terms[k - 1]->expo)
+		{
+			buff1 = Polys[num]->terms[k]->coef; Polys[num]->terms[k]->coef = Polys[num]->terms[k - 1]->coef;
+			Polys[num]->terms[k - 1]->coef = buff1;
+			buff2 = Polys[num]->terms[k]->expo; Polys[num]->terms[k]->expo = Polys[num]->terms[k - 1]->expo;
+			Polys[num]->terms[k - 1]->expo = buff2;
+		}
+	}
+}
+void mult(char*argument, int argument2) {
+	int num = seek(argument);
+	for (int i = 0; i < Polys[num]->nbr_terms; i++) {
+		Polys[num]->terms[i]->coef *= argument2;
+	}
+}
+void calc(char *argument, int argument2) {
+	int num = seek(argument);
+	int sum, large = 0;
+	for (int j = 0; j <Polys[num]->nbr_terms; j++) {
+		sum = 1;
+		for (int i = 0; i < Polys[num]->terms[j]->expo; i++)
+			sum *= argument2;
+		large += (sum*Polys[num]->terms[j]->coef);
+	}
+	printf("%d\n", large);
+}
+void print(char *argument) {
+	int num = seek(argument);
+	int cout = 0;
+	for (int i = 0; i < Polys[num]->nbr_terms; i++)
+	{
+		if (cout != 0 && Polys[num]->nbr_terms != i) {
+			if (Polys[num]->terms[i]->coef>0)
+				printf("+");
+		}
+		cout++;
+		if (Polys[num]->terms[i]->coef != 0) {
+			if (Polys[num]->terms[i]->coef == -1)
+				printf("-");
+			else
+				printf("%d", Polys[num]->terms[i]->coef);
+		}
+		if (Polys[num]->terms[i]->expo != 0) {
+			printf("x");
+			if (Polys[num]->terms[i]->expo > 1)
+				printf("^%d", Polys[num]->terms[i]->expo);
+		}
+
+	}
+	printf("\n");
+}
+void printAll() {
+	for (int k = 0; k < n; k++) {
+		int cout = 0;
+		printf("%c(x) = ", Polys[k]->name);
+		for (int i = 0; i < Polys[k]->nbr_terms; i++)
+		{
+			if (cout != 0 && Polys[k]->nbr_terms != i) {
+				if (Polys[k]->terms[i]->coef>0)
+					printf("+");
+			}
+			cout++;
+			if (Polys[k]->terms[i]->coef != 0) {
+				if (Polys[k]->terms[i]->coef == -1)
+					printf("-");
+				else
+					printf("%d", Polys[k]->terms[i]->coef);
+			}
+			if (Polys[k]->terms[i]->expo != 0) {
+				printf("x");
+				if (Polys[k]->terms[i]->expo > 1)
+					printf("^%d", Polys[k]->terms[i]->expo);
+			}
+
+		}
+		printf("\n");
+	}
+}
+void diff(char*f, char *h) {
+	create(h);
+	int num = seek(f);
+	int num2 = seek(h);
+	int i;
+	for (i = 0; Polys[num]->terms[i]->expo != 0; i++) {
+		Polys[num2]->terms[Polys[num2]->nbr_terms] = malloc(sizeof(Term));
+		Polys[num2]->terms[Polys[num2]->nbr_terms]->coef = Polys[num]->terms[i]->coef*Polys[num]->terms[i]->expo;
+		Polys[num2]->terms[Polys[num2]->nbr_terms++]->expo = Polys[num]->terms[i]->expo - 1;
+	}
+}
+int main() {
+	char buffer[100];
+	char *argument1, *argument2,argument3[100], f[100], h[100];
+	int argument4, argument5;
+	while (1) {
+		printf("$ ");
+		read_line(stdin,buffer, 100);
+		argument1 = strtok(buffer, " ");
+		if (strcmp(argument1, "create") == 0) {
+			argument2 = strtok(NULL, "\0");
+			create(argument2);
+		}
+		else if (strcmp(argument1, "add") == 0) {
+			argument2 = strtok(NULL, "\0");
+			sscanf(argument2, "%s%d%d", argument3, &argument4, &argument5);
+			add(argument3, argument4, argument5);
+		}
+		else if (strcmp(argument1, "mult") == 0) {
+			argument2 = strtok(NULL, "\0");
+			sscanf(argument2, "%s%d", argument3, &argument4);
+			mult(argument3, argument4);
+		}
+		else if (strcmp(argument1, "calc") == 0) {
+			argument2 = strtok(NULL, "\0");
+			sscanf(argument2, "%s%d", argument3, &argument4);
+			calc(argument3, argument4);
+		}
+		else if (strcmp(argument1, "print") == 0) {
+			argument2 = strtok(NULL, " ");
+			if (strcmp(argument2, "all") == 0)
+				printAll();
+			else
+				print(argument2);
+		}
+		else if (strcmp(argument1, "diff") == 0) {
+			argument2 = strtok(NULL, "\0");
+			sscanf(argument2, "%s%s%s", f, argument3, h);
+			diff(f, h);
+		}
+		else if (strcmp(argument1, "exit") == 0) {
+			break;
+		}
+	}
+	for (int i = 0; i <sizeof(Polys) / sizeof(Polynomial*); i++)
+	{
+		for (int j = 0; i <Polys[i]->nbr_terms; j++)
+		{
+			free(Polys[i]->terms[j]);
+		}
+		free(Polys[i]);
+	}
+	return 0;
+}
+
+
+
+
+
+
+
+
+
+
+
+#pragma warning(disable:4996)//건우 2번 코드
+#include<stdio.h>
+#include<string.h>
+#include<stdlib.h>
+#define MAX_TERMS 100
+#define MAX 100
+#define BUFFER_SIZE 100
+
+typedef struct term {         //하나의 항을 표현하는 구조체
+   int coef;                 //계수
+   int expo;                 //차수
+}Term;
+
+typedef struct polynomial {   //하나의 다항식을 표현하기 위한 구조체
+   char name;                //f,g,h등의 다항식의 이름
+   int nbr_terms;            //이 다항식을 구성하는 항의 개수
+   Term *terms[MAX_TERMS];
+}Polynomial;
+
+Polynomial *polys[MAX];
+int n = 0;
+
+void create();
+void add();
+void mult();
+void calc();
+void print();
+void diff();
+void printall();
+int search(char name);
+void sort(int i);
+
+int main(void)
+{
+   char buffer[BUFFER_SIZE];
+   while (1) {
+      printf("$ ");
+      scanf("%s", buffer);
+      if (strcmp(buffer, "create") == 0)
+         create();
+      else if (strcmp(buffer, "add") == 0)
+         add();
+      else if (strcmp(buffer, "mult") == 0)
+         mult();
+      else if (strcmp(buffer, "calc") == 0)
+         calc();
+      else if (strcmp(buffer, "print") == 0)
+         print();
+      else if (strcmp(buffer, "diff") == 0)
+         diff();
+      else if (strcmp(buffer, "printall") == 0)
+         printall();
+      else if (strcmp(buffer, "exit") == 0)
+         break;
+   }
+   for (int i = 0; i <sizeof(polys) / sizeof(Polynomial*); i++)
+      free(polys[i]);
+
+   return 0;
+}
+
+void create() {
+   char name;
+   scanf(" %c", &name);
+   if (search(name) != -1)
+      printf("이름이 중복된 함수 존재\n");
+   else {
+      polys[n] = (Polynomial*)malloc(sizeof(Polynomial));
+      polys[n]->name = name;
+      polys[n]->nbr_terms = 0;
+      n++;
+   }
+}
+void add() {
+   char name;
+   int coef, expo;
+   int i, flag = 0;
+
+   scanf(" %c", &name);
+   scanf("%d %d", &coef, &expo);
+
+   i = search(name);
+
+   if (i != -1) {
+      for (int j = 0; j < polys[i]->nbr_terms; j++) {
+         flag = 0;
+         if (polys[i]->terms[j]->expo == expo) {
+            polys[i]->terms[j]->coef += coef;
+            flag = 1;
+            break;
+         }
+      }
+      if (flag == 0) {
+         polys[i]->terms[polys[i]->nbr_terms] = (Term*)malloc(sizeof(Term));
+         polys[i]->terms[polys[i]->nbr_terms]->coef = coef;
+         polys[i]->terms[polys[i]->nbr_terms]->expo = expo;
+         polys[i]->nbr_terms++;
+      }
+   }
+}
+void mult() {
+   char name;
+   int multi;
+
+   scanf(" %c", &name);
+   scanf("%d", &multi);
+
+   int i = search(name);
+   if (i != -1) {
+      sort(i);
+      for (int j = 0; j < polys[i]->nbr_terms; j++) {
+         polys[i]->terms[j]->coef *= multi;
+      }
+   }
+
+}
+void calc() {
+   char name;
+   int value, ans = 0;
+   int result = 1;
+
+   scanf(" %c", &name);
+   scanf("%d", &value);
+
+   int i = search(name);
+   if (i != -1) {
+      for (int j = 0; j < polys[i]->nbr_terms; j++) {
+         result = 1;
+         for (int k = 0; k < polys[i]->terms[j]->expo; k++) {
+            result *= value;
+         }
+         result *= polys[i]->terms[j]->coef;
+         ans += result;
+      }
+   }
+   printf("%d\n", ans);
+
+}
+void print() {
+   char name;
+   scanf(" %c", &name);
+
+   int i = search(name);
+   sort(i);
+   if (i != -1) {
+      for (int j = 0; j < polys[i]->nbr_terms; j++) {
+         if (j != polys[i]->nbr_terms - 1) {
+            if (polys[i]->terms[j + 1]->coef > 0)
+               printf("%dx^%d + ", polys[i]->terms[j]->coef, polys[i]->terms[j]->expo);
+            else if (polys[i]->terms[j + 1]->coef < 0)
+               printf("%dx^%d ", polys[i]->terms[j]->coef, polys[i]->terms[j]->expo);
+         }
+         else if (j == polys[i]->nbr_terms - 1)
+            printf("%dx^%d", polys[i]->terms[j]->coef, polys[i]->terms[j]->expo);
+      }
+      printf("\n");
+   }
+}
+void diff() {
+   char name1;
+   char as[BUFFER_SIZE];
+   scanf(" %c", &name1);
+   scanf("%s", as);
+   create();
+
+   int i = search(name1);
+   sort(i);
+
+   if (i != -1) {
+      if (polys[i]->terms[polys[i]->nbr_terms - 1]->expo == 0) {
+         for (int h = 0; h < polys[i]->nbr_terms - 1; h++) {
+            polys[n - 1]->terms[h] = (Term*)malloc(sizeof(Term));
+            polys[n - 1]->terms[h]->coef = polys[i]->terms[h]->coef * polys[i]->terms[h]->expo;
+            polys[n - 1]->terms[h]->expo = polys[i]->terms[h]->expo - 1; polys[n - 1]->nbr_terms++;
+         }
+      }
+      else if (polys[i]->terms[polys[i]->nbr_terms - 1]->expo > 0) {
+         for (int h = 0; h < polys[i]->nbr_terms; h++) {
+            polys[n - 1]->terms[h] = (Term*)malloc(sizeof(Term));
+            polys[n - 1]->terms[h]->coef = polys[i]->terms[h]->coef * polys[i]->terms[h]->expo;
+            polys[n - 1]->terms[h]->expo = polys[i]->terms[h]->expo - 1; polys[n - 1]->nbr_terms++;
+         }
+      }
+   }
+}
+void printall() {
+   for (int i = 0; i < n; i++) {
+      sort(i);
+      printf("%c(x) = ", polys[i]->name);
+      for (int j = 0; j < polys[i]->nbr_terms; j++) {
+         if (j != polys[i]->nbr_terms - 1) {
+            if (polys[i]->terms[j + 1]->coef > 0)
+               printf("%dx^%d + ", polys[i]->terms[j]->coef, polys[i]->terms[j]->expo);
+            else if (polys[i]->terms[j + 1]->coef < 0)
+               printf("%dx^%d + ", polys[i]->terms[j]->coef, polys[i]->terms[j]->expo);
+         }
+         else if (j == polys[i]->nbr_terms - 1)
+            printf("%dx^%d", polys[i]->terms[j]->coef, polys[i]->terms[j]->expo);
+      }
+      printf("\n");
+   }
+}
+int search(char name) {
+   int i;
+   for (i = 0; i < n; i++) {
+      if (name == polys[i]->name)
+         return i;
+   }return -1;
+}
+void sort(int i) {
+   char name;
+   Term *tmp;
+
+   if (i != -1) {
+      for (int j = 0; j < polys[i]->nbr_terms; j++) {
+         for (int k = 0; k < polys[i]->nbr_terms - 1; k++) {
+            if (polys[i]->terms[j]->expo > polys[i]->terms[k]->expo) {
+               tmp = polys[i]->terms[j];
+               polys[i]->terms[j] = polys[i]->terms[k];
+               polys[i]->terms[k] = tmp;
+            }
+         }
+      }
+   }
+}
+
+---------------------------------5강---------------------------------------------------
+
+
+리스트
+기본적인연산 : 삽입,삭제,검색 등
+리스트를 구현하는 대표적인 두가지 방법 : 배열,연결리스트
+배열의 장점 : 임의의 n번째 칸에 메모리 주소를 바로 계산할수있다(랜덤액세스가 빨리된다.)
+배열의 단점
+크기가고정-reallocation필요
+리스트의 중간에 원소를 삽입하거나 삭제할 경우 다수의 데이터를 옮겨야
+연결리스트
+다른 데이터의 이동없이 중간에 삽입이나 삭제가 가능하며 길이의 제한이 없음
+하지만 랜덤 액세스가 불가능
+만약 연결리스트의 길이가 0일경우
+
+
+
+
+#include<stdio.h>
+struct node {
+	char*data;
+	struct node*next;//자기 참조
+
+};
+typedef struct node Node;
+Node *head = NULL;//첫번째 노드의 주소를 저장할 포인터
+
+void add_first(Node**ptr_head, char *item) {//ptr_head가head(첫번쨰의 주소)의 주소를 갖는다
+	Node*temp = (Node*)malloc(sizeof(Node));
+	temp->data = item;
+	temp->next = *ptr_head;//head의 주소
+	*ptr_head = temp;
+}
+
+//Node* add_first(Node*ptr_head, char *item) {//ptr_head가head(첫번쨰의 주소)의 값을 갖는다
+//	Node*temp = (Node*)malloc(sizeof(Node));
+//	temp->data = item;
+//	temp->next = ptr_head;//head의 주소
+//	return temp;
+//}메인에head=add_first
+
+void add_after(Node *prev, char *item) {
+	if (prev == NULL)
+		return 0;
+	Node*tmp = (Node*)malloc(sizeof(Node));
+	tmp->data = item;
+	tmp->next = prev->next;
+	prev->next = tmp;
+	return 1;
+}
+
+Node*remove_first() {
+	if (head == NULL) {//노드가 하나도없다
+		return NULL;
+	}
+	else {
+		Node*tmp = head;
+		head = head->next;//다음의 주소를 해드에 넣어줌 첫번째 노드는 free시켜주어야함
+		return tmp;
+	}
+}
+//이전 노드의 주소를 알방법은 쉽지않다
+Node*remove_after(Node*prev) {
+	Node*tmp = prev->next;
+	if (tmp == NULL) {
+		return NULL;
+	}
+	else {
+		prev->next = tmp->next;
+		return tmp;
+	}
+}
+//연결리스트 순회하기(처음부터 찾을때까지 쭉)
+Node*find(char *word) {
+	Node*p = head;
+	while (p != NULL) {
+		if (strcmp(p->data, word) == 0) {
+			return p;
+			p = p->next;
+		}
+	}
+	return NULL;
+}
+
+Node*get_node(int index) {
+	if (index < 0) {
+		return NULL;
+
+	}
+	Node*p = head;
+	for (int i = 0; i < index&p != NULL; i++)
+		p->next;
+	return p;
+}
+
+int add(int index, char *item) {
+	if (index < 0)
+		return 0;
+	if (index == 0) {
+		add_first(head,item);
+		return 0;
+	}
+	Node*prev = get_node(index - 1);
+	if (prev != NULL) {
+		add_after(prev, item);
+		return 1;
+	}
+	return 0;
+}
+
+Node*remove(int index) {
+	if (index < 0)
+		return NULL;
+	if (index == 0)
+		return remove_first();
+	Node*prev = get_node(index - 1);
+	if (prev == NULL)
+		return NULL;
+	else
+		return remove_after(prev);
+}
+
+Node*remove(char *item) {
+	Node*p = head;
+	Node*q = NULL; //p의 직전노드
+	while (p != NULL&&strcmp(p->data, item) != 0){
+		q = p;
+		p = p->next;
+	}
+	if (p == NULL)
+		return NULL;
+	if (q = NULL)
+		return remove_first();
+	else
+		return remove_after(q);
+}
+
+void add_to_ordered_list(char *item) {
+	Node*p = head;
+	Node*q = NULL;
+	while (p != NULL&&strcmp(p->data, item) <= 0) {
+		q = p;
+		p = p->next;
+	}
+	if (q == NULL)
+		add_first(head,item);
+	else
+		add_after(q,item);
+}
+int main() {
+	head = (Node*)malloc(sizeof(Node));
+	head->data = "Tuesday";
+	head->next = NULL;
+	Node *q = (Node*)malloc(sizeof(Node));
+	q->data = "Thursday";
+	q->next = NULL;
+	head->next = q;
+	//연결리스트의 맨앞에 데이터를 넣는다
+	q = (Node*)malloc(sizeof(Node));
+	q->data = "Monday";
+	q->next = head;//순서바꾸면:첫번째 노드의 주소를 잃어버린다
+	head = q;
+
+	Node*p = head;
+	while (p != NULL) {
+		printf("%s\n", p->data);
+		p = p->next;
+	}
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+#include<stdio.h>//5강의 1번(연결리스트:구조체안의 구조체)
+#include<stdlib.h>
+#include<string.h>
+#pragma warning(disable:4996)
+typedef struct word {
+	char*data;
+	int number;
+	struct word*next;//자기 참조
+
+}Word;
+
+typedef struct node {
+	struct Word *word_list;//첫번째 노드의 주소를 저장할 포인터
+	struct node*next;
+}Node;
+
+struct node *word_lists[27];
+
+void add_first(Word**ptr_head, char *item) {//ptr_head가head(첫번쨰의 주소)의 주소를 갖는다
+	Word*temp = (Word*)malloc(sizeof(Word));
+	temp->data = item;
+	temp->number = 1;
+	temp->next = *ptr_head;//head의 주소
+	*ptr_head = temp;
+}
+void add_after(Word *prev, char *item) {
+	if (prev == NULL)
+		return;
+	Word*tmp = (Word*)malloc(sizeof(Word));
+	tmp->data = item;
+	tmp->number = 1;
+	tmp->next = prev->next;
+	prev->next = tmp;
+}
+void add_to_ordered_list(char *item) {
+	Word*p = word_lists[item[0] - 97]->word_list;
+	Word*q = NULL;
+	while (p != NULL&&strcmp(p->data, item) <= 0) {
+		if (strcmp(p->data, item) == 0) {
+			p->number++;
+			return;
+		}
+		q = p;
+		p = p->next;
+	}
+	if (q == NULL)
+		add_first(&word_lists[item[0] - 97]->word_list, item);//
+	else
+		add_after(q, item);
+}
+int main() {
+
+	char *ignore[100];
+	char buff[20];
+
+	for (int k = 0; k < 27; k++) {
+		word_lists[k] = (Node*)malloc(sizeof(Node));
+	}
+	int Q;
+	for (Q = 0; Q < 26; Q++) {
+		word_lists[Q]->next = word_lists[Q + 1];
+	}
+	word_lists[Q]->next = NULL;
+
+	for (int i = 0; i < 27; i++) {
+		word_lists[i]->word_list = NULL;
+	}
+
+	int ign = 0;
+	FILE*f = fopen("ignore.txt", "r");
+	while (fscanf(f, "%s", buff) != EOF) {
+		ignore[ign++] = strdup(buff);
+	}
+	FILE*fp = fopen("harry.txt", "r");
+	char *wordss[100000];
+	int i=0;
+	char buffer[50];
+A:
+	
+	while (fscanf(fp, "%s", buffer) != EOF) {
+		if (strlen(buffer) > 2) {
+			for (int j = 0; j < ign; j++) {
+				if (strcmp(ignore[j], buffer) == 0)
+					goto A;
+			}
+			wordss[i] = strdup(buffer);
+			add_to_ordered_list(wordss[i++]);
+		}	
+	}
+	fclose(f);
+	fclose(fp);
+	Node *q = word_lists[0];
+while(q!=NULL){
+	Word *p = q->word_list;
+
+		while (p != NULL) {
+			printf("%s : %d\n", p->data,p->number);
+			p = p->next;
+		}
+		q=q->next;
+	}
+	for (int k = 0; k < 26; k++) {
+		free(word_lists[k]);
+	}
+}

@@ -1,0 +1,118 @@
+#include <stdio.h>//9강 3번
+#pragma warning(disable:4996)
+int lenOfOverlap(int sa, int ta, int sb, int tb);
+int main() {
+	int x1, y1, x2, y2, x3, y3, x4, y4;
+	scanf("%d %d %d %d %d %d %d %d", &x1, &y1, &x2, &y2, &x3, &y3, &x4, &y4);
+	int sx1 = x1, tx1 = x2, sy1 = y1, ty1 = y2, sx2 = x3, tx2 = x4, sy2 = y3, ty2 = y4;
+	if (x1 > x2) { sx1 = x2; tx1 = x1; }
+	if (y1 > y2) { sy1 = y2; ty1 = y1; }
+	if (x3 > x4) { sx2 = x4; tx2 = x3; }
+	if (y3 > y4) { sy2 = y4; ty2 = y3; }
+	int width = lenOfOverlap(sx1, tx1, sx2, tx2);
+	int height = lenOfOverlap(sy1, ty1, sy2, ty2);
+	printf("%d\n", width*height);
+}
+int lenOfOverlap(int sa, int ta, int sb, int tb) {
+	int s = sb, t = ta;
+	if (sa >= sb) s = sa;
+	if (ta >= tb) t = tb;
+	if (s > t) return 0;
+	else return t - s;
+}
+
+
+
+
+#include <stdio.h>//9장 5번
+#pragma warning(disable:4996)
+#define max 100
+int compareLexicographic(int a, int b);
+int main()
+{
+	int data[max],n=0;
+	FILE*fp = fopen("input5.txt", "r");
+	while (fscanf(fp, "%d", &data[n++]) != EOF);
+	fclose(fp);
+	n--;
+	for (int i = 1; i < n; i++)//삽입정렬하는것
+	{
+		int j = i - 1, tmp = data[i];
+		while (j >= 0 && compareLexicographic(tmp, data[j]) == -1)
+		{
+			data[j + 1] = data[j];
+			j--;
+		}
+		data[j + 1] = tmp;
+	}
+	for (int i = 0; i < n; i++)
+		printf("%d ", data[i]);
+}
+int compareLexicographic(int a, int b)
+{
+	int r = a, k = 0;
+	int digits1[max], digits2[max];
+	while (r > 0)
+	{
+		digits1[k++] = r % 10;
+		r /= 10;
+	}
+	int r2 = b, k2 = 0;
+	while (r2 > 0)
+	{
+		digits2[k2++] = r2 % 10;
+		r2 /= 10;
+	}
+	for (int i = k - 1, j = k2 - 1; i >= 0 && j >= 0; i--, j--)
+	{
+		if (digits1[i] < digits2[j])
+			return -1;
+		else if (digits1[i] > digits2[j])
+			return 1;
+	}
+}
+
+
+
+#include<stdio.h>//9강 6번
+#define max 100
+int polynomial(int x);
+#pragma warning(disable:4996)
+void main()
+{
+	int x;
+	scanf("%d", &x);
+	printf("%d",polynomial(x));
+
+}
+int polynomial(int x)//몇차 다항식인가
+{
+	int coefficient[max], v, k = 0, empty[max], o = 0;
+	for(int i=0;i<x*2;i++)
+	{
+		scanf("%d", &v);
+		if (i % 2 == 0)
+		coefficient[k] = v;
+		else
+		{
+			k++;
+			empty[o] = v;
+			o++;
+		}
+	}
+	scanf("%d", &v);
+	int result[max] ,a=1, l = 0;
+	for (o = 0; o < k; o++)
+	{
+		for (int j = 0; j <empty[o]; j++)
+		{
+			a *= v;
+		}result[l] = a;  l++; a = 1;
+	}
+	int res = 0;
+	for (int j = 0; j < k; j++)
+	{
+		res += coefficient[j] * result[j];
+	}
+	return res;
+}

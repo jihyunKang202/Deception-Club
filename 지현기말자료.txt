@@ -1,0 +1,6052 @@
+ 구1311#include<stdio.h>//1강 1번(pow만들기)
+#pragma warning(disable:4996)
+int main()
+{
+	int a, b,sum=1;
+	scanf("%d%d", &a, &b);
+	for (int i = 0; i < b; i++)
+		sum *= a;
+	printf("%d", sum);
+}
+
+#include<stdio.h>//1강 2번(섭씨를 화씨로 바꾸기)
+#pragma warning(disable:4996)
+int main()
+{
+	double f, c;
+	scanf("%lf", &c);
+	f = c*1.8 + 32.0;
+	printf("%lf", f);
+}
+
+#include<stdio.h>//1강 3번(분모가 증가하는 수열의 합)
+#pragma warning(disable:4996)
+int main()
+{
+	int n;
+	double sum = 0.0;
+	scanf("%d", &n);
+	for (int i = 1; i <= n; i++)
+		sum += (double)(1.0 / i);
+	printf("%f", sum);
+}
+
+#include<stdio.h>//1강 4번(재귀함수)
+#pragma warning(disable:4996)
+int padovan(int x);
+int main()
+{
+	int n;
+	scanf("%d", &n);
+	printf("%d", padovan(n));
+}
+int padovan(int x)
+{
+	if (x == 0 || x == 1)
+		return 1;
+	else
+		return padovan(x - 1) + padovan(x - 2);
+}
+
+#include<stdio.h>//1강 5번(재귀함수)
+#pragma warning(disable:4996)
+int padovan(int x);
+int main()
+{
+	int n;
+	scanf("%d", &n);
+	printf("%d", padovan(n));
+}
+int padovan(int x)
+{
+	if (x == 0 || x == 1||x==2)
+		return 1;
+	else
+		return padovan(x - 2) + padovan(x - 3);
+}
+
+#include<stdio.h>//1강 6번(분모의 지수승이 커질때)
+#pragma warning(disable:4996)
+int main()
+{
+	int n;
+	double sum = 1, denom = 1;
+	scanf("%d", &n);
+	for (int i = 1; i <= n; i++)
+	{
+		denom *= 2.0;
+		sum += 1.0 / denom;
+	}
+	printf("%f", sum);
+}
+
+#include<stdio.h>//1강 7번(분모의 지수승이 커지고,마이너스 값 번갈아 나올때)
+#pragma warning(disable:4996)
+int main()
+{
+	int n;
+	double sum = 1, denom=1 ;
+	scanf("%d", &n);
+	for (int i = 1; i <= n; i++)
+	{
+		denom *= -2.0;
+		sum += 1.0 / denom;
+	}
+	printf("%f", sum);
+}
+
+#include<stdio.h>//1강 8번(분모의 팩토리얼 승이 커질때)
+#pragma warning(disable:4996)
+int fac(int x);
+int main()
+{
+	int n;
+	double sum = 0 ;
+	scanf("%d", &n);
+	for (int i = 1; i <= n; i++)
+	{
+		sum += (double)1.0 / fac(i);
+	}
+	printf("%f", sum);
+}
+int fac(int x)
+{
+	int sum = 1;
+	for (int j = 1; j <= x; j++)
+		sum *= j;
+	return sum;
+}
+
+#include<stdio.h>//1강 9번(파이 값 계산)
+#pragma warning(disable:4996)
+int main()
+{
+	int n;
+	double sum = 0,denom,k=-1;
+	scanf("%d", &n);
+	for (int i = 1; i <= n; i++)
+	{
+		k*=-1;
+		sum += k*(4.0 / (2 * i - 1));
+	}
+	printf("%f", sum);
+}
+
+#include<stdio.h>//1강 10번(로그 2의 몇승 값 계산)
+#pragma warning(disable:4996)
+int main()
+{
+	int n;
+	scanf("%d", &n);
+	for (int i = 1; i <= n / 2; i *= 2)
+		printf("hello ");
+}
+
+#include<stdio.h>//1강 11번(연속적으로 2로 나눈 몫을 출력)
+#pragma warning(disable:4996)
+int main()
+{
+	int n;
+	scanf("%d", &n);
+	while (n > 1)
+	{
+		n /= 2;
+		printf("%d ", n);
+	}
+}
+
+#include<stdio.h>//1강 12번(입력받을때 마다 평균 출력)
+#pragma warning(disable:4996)
+int main()
+{
+	int N,sum=0;
+	double val;
+	for (int i = 1; i <= 10; i++)
+	{
+		scanf("%d", &N);
+		sum += N;
+		val = (double)sum / i;
+		printf("%f\n", val);
+	}
+}
+
+#include<stdio.h>//1강 13번(통장복리계산)
+#pragma warning(disable:4996)
+int main()
+{
+	double r,money,sum=0;
+	scanf("%lf", &r);
+	for (int i = 1; i <= 12; i++)
+	{
+		scanf("%lf", &money);
+		sum +=money+(money+sum)*r;
+		printf("%lf\n", sum);
+	}
+}
+
+#include<stdio.h>//1강 14번(math.h안쓰고 싸인코싸인 함수 구하기)
+#pragma warning(disable:4996)
+int main()
+{
+	double sinx,o;
+	double cosx = 1.0;
+	double pact = 1.0;
+	double result;
+	double pact_a = 1.0;
+	double result_a = 1.0;
+	printf("x값을 입력하시오:");
+	scanf_s("%lf", &o);
+	sinx = o;
+	result = o;
+	for (int i = 1; i < 100; i++)
+	{
+		pact = pact*(2.0*i + 1.0)*(2.0*i);
+		result = result*o*o*(-1.0);
+		sinx = sinx + result / pact;
+
+		pact_a = pact_a*(2.0*i - 1)*(2.0*i);
+		result_a = result_a* o*o*(-1.0);
+		cosx += result_a / pact_a;
+	}
+	printf("sin값은 %f이고 cos값은 %f이다.", sinx, cosx);
+	return 0;
+}
+
+#include<stdio.h>//2강 1번(가정:삼각형이 되는지 안되는지)
+#pragma warning(disable:4996)
+int main()
+{
+	int a, b, c,tmp;//a<b&&b<c로 가정한다.
+	scanf("%d%d%d", &a, &b, &c);
+	if (a > b) { tmp = a; a = b; b = tmp; }
+	if (b > c) { tmp = b; b = c; c = tmp; }
+	if (a > b) { tmp = a; a = b; b = tmp; }
+	if (a + b > c)
+		printf("Yes");
+	else
+		printf("No");
+}
+#include<stdio.h>//2강 2번(가정:오름차순 나열)
+#pragma warning(disable:4996)
+int main()
+{
+	int a, b, c, tmp;//a<b&&b<c로 가정한다.
+	scanf("%d%d%d", &a, &b, &c);
+	if (a > b) { tmp = a; a = b; b = tmp; }
+	if (b > c) { tmp = b; b = c; c = tmp; }
+	if (a > b) { tmp = a; a = b; b = tmp; }
+	printf("%d %d %d", a, b, c);
+}
+
+
+#include<stdio.h>//2강 3번(짝수의 합과 홀수의 합간의 차이의 절댓값)
+#pragma warning(disable:4996)
+int main()
+{
+	int n,even=0,odd=0;
+	for (int i = 0; i < 10; i++)
+	{
+		scanf("%d", &n);
+		if (n % 2 == 0)
+			even += n;
+		else
+			odd += n;
+	}
+	printf("%d",abs(even - odd));
+}
+
+#include<stdio.h>//2강 4번(음이 아닌정수들 중에서 최솟값)
+int main()
+{
+	int n;
+	int a = 2147483647;
+	for (int i = 1; i <= 10; i++)
+	{
+		scanf_s("%d", &n);
+		if (n >= 0)
+		{
+			if (n >a)
+				a = a;
+			else
+				a = n;
+		}
+	}
+	printf("최솟값은%d", a);
+	return 0;
+}
+
+#include<stdio.h>//2강 5번(입력된 수들중 최솟값과 최댓값의 차이)
+#pragma warning(disable:4996)
+int main()
+{
+	int min, max,n;
+	scanf("%d", &min);
+	printf("0\n");
+	scanf("%d", &max);
+	if (min > max) { int tmp = min;  min = max; max = min; }//(min<max로 가정하고 푼다)
+	printf("%d\n", max - min);
+	for (int i = 3; i <= 10; i++)
+	{
+		scanf("%d", &n);
+		if (n > max)
+			max = n;
+		else if (n < min)
+			min = n;
+		printf("%d\n", max - min);
+	}
+	return 0;
+}
+
+#include<stdio.h>//2강 6번(날짜:어느 날짜가 더 이른가?)
+int main()
+{
+	int year, month, day, year_a, month_a, day_a;
+	printf("두날짜를 입력하시오(년,월,일):");
+	scanf_s("%d%d%d%d%d%d", &year, &month, &day, &year_a, &month_a, &day_a);
+	if (year > year_a)
+		printf("1");
+	else if (year < year_a)
+		printf("-1");
+	else
+	{
+		if (month > month_a)
+			printf("1");
+		else if (month < month_a)
+			printf("-1");
+		else
+		{
+			if (day > day_a)
+				printf("1");
+			else if (day < day_a)
+				printf("-1");
+			else
+				printf("0");
+		}
+	}
+	return 0;
+}
+
+#include<stdio.h>//2강 7번(교차:두원이 교차 하는가?)
+#include<math.h>
+#pragma warning(disable:4996)
+int main()
+{
+	double x, y, r, x1, y1, r1;
+	scanf("%lf%lf%lf%lf%lf%lf",&x,&y,&r,&x1,&y1,&r1);
+	if (r1 > r) { double tmp = r1; r1 = r; r = tmp; }
+	if (sqrt((x - x1)*(x - x1) + (y - y1)*(y - y1)) <= r + r1 && (r - sqrt((x - x1)*(x - x1) + (y - y1)*(y - y1)) <= r1))
+		printf("yes");
+	else
+		printf("no");
+
+}
+
+#include<stdio.h>//2강 8번(4개점이 폐구간안에 속하는지)
+int main()
+{
+	int a, b, c, d;
+	printf("폐구간 [a, b]와[c,d]를 입력하시오");
+	scanf_s("%d%d%d%d", &a, &b, &c, &d);
+	if (c <= b&&d >= a&&a <= b&&c <= d)
+		printf("yes");
+	else if (b<a || c>d)
+		printf("Input error");
+	else
+		printf("no");
+	return 0;
+}
+
+#include<stdio.h>//2강 9번문제(직사각형:4점의 좌표가 주어질때 사각형이 직사각형이되는가?)
+int main()
+{
+	int ax, ay, j = 0, k = 0, a, b;
+	int bx, by;
+	scanf_s("%d%d", &ax, &ay);
+	a = ax;
+	b = ay;
+	for (int i = 1; i <= 3; i++)
+	{
+
+		scanf_s("%d%d", &bx, &by);
+		if (ax == bx)//x좌표는 동일하고 y좌표는 다른경우(세로)
+			j++;
+		else if (ay == by)//y좌표는 동일하고 x좌표는 다른경우(가로)
+			k++;
+		ax = bx; ay = by;
+	}
+	if (ax == a)
+		j++;
+	else if (ay == b)
+		k++;
+	if (j == 2 && k == 2)//직사각형이되려면 가로면 2개 세로면 2개가 있어야함으로.
+		printf("Yes");
+	else
+		printf("No");
+	return 0;
+}
+
+#include<stdio.h>//2강 10번(길이:입력된 점들을 다 이은 길이)
+#include<math.h>
+int main()
+{
+	int n;
+	double sum = 0;
+	double a, b;
+	double z, k;
+	scanf_s("%d", &n);
+	scanf_s("%lf%lf", &z, &k);
+	a = z;
+	b = k;
+	int i;
+	int s = 0;//두점사이 길이를 계산하는 횟수
+	for (i = 1; i < n; i++)
+	{
+		double x, y;
+		scanf_s("%lf%lf", &x, &y);
+		if (a == x || b == y)
+		{
+			sum += sqrt((x - a)*(x - a) + (y - b)*(y - b));
+			a = x;
+			b = y;
+			s++;
+		}
+		else
+			break;
+	}
+	if (s < n - 1)
+		printf("Input error");
+	else
+		printf("%f", sum);
+	return 0;
+}
+
+#include<stdio.h>//2강 11번(방향함수:좌회전,우회전,직전,유턴을 출력) 
+int input(int, int, int, int);
+void judge(int, int, int, int, int);
+int j, j1;
+int straight = 0, u_turn = 0, left = 0, right = 0;
+int main(void)
+{
+	int x, y, x1, y1;
+	scanf_s("%d %d", &x, &y);
+	for (int i = 0; i < 2; i++) {
+		scanf_s("%d %d", &x1, &y1);
+
+		if (input(x, y, x1, y1) == 1)
+			return 0;
+		else
+			judge(i, x, y, x1, y1);
+		x = x1;
+		y = y1;
+	}
+	if (left == 1)
+		printf("left");
+	else if (right == 1)
+		printf("right");
+	else if (straight == 1)
+		printf("straight");
+	else
+		printf("u_turn");
+	return 0;
+}
+int input(int x, int y, int x1, int y1) //두점이 같은 x좌표나 같은 y좌표둘중 하나도 안가질경우
+{
+	if ((x != x1 && y != y1) == 1) {
+		printf("input error");
+		return 1;
+	}
+	return 0;
+}
+void judge(int i, int x, int y, int x1, int y1) //방향 함수를 세운다.
+{
+	if (x == x1 && y < y1) j = 0;
+	else if (x == x1 && y > y1) j = 2;
+	else if (y == y1 && x < x1) j = 1;
+	else j = 3;
+	if (i != 0)
+	{
+		if (j1 == j) straight += 1;
+		if (j1 + 2 == j || j1 - 2 == j) u_turn += 1;
+		if (j1 + 1 == j || (j1 - j) == 3) right += 1;
+		if (j1 - 1 == j || (j - j1) == 3) left += 1;
+	}
+	j1 = j;
+}
+
+#include<stdio.h>//2강 12번(방향함수:좌회전,우회전,직전,유턴의 개수) 
+int input(int, int, int, int);
+void judge(int, int, int, int, int);
+int j, j1;
+int straight = 0, u_turn = 0, left = 0, right = 0;
+int main(void)
+{
+	int x, y, x1, y1, n;
+	scanf_s("%d", &n);
+	scanf_s("%d %d", &x, &y);
+	for (int i = 0; i < n - 1; i++) {
+		scanf_s("%d %d", &x1, &y1);
+
+		if (input(x, y, x1, y1) == 1)
+			return 0;
+		else
+			judge(i, x, y, x1, y1);
+		x = x1;
+		y = y1;
+	}
+	printf("%d %d %d %d\n", left, straight, right, u_turn);
+	return 0;
+}
+int input(int x, int y, int x1, int y1) //두점이 같은 x좌표나 같은 y좌표둘중 하나도 안가질경우
+{
+	if ((x != x1 && y != y1) == 1) {
+		printf("input error");
+		return 1;
+	}
+	return 0;
+}
+void judge(int i, int x, int y, int x1, int y1) 
+{
+	if (x == x1 && y < y1) j = 0;
+	else if (x == x1 && y > y1) j = 2;
+	else if (y == y1 && x < x1) j = 1;
+	else j = 3;
+	if (i != 0)
+	{
+		if (j1 == j) straight += 1;
+		if (j1 + 2 == j || j1 - 2 == j) u_turn += 1;
+		if (j1 + 1 == j || (j1 - j) == 3) right += 1;
+		if (j1 - 1 == j || (j - j1) == 3) left += 1;
+	}
+	j1 = j;
+}
+
+#include<stdio.h>//2강 14번 문제(두선분이 교차하는지 아닌지)
+int main()
+{
+	int a, b, c, d, e, f, g, h;
+	scanf_s("%d%d%d%d%d%d%d%d", &a, &b, &c, &d, &e, &f, &g, &h);
+	if (a > c || f > h)//b==d,e==g를 가정하고 문제를 푼다.
+		;
+	else
+	{
+		if (b <= h&&f <= b&&a <= e&&e <= c)
+			printf("yes");
+		else
+			printf("no");
+	}
+	return 0;
+}
+
+#include<stdio.h>//2강 15번문제(달력)
+#pragma warning(disable:4996)
+int main()
+{
+	int days, day1;
+	int i;
+	scanf("%d%d", &days, &day1);
+	for (int j = 1; j < day1; j++)
+		printf("      ");
+	for (i = 1; i <= 7 - day1 + 1; i++)
+	{
+		if (i<8 - day1)
+			printf("%d     ", i);
+		else
+			printf("%d     \n", i);
+
+	}
+	while (i <= days)
+	{
+		if (i == 8 - day1 + 7 || i == 8 - day1 + 14 || i == 8 - day1 + 21 || i == 8 - day1 + 28)
+			printf("%d    \n", i);
+		else
+			printf("%d    ", i);
+		i++;
+	}
+	return 0;
+}
+
+#include<stdio.h>//3강 1번(홀수와 짝수의 합이 동일하면 그땨index출력)
+int main()
+{
+	int i = 0, sum1 = 0, sum2 = 0;
+	while (1)
+	{
+		if (sum1 == sum2&&sum1!=0&&sum2!=0)
+			break;
+		else
+		{
+			int n;
+			scanf_s("%d", &n);
+			if (n % 2 == 0)
+				sum2 += n;
+			else
+				sum1 += n;
+			i++;
+		}
+	}
+	printf("%d", i );
+	return 0;
+}
+
+#include<stdio.h>//3강 2번(이진수 출력:양의정수 n을 입력 받은후 이진수로 변환)
+int main()
+{
+	int n, v = 1, i = 0;
+	scanf_s("%d", &n);
+	while (v <= n)
+	{
+		v = v * 2;
+	}
+	while (v > 0)
+	{
+		if (n >= v)
+		{
+			n = n - v;
+			printf("1");
+		}
+		else if (i != 0)
+			printf("0");
+		else if (n == 0)
+			printf("0");
+		v = v / 2;
+		i++;
+	}
+}
+
+#include<stdio.h>//3강 3번(최대공약수 구하기)
+int main()
+{
+	int x, y, gcd, a, b;
+	scanf_s("%d%d", &x, &y);
+	if (x < y) { int tmp = x; x = y; y = tmp; }
+	if (x > y&&x >= 0 && y >= 0)
+	{
+		if (x%y == 0)
+			gcd = y;
+		else
+		{
+			while (x%y != 0)
+			{
+				a = x;
+				b = y;
+				x = y;
+				y = a%b;
+			}
+			gcd = y;
+		}
+	}
+	printf("%d", gcd);
+	return 0;
+}
+
+#include<stdio.h>//3강 4번(역순서:정수 자리뒤집기)
+int main()
+{
+	int n,sum=0;
+	scanf_s("%d", &n);
+	while (n > 0)
+	{
+		sum = n % 10;
+		printf("%d", sum);
+		n /= 10;
+	}
+}
+
+#include<stdio.h>//3강 5번(두번째로 큰 수 : 입력된수들중 가장 큰수와 두번째로 큰수)
+int main()
+{
+	int n, n1, n2, max, max2;
+	scanf_s("%d", &n);
+	n1 = n;
+	scanf_s("%d", &n);
+	n2 = n;
+	if (n1 >= n2)
+	{
+		max = n1;
+		max2 = n2;
+	}
+	else
+	{
+		max = n2;
+		max2 = n1;
+	}
+	while (1)
+	{
+		scanf_s("%d", &n);
+		if (n == -1)
+			break;
+		else 
+		{
+			if (n > max)
+			{
+				int tmp = max; max = n; max2 = tmp;
+			}
+			else if (n >= max2)
+				max2 = n;
+		}
+	}
+	printf("%d %d", max, max2);
+	return 0;
+}
+
+#include<stdio.h>//3강 6번(제곱근 구하는 프로그램)
+int main()
+{
+	double y=1.0, x, e,y1,a;
+	scanf_s("%lf", &x);
+	while (1)
+	{
+		y1 = (y + (x / y)) / 2.0;
+		e = y1*0.00001;
+		double diff=y1 - y;
+		if (diff < 0)
+			diff = -diff;
+		y = y1;
+		if (diff < e)
+			break;
+	}
+	printf("%lf\n",y);
+	return 0;
+}
+
+#include<stdio.h>//3강 7번(local minima의 개수)
+int main()
+{
+	int n, n1, n2, local_minima = 0;
+	scanf_s("%d", &n);
+	n1 = n;
+	scanf_s("%d", &n);
+	n2 = n;
+	if (n2 >= n1)
+		local_minima += 1;
+	while (1)
+	{
+		scanf_s("%d", &n);
+		if (n == -1)
+			break;
+		if (n2 <= n1&&n2 <= n)
+			local_minima += 1;
+		n1 = n2;
+		n2 = n;
+	}
+	if (n2 <= n1)
+		local_minima += 1;
+	printf("%d", local_minima);
+	return 0;
+}
+
+#include<stdio.h>//3강 8번(세금 구하기)
+int main()
+{
+	double n, tax;
+	scanf_s("%lf", &n);
+	if (n <= 12000000)
+		tax = n*0.06;
+	else if (n <= 46000000)
+		tax = 12000000 * 0.06 + (n - 12000000)*0.15;
+	else if (n <= 88000000)
+		tax = 12000000 * 0.06 + (46000000 - 12000000)*0.15 + (n - 46000000)*0.24;
+	else if (n <= 150000000)
+		tax = 12000000 * 0.06 + (46000000 - 12000000)*0.15 + (88000000 - 46000000)*0.24 + (n - 88000000)*0.35;
+	else if (n <= 500000000)
+		tax = 12000000 * 0.06 + (46000000 - 12000000)*0.15 + (88000000 - 46000000)*0.24 + (150000000 - 88000000)*0.35 + (n - 150000000)*0.38;
+	else
+		tax = 12000000 * 0.06 + (46000000 - 12000000)*0.15 + (88000000 - 46000000)*0.24 + (150000000 - 88000000)*0.35 + (500000000 - 150000000)*0.38 + (n - 500000000)*0.4;
+	printf("%lf", tax);
+	return 0;
+}
+
+#include<stdio.h>//3강 9번문제(비증가 비감소 수열 판정)
+int main()
+{
+	int n, n2, result = 0, result1 = 0, k = 0, j = 0, a, b, c, d;//j는 이전수보다 증가k는 감소를의미(1은참 0은거짓으로 간주)
+	scanf_s("%d%d", &n2, &n);
+	if (n2 != n)
+	{
+		c = n2;
+		d = n;//c와d는 처음으로 연속해서 입력된 서로 다른 정수(c<d)
+	}
+	else {
+		while (n2 == n)
+		{
+			n2 = n;
+			scanf_s("%d", &n);
+		}
+		c = n2; d = n;
+	}
+	while (n != -1)
+	{
+		if (n > n2)
+		{
+			result += 1;
+			a = n2;
+			b = n;//a와b는 마지막으로 연속해서 입력된 서로 다른 정수(a<b)
+
+		}
+		else if (n < n2)
+		{
+			result -= 1;
+			a = n2;
+			b = n;
+		}
+		if (result1 > result&&n < n2)//n이감소하면
+		{
+			if (k == 1)
+			{
+				k = k;
+				if (j == 1)
+					k += 1;
+			}
+			else if (k == 0)
+			{
+				k = k + 1;
+			}
+
+		}
+		else if (result1 < result&&n>n2)//n이증가하면
+		{
+			if (j == 1)
+			{
+				j = j;
+				if (k == 1)
+					j += 1;
+			}
+			else if (j < 1)
+			{
+				j = j + 1;
+			}
+		}
+		n2 = n;
+		result1 = result;
+		scanf_s("%d", &n);
+	}
+	if ((j == 1 && k == 0) || (j == 0 && k == 1) || (j == 0 && k == 0))
+		printf("both");
+	if (k + j == 2)
+	{
+		if (k == 1 && a > b)
+			printf("convex");
+		else if (j == 1 && a < b)
+			printf("concave");
+	}
+	if (j + k >= 3)
+	{
+		if (j == 2 && k == 1 && c < d&&a<b)
+			printf("None");
+		else if (j == 2 && k == 1 && c < d&&a>b)
+			printf("convex");
+		else if (j == 2 && k == 1 && c > d)
+			printf("concave");
+		if (j == 1 && k == 2 && c > d&&a>b)
+			printf("None");
+		else if (j == 1 && k == 2 && c > d&&a<b)
+			printf("concave");
+		else if (j == 1 && k == 1 && c < d)
+			printf("convex");
+	}
+	return 0;
+}
+
+#include <stdio.h>//4강 1번(정수 점의 개수:이차원 평면의 1사분면 그래프)
+int main() 
+{
+	int count = 0;
+	for (int x = 0; x <= 100; x++) {
+		for (int y = 0; y <= 100; y++) {
+			if (y >= x / 3.0 && y <= 2.0*x / 3 && x*x + y*y <= 10000)
+				count++;
+		}
+	}
+	printf("%d\n", count);
+}
+
+#include <stdio.h> //4강 2번(2~100까지 서로소인 서로다른 세개의 정수쌍의 개수)
+int main() {
+	int count = 0;
+	for (int a = 2; a <= 100; a++) {
+		for (int b = a + 1; b <= 100; b++) {
+			int m = b, n = a;
+			while (m % n != 0) {
+				m = m % n;
+				int tmp = m;
+				m = n;
+				n = tmp;
+			}
+			if (n > 1)
+				continue;
+			for (int c = b + 1; c <= 100; c++) {
+				int m = c, n = a;
+				while (m % n != 0) {
+					m = m % n;
+					int tmp = m;
+					m = n;
+					n = tmp;
+				}
+				if (n > 1)
+					continue;
+				m = c, n = b;
+				while (m % n != 0) {
+					m = m % n;
+					int tmp = m;
+					m = n;
+					n = tmp;
+				}
+				if (n > 1)
+					continue;
+				printf("%d %d %d\n", a, b, c);
+				count++;
+			}
+		}
+	}
+	printf("%d\n", count);
+}
+
+#include<stdio.h>//4강 3번(n까지의 x,y좌표를 출력하는데 y좌표가 증가하는 순서대로 출력.같을경우x좌표가 짝수이면 증가하는순서,홀수이면 감소하는 순서대로 출력)
+int main()
+{
+	int n;
+	int x;
+	scanf_s("%d", &n);
+	for (int y = 0; y <= n; y++)
+	{
+		if (y % 2 == 0) 
+		{
+			for (x = 0; x <= n; x++)
+				printf("(%d,%d)\n", x, y);
+		}
+		if (y % 2 != 0)
+		{
+			for (x = n; x >= 0; x--)
+				printf("(%d,%d)\n", x, y); 
+		}
+	}
+	return 0;
+}
+
+#include<stdio.h>//4강 4번(x,y좌표 합의 오름차순으로 출력+같을경우 x좌표의 오름차순으로 출력)
+int main()
+{
+	int x, y, k;
+	scanf_s("%d", &k);
+	for (int sum = 0; sum <= k; sum++)
+		for (x = 0; x <= sum; x++)
+			for (y = sum - x; y >= 0 && x + y <= k; y--)
+			{
+				printf("(%d,%d)\n", x, y);
+				break;
+			}
+	return 0;
+}
+
+#include<stdio.h>//4강 5번(n까지 종이에 쓸때 0이 몇번 포함되는가)
+#pragma warning(disable:4996)
+int main()
+{
+	int n, count = 0;
+	scanf("%d", &n);
+	for (int i = 1; i <= n; i++)
+	{
+		int k = i;
+		while (k > 0)
+		{
+			if (k % 10 == 0)
+			{
+				count++;
+			}
+			k = k / 10;
+		}
+	}
+	printf("%d", count);
+	return 0;
+}
+
+#include<stdio.h>//4강6번문제(1~n까지 수들중 각자리 합이 7의배수인 것들의 개수) 
+int main()
+{
+	int n, count = 0, sum, i, j;
+	scanf_s("%d", &n);
+	for (i = 1; i <= n; i++)
+	{
+		sum = 0; j = i;
+		while (j>0)
+		{
+			sum += j % 10;
+			j = j / 10;
+		}
+		if (sum % 7 == 0)
+			count++;
+	}
+	printf("%d", count);
+}
+
+#include<stdio.h>//4강 7번문제(동서남북 가다가 x나y가 절댓값n에 도달하면 종료)
+#include<stdlib.h>
+#include<time.h>
+int main()
+{
+	int n, x = 0, y = 0, count = 0, t, c;
+	scanf_s("%d", &n);
+	srand((unsigned)time(NULL));
+	for (t = 1; t <= 1000; t++)
+	{
+		while (x != n && y != n&&x != -n&&y != -n)
+		{
+			c = rand() % 4;//0은 동,1은 서,2는 남,3은 북을 의미
+			if (c == 0) { x++; count++; }
+			else if (c == 1) { x--; count++; }
+			else if (c == 2) { y--; count++; }
+			else { y++; count++; }
+		}
+		x = 0; y = 0;
+	}
+	printf("%d", count / 1000);
+	return 0;
+}
+
+#include<stdio.h>//4강 8번 문제(뉴튼의 주사위 법칙,확률)
+#include<stdlib.h>
+#include<time.h>
+int main()
+{
+	int b=0,b2=0;
+	srand((unsigned)time(NULL));
+	for (int t = 1; t <= 1000000; t++)
+	{
+		int count_a = 0, count = 0;
+		for (int i = 1; i <= 6; i++) //주사위를 6번던져서 적어도한번 1이 나오는것
+		{
+			int  c = rand() % 6;
+			if (c == 1)
+				count_a++;
+		}
+		if (count_a >= 1)
+			b++;
+		for (int j = 1; j <= 12; j++)//주사위를 12번 던져서 적어도 1이 두번이상 나오는 것
+		{
+			int  c = rand() % 6;
+			if (c == 1)
+				count++;
+		}
+		if (count >= 2)
+			b2++;
+	}
+	printf("6번던져서 적어도1이 한번 나올 경우의수는 %d이고 확률은 %lf \n12번던져서 1이적어도2번이상 나올 경우의 수는 %d 확률은 %lf이다.", b,(double)b/1000000,  b2,(double)b2/1000000);
+	return 0;
+}
+
+
+#include<stdio.h>//4강 10번(두 직사각형의 겹치는 면적)
+int main()
+{
+	int a, b, c, d, a2, b2, c2, d2, x = 0, y = 0;
+	scanf_s("%d%d%d%d%d%d%d%d", &a, &b, &c, &d, &a2, &b2, &c2, &d2);//a<c, b<d, a2<c2, b2<d2라고 가정한다.
+	if (d<b) { int k; k = d; d = b; b = k; }
+	if (d2 < b2) { int k; k = d2; d2 = b2; b2 = k; }
+	if (c < a) { int k; k = c; c = a; a = k; }
+	if (c2 < a2) { int k; k = c2; c2 = a2; a2 = k; }
+	for (int i = a; i <= c; i++)
+	{
+		for (int j = a2; j <= c2; j++) {
+			if (i == j)
+				x++;
+		}
+	}
+	for (int i = b; i <= d; i++) {
+		for (int j = b2; j <= d2; j++) {
+			if (i == j)
+				y++;
+		}
+	}
+	printf("%d", (x - 1)*(y - 1));
+	return 0;
+}
+#include<stdio.h>//5강1번문제(k보다 작거나 같으면서 가장 큰 정수를 찾아 인덱스,정수의 값,k와의 차의 절댓값)
+#include<stdlib.h>
+int main()
+{
+	int data[100];
+	int n, count = 0, index = 0, tmp = 0;
+	int i, j;
+	scanf_s("%d", &n);
+	for (j = 0; j < n; j++)
+		scanf_s("%d", &data[j]);
+	int small = data[0];
+	int k;
+	scanf_s("%d", &k);
+	for (i = 1; i < n; i++)
+	{
+		if (small != data[i])
+		{
+			if (small < data[i] && data[i] < k)
+			{
+				small = data[i]; count++; index = i;
+			}
+			else if (data[i] == k)
+			{
+				small = data[i]; count++; index = i; break;
+			}
+			else;
+		}
+		else
+			;
+	}
+	if (count != 0)
+		printf("%d %d %d", index, small, abs(k - small));
+	else
+		printf("-1");
+}
+
+#include<stdio.h>//5 강2번문제(가장작은정수와 두번째로 작은정수)
+int main()
+{
+	int n,i;
+	scanf_s("%d", &n);
+	int data_pos = 0;
+	int data[500];
+	for (int j = 0; j < n; j++)
+		scanf_s("%d", &  data[j]);
+	int min = data[0]; int sec_min = data[1];//data[0]<data[1]로 가정
+	if (data[0] > data[1]) { min = data[1]; sec_min = data[0]; }
+	for (i = 2; i < n; i++)
+	{
+		if (data[i] <= min)
+		{
+			sec_min = min; min = data[i];
+		}
+		else if (data[i] < sec_min)sec_min = data[i];
+	}
+	printf("%d %d", min, sec_min);
+	return 0;
+}
+#include<stdio.h>
+#include<math.h>//5 강3번문제(평균,표준편차)
+int main()
+{
+	double n,sum=0.0,SD=0.0;
+	scanf_s("%lf", &n);
+	double data[100];
+	for (int i = 0; i < n; i++)
+	{
+		scanf_s("%lf", &data[i]);
+		sum += data[i];
+	}
+	for (int i = 0; i < n; i++)
+	{
+		SD += (data[i] - sum / n)*(data[i] - sum / n);
+	}
+	printf("%lf %lf", sum / n, sqrt((1.0 / n)*SD));
+	return 0;
+}
+#include<stdio.h>//5 강4번문제(n에서 0~9까지의 digit가 얼만큼 등장했는가)
+int main()
+{
+	int n, r;
+	scanf_s("%d", &n);
+	int data[10] = { 0 };
+	while (1)
+	{
+		if (n <= 0)
+			break;
+		else
+		{
+			r = n % 10;
+			data[r] += 1;
+			n = n / 10;
+		}
+	}
+	for (int i = 0; i < 10; i++)
+		printf("%d ", data[i]);
+	return 0;
+}
+
+#include<stdio.h>//5강 5번문제(날짜:태어난 날부터 현재까지 살아온 날짜의 수)
+#define max 3
+int main()
+{
+ int month[12] = { 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31 };
+ int birthday[max];
+ int today[max];
+ for (int i = 0; i < 3; i++)
+  scanf_s("%d", birthday[i]);
+ for (int j = 0; j < 3; j++)
+  scanf_s("%d", today[j]);
+ int sum = 0;
+ sum += (today[0] - birthday[0]) * 365;
+ if (birthday[1] < today[1])
+ {
+  for (int k = 0; k < today[1] - birthday[1] ;k++)
+   sum += month[birthday[1]+k-1];//
+  if (birthday[2] < today[2])
+   sum += (today[2] - birthday[2]);
+  else if (birthday[2] == today[2])
+   ;
+  else
+   sum -= (birthday[2] - today[2]);
+ }
+ else if (birthday[1] == today[1])
+ {
+  if (birthday[2] < today[2])
+   sum += today[2] - birthday[2];
+  else if (birthday[2] == today[2])
+   ;
+  else
+   sum -= (birthday[2] - today[2]);
+ }
+ else
+ {
+  for (int k = 0; k < birthday[1] - today[1]; k++)
+   sum -= month[birthday[1] - k-1];//
+  if (birthday[2] < today[2])
+   sum += today[2] - birthday[2];//
+  else if (birthday[2] > today[2])
+   sum -= birthday[2] - today[2]-1;//
+  else
+   ;
+ }
+ printf("%d", sum);
+ return 0;
+}
+
+#include<stdio.h>//5강 6번문제(n개의 정수 중에서 k와의 절댓값이 가장작은 정수 출력)
+#include<stdlib.h>
+#pragma warning(disable:4996)
+#define max 100
+int main()
+{
+	int n;
+	int data[max];
+	scanf("%d", &n);
+	int i;
+	int index;
+	for (i = 0; i < n; i++)
+		scanf("%d", &data[i]);
+	int k;
+	scanf("%d", &k);
+	int closer = abs(k - data[0]);
+	for (int j = 1; j < i; j++)
+	{
+		if (abs(k - data[j]) < closer)
+		{
+			closer = abs(k - data[j]);
+			index = data[j];
+		}
+	}
+	printf("%d", index);
+}
+
+
+#include<stdio.h>//5강 7번문제(한칸씩 미루기)
+#pragma warning(disable:4996)
+#define MAX 100
+int main()
+{
+	int data[MAX];
+	int i = 0;
+	FILE*fp = fopen("input7.txt", "r");
+	while (fscanf_s(fp, "%d", &data[i]) != EOF)//파일 끝이면 EOF를 보여준다.
+		i++;
+	fclose(fp);
+	int pre = data[i-1];
+	for (int j = i-1; j >0; j--)
+		data[j] = data[j - 1];
+	data[0] = pre;
+	for (int k = 0; k < i; k++)
+		printf("%d ", data[k]);
+}
+
+#include<stdio.h>//5강 8번문제(배열순서뒤집기)
+#pragma warning(disable:4996)
+#define max 100
+int main()
+{
+	int data[max];
+	int i = 0;
+	FILE*fp = fopen("input7.txt", "r");
+	while (fscanf_s(fp, "%d", &data[i]) != EOF)
+		i++;
+	fclose(fp);
+	for (int j = 0; j < i / 2; j++)
+	{
+		int tmp = data[j]; data[j] = data[i - j - 1]; data[i - j - 1] = tmp;
+	}
+	for (int k = 0; k < i; k++)
+		printf("%d ", data[k]);
+}
+
+#include<stdio.h>//5강 9번문제(리더 개수 출력:자신보다 먼저 나온 모든 정수들보다 크거나 같은 정수)
+#pragma warning(disable:4996)
+#define max 100
+int main()
+{
+	int data[max];
+	int reader[max];
+	int i = 0;
+	FILE*fp = fopen("input7.txt", "r");
+	while (fscanf(fp, "%d", &data[i]) != EOF)
+		i++;
+	fclose(fp);
+	reader[0] = data[0];
+	int k = 0;//readerr함수의 index=k,data 배열의 index가 j,data배열의 전체 수가 i
+	for (int j = 1; j <= i; j++)
+	{
+		if (k < i&&data[j] >= reader[k])
+		{
+			k++;
+			reader[k] = data[j];
+		}
+	}
+	printf("%d:", k + 1);
+	for (int q = 0; q < k + 1; q++)
+		printf("%d ", reader[q]);
+}
+
+#include<stdio.h>//5강 10번문제(주식)
+#pragma warning(disable:4996)
+int main()
+{
+	int data[500];
+	int i = 0;
+	FILE*fp = fopen("input10.txt","r" );
+	while (fscanf(fp, "%d", &data[i]) != EOF)
+		i++;
+	fclose(fp);
+	int first = data[0];
+	int index = 0, index_a = 0, sum = 0, buy = 0, sell = 0, count;
+	for (int j = 1; j < i; j++)
+	{
+		if (first < data[j] && buy == 0)
+		{
+			index_a = j - 1;
+			buy++;
+		}//사야하는날
+		else if (first > data[j] && sell == 0 && buy == 1)
+		{
+			index = j - 1;
+			sell++;
+		}//팔아야하는날
+		if (buy == 0 && sell == 0 && count == 0)//이전의 사고 판 거래흔적이 없고 지금도 거래를 안했을때
+			sum = 0;
+		else if (buy == 1 && sell == 1)
+		{
+			sum += data[index] - data[index_a];
+			buy = 0; sell = 0; count = 1;
+		}
+		first = data[j];
+	}
+	if (buy == 1 && sell == 0)//사놓고 계속올라서 팔지못했을때
+		sum += data[i - 1] - data[index_a];
+	printf("%d", sum);
+}
+
+#include<stdio.h>//5강 11번문제(두 배열의 수가 번갈아 가면서 나오게)
+#define max 100
+int main()
+{
+ int data1[max];
+ int data2[max];
+ int i = 0,j=0;
+ FILE*fp = fopen("input11_1.txt", "r");
+ while (fscanf(fp, "%d", &data1[i]) != EOF)
+  i++;
+ fclose(fp);
+ FILE*fp = fopen("input11_2.txt", "r");
+ while (fscanf(fp, "%d", &data2[j]) != EOF)
+  j++;
+ fclose(fp);
+ if (i == j)
+ {
+  for (int k = 0; k < i; k++)
+   printf("%d %d ", data1[k], data2[k]);
+ }
+} 
+
+#include<stdio.h>//5강12번(두 배열:모든점의 중점 좌표와 그 중점과 모든점들의 거리 평균)
+#include<math.h>
+#define max 100
+int main()
+{
+ FILE*fp = fopen("input12.txt", "r");
+ int i = 0;
+ double x[max];
+ double y[max];
+ double xsum = 0.0, ysum = 0.0, legth = 0.0;
+ double n1=1, n2=1;
+ while (1) {
+  if (n1 == EOF || n2 == EOF)//EOF는 0이다.
+   break;
+  n1 = fscanf(fp, "%lf", &x[i]);
+  n2 = fscanf(fp, "%lf", &y[i]);
+  i++;
+ }
+ fclose(fp);
+ for (int j = 0; j < i; j++)
+ {
+  xsum += x[j];
+  ysum += y[j];
+ }
+ double xmid = (double)xsum / i;
+ double ymid = (double)ysum / i;
+ printf("%lf %lf", xmid, ymid);
+ for (int k = 0; k < i; k++)
+  legth += sqrt((x[k] - xmid)*(x[k] - xmid) + (y[k] - ymid)*(y[k] - ymid));
+ printf("%lf", (double)legth / i);
+ return 0;
+} 
+
+
+
+----------------------------------------------6장--------------------------------------------------
+
+01 키보드로  부터  연속해서  정수들을  입력받는다.  정수가  하나  씩  입력될  때  마다  현재까지  입력된  정수들을  오름차순으로  정렬하여  화면에  출력한다.  단,  새로  입력된  정수가  이미  배열에  저장되어  있다면  추가하는  대신  “duplicate  entry”라고  출력한다.  사용자가  -1을  입력하면  프로그램을  종료한다. 
+
+#include <stdio.h>//6강 1번(입력받는데로 오름차순정렬)
+#define max 100
+#pragma warning(disable:4996)
+int main()
+{
+	int data[max];
+	int tmp, n = 0, count;
+	while (1) {
+		count = 0;
+		scanf("%d", &tmp);
+		if (tmp == -1)
+			break;
+		for (int i = 0; i < n; i++)
+			if (data[i] == tmp)
+			{
+				printf("duplicate entry");
+				count++;
+			}
+		if (count == 0)
+		{
+			int i = n - 1;
+			while (i >= 0 && data[i] > tmp)
+			{
+				data[i + 1] = data[i];
+				i--;
+			}
+
+			data[i + 1] = tmp;
+			n++;
+		}
+		for (int i = 0; i < n&&count == 0; i++)
+			printf("%d ", data[i]);
+		printf("\n");
+	}
+}
+
+03. 선택정렬(selection  sort)  알고리즘은  다음과  같다.  배열  data에  data[0]에서  data[n-1]까지  개의  정수가  저장되어  있다.  먼저  data[0]  ~  data[n-1]  사이의  정수들  중에서  가장  큰  정수를  찾는다.  그것을  data[k]라고  가정해보자.  그러면  data[k]와  data[n-1]을  교환(swap)한다.  이제  가장  큰  정수가  data[n-1],  즉  맨  마지막  위치에  저장되었으므로  그  값에  대해서는  더  이상  생각할  필요가  없다.  이제  data[0]  ~  data[n-2]  중에서  최대값을  찾는다.  그  값을  data[p]라고  하자.  그러면  다시  data[p]와  data[n-2]를  교환하고  data[n-2]에  대해서는  잊어버려도  된다.  이런  식으로  계속하면  마지막에는  data[0]와  data[1]  중에  최대값을  data[1]과  교환하면  전체의  정렬이  완료된다.  이  알고리즘을  구현하라.  즉  input3.txt에  저장된  정수들을  읽어서  순서대로  배열에  저장한  후  선택정렬  알고리즘으로  정렬하여  출력하는  프로그램을  작성하라. 
+
+#include <stdio.h>//6강 3번(파일로부터 입력받아서 오름차순정렬,선택정렬)
+#define max 100
+#pragma warning(disable:4996)
+int main()
+{
+	int n = 0;
+	int data[max];
+	FILE*fp = fopen("input.txt", "r");
+	while (fscanf(fp, "%d", &data[n]) != EOF)
+		n++;
+	fclose(fp);
+	for (int i = n-1 ; i > 0; i--)
+	{
+		int k=0;
+		for (int j = 0; j <= i; j++)
+		{
+			if (data[k] < data[j])
+				k = j ;
+		}
+		int tmp = data[k]; data[k] = data[i]; data[i] = tmp;
+	}
+	for (int i = 0; i < n; i++)
+		printf("%d ", data[i]);
+	getchar();
+}
+
+05. 입력으로  개의  구간(interval)이  주어진다.  각  구간은  구간의  시작점과  끝점으로  표현된다.  이  구간들을  시작점이  빠른  순서대로  정렬하여  출력하는  프로그램을  작성하라.  시작점이  같은  경우  끝점이  빠른  것을  먼저  출력한다.  입력  형식은  먼저  의  값이  주어지고,  이어서  각  구간의  시작점과  끝점이  차례대로  주어진다.  각  구간의  시작점과  끝점은  정수이고,  끝점은  항상  시작점보다  크거나  같다.
+
+#include <stdio.h>//6강 5번(파일로부터 입력받아서 오름차순정렬,선택정렬)
+#define max 100
+#pragma warning(disable:4996)
+int main()
+{
+	int n;//구간의 개수
+	int start[max];
+	int end[max];
+	scanf("%d", &n);
+	for (int i = 0; i < n; i++)
+	{
+		scanf("%d%d", &start[i], &end[i]);
+	}
+	for (int j = n - 1; j > 0; j--)
+		for (int k = 0; k < j; k++)
+		{
+			if (start[k] > start[k + 1]||(start[k] == start[k + 1]&&end[k]>end[k+1]))
+			{
+				int tmp = start[k]; start[k] = start[k + 1]; start[k + 1] = tmp;
+				int tmp2 = end[k]; end[k] = end[k + 1]; end[k + 1] = tmp2;
+			}
+		}
+	for (int i = 0; i < n; i++)
+		printf("%d %d\n", start[i], end[i]);
+}
+
+07. 입력으로  두  개의  양의  정수를  받는다.  그런  다음  두  정수를  사전식  순서(lexicographic  order)로  출력하는  프로그램을  작성하라.  예를  들어  두  정수가  75와  111이라면    75는  7로  시작하므로  사전식  순서에서는  1로  시작하는  111보다  나중에  나와야  한다.  즉  111,  75의  순서로  출력해야  한다.  
+
+#include <stdio.h> //6강 7번(사전식 정리)
+#pragma warning(disable:4996)
+#define max 100
+int main() 
+{
+	int a, b;
+	int digits1[max], digits2[max];
+	scanf("%d %d", &a, &b);
+	int r = a, k = 0;
+	while (r > 0) 
+	{
+		digits1[k++] = r % 10;
+		r /= 10;
+	}
+	int r2 = b, k2 = 0;
+	while (r2 > 0) 
+	{
+		digits2[k2++] = r2 % 10;
+		r2 /= 10;
+	}
+	for (int i = k - 1, j = k2 - 1; i >= 0 && j >= 0; i--, j--) 
+	{
+		if (digits1[i] < digits2[j]) 
+		{
+			printf("%d %d\n", a, b);
+			return 0;
+		}
+		else if (digits1[i] > digits2[j])
+		{
+			printf("%d %d\n", b, a);
+			return 0;
+		}
+	} 
+	if (k <= k2) printf("%d %d\n", a, b);//끝까지 비교해도 같을때 더큰 자리수가 크다
+	else printf("%d %d\n", b, a);
+}
+
+
+06. 정수  집합  의  임의의  순열(permutation)이  저장된  배열  가  있다.  아래의  그림은  인  경우의  한  예이다.  이  배열의  인덱스의  수열  에  대해서  이  성립할  때  이  수열을  사이클(cycle)이라고  부른다.  이예에서수열은사이클이다.  왜냐하면이기때문이다.  수열역시이고이므로사이클이다.    또한길이가  1인수열  (6)  역시이므로사이클이다.  결국배열는  3개의사이클을가진다.    입력으로정수과이어서의임의의순열이주어질때사이클의개수를찾아출력하는프로그램을작성하라
+
+#include<stdio.h> //6강 6번(순열)
+#pragma warning(disable:4996)
+#define max 100
+int main()
+{
+	int data[max];
+	int cycle[max];
+	int n, count = 0;
+	scanf("%d", &n);
+	for (int i = 0; i < n; i++)
+		scanf("%d", &data[i]);
+	for (int k2 = 0; k2 < n; k2++)//길이가 1인 수열
+		if (data[k2] == k2)
+			count++;
+	int l = 0, k = 0;
+	while (l != data[l])//0부터시작하는 싸이클
+	{
+		l = data[l];
+		cycle[k++] = l;
+		if (cycle[0] == cycle[k - 1] && k > 2)
+		{
+			count++;
+			break;
+		}
+	}
+	int  val;//두경우 제외한 싸이클
+	for (int i = 0; i < n; i++){
+		val = 0;
+		if (data[i] == i)
+			continue;
+		for (int j = 0; j < k - 1; j++)
+			if (cycle[j] == i)
+				val++;
+		if(val==0){count++; break;}
+	}
+	printf("%d", count);
+}
+-----------------------------------------------------------------------------------------
+
+7장
+
+02. 수열  에서  어떤  3개의  값  가  이면서  일  때  이를  역전된  3중쌍이라고  부른다.  역전된  3중쌍의  개수를  구하는  프로그램을  작성하라.  먼저  수열의  길이  이  주어지고  이어서  개의  정수가  입력으로  주어진다. 
+
+#include <stdio.h> //7강 2번
+#pragma warning(disable:4996)
+#define max 100
+int main()
+{
+	int n,data[max],count=0;
+	scanf("%d", &n);
+	for (int i = 0; i < n; i++)
+		scanf("%d", &data[i]);
+	for (int i = 0; i < n; i++)
+		for (int j = i + 1; j < n; j++)
+			for (int k = j + 1; k < n; k++)
+				if (data[i] > data[j] && data[j] > data[k])
+					count++;
+	printf("%d", count);
+}
+
+04. 입력으로  하나의  수열이  주어진다.  이  중  오름차순으로  정렬되어  있는  가장  긴  구간을  찾아서  그  구간의  길이를  출력하는  프로그램을  작성하라.  예를  들어  수열이  2,  3,  -2,  -2,  -2,  7,  7,  9,  10,  10,  9,  -3라면  밑줄  친  구간이  가장  긴  구간이고  그  길이는  8이다.  입력은  키보드로부터  받으며  먼저  수열의  길이  이  주어지고  이어서  개의  정수들이  주어진다.   
+
+#include <stdio.h> //7강 4번
+#pragma warning(disable:4996)
+#define max 100
+int main()
+{
+	int n, data[max], count = 1, lenthMax=0;
+	scanf("%d", &n);
+	for (int i = 0; i < n; i++)
+		scanf("%d", &data[i]);
+	for (int i = 1; i < n; i++)
+	{
+		if (data[i] >= data[i - 1]){
+			count++; 
+			if (count > lenthMax)
+				lenthMax = count;
+		}
+		else
+			count = 1;
+	}
+	printf("%d", lenthMax);
+}
+
+ 07. 입력으로  개의  폐구간(closed  interval)이  주어진다.  이중  겹치는  길이가  가장  긴  두  구간을  찾아서  출력하는  프로그램을  작성하라.  예를  들어    이고  입력된  구간들이  [0,  3],  [3,  6],  [2,  7],  [4,  5]라면  구간  [3,  6]과  [2,  7]이  겹치는  길이는  3이고  가장  길다.  입력은  input6.txt 파일로부터  받는다.  파일의  각  줄마다  하나의  구간의  시작점과  끝점이  주어진다.  각  구간의  끝점은  항상  시작점보다  크거나  같다  
+
+#include <stdio.h> //7강 7번
+#pragma warning(disable:4996)
+#define max 100
+int main()
+{
+	int data[max];
+	int data2[max];
+	int n = 0,length, lengthMax=0,index,index2;
+	FILE*fp = fopen("input7.txt", "r");
+	while (fscanf(fp, "%d%d", &data[n], &data2[n])!=EOF)
+		n++;
+	fclose(fp);
+	for(int i=0;i<n;i++)
+		for (int j = i; j < n; j++)
+		{
+			if (data2[j] < data2[i] && data[i] < data[j])
+				length = data2[j] - data[i];
+			else if (data2[j] > data2[i] && data[j] < data[i])
+				length = data2[i] - data[i];
+			else if (data2[j] > data2[i] && data[i] < data[j])
+				length = data2[i] - data[j];
+			else if (data2[j] < data2[i] && data[j] < data[i])
+				length = data2[j] - data[i];
+			if (length > lengthMax)
+			{
+				lengthMax = length;
+				index = i; index2 = j;
+			}
+		}
+	printf("[%d,%d],[%d,%d]", data[index], data2[index], data[index2], data2[index2]);
+}
+
+10.  미만의  음이  아닌  개의  정수들이  저장된  배열  가  있다.  임의의  정수  ,에  대해서  다음과  같이  정의한다.  어떤  정수  에  대해서  만약  이면    이상인  모든  정수  에  대해서도  가  된다.  이때  를  의  루트(root)라고  부르고  로  나타낸다.  예를  들어  이라고  하자.  그러면    이므로  4의  루트  이다.  항상  루트가  존재하는  것은  아니다.  위의  예에서  와  는  존재하지  않는다.  입력으로  먼저  정수  을  받고  이어서  개의  미만인  음이  아닌  정수를  받는다.  을  모두  구해서  순서대로  출력하는  프로그램을  작성하라.  단,  루트가  존재하지  않는경우에는  -1을  출력하라. 
+
+#include <stdio.h> //7강 10번
+#pragma warning(disable:4996)
+#define max 100
+int main()
+{
+	int n,A[max],B[max],R[max],l=0;
+	scanf("%d", &n);
+	for (int i = 0; i < n; i++)
+		scanf("%d", &A[i]);
+	for (int i = 0; i < n; i++)
+	{
+		int count = 0;
+		for (int k = 0; k < n; k++)
+		{
+			if (k == 0)
+				B[k] = i;
+			else 
+				B[k] = A[B[k - 1]];
+			if (B[k] == B[k - 1])
+			{
+				R[i] = B[k]; count = 1; break;
+			}
+		}
+		if (count == 0)
+			printf("-1 ");
+		else
+			printf("%d ",R[i]);
+	}
+}
+
+
+11. .  0  혹은  1로  이루어진  길이가  N인  수열이  주어진다.  이  중  최대  하나의  0을  1로  교체해서  만들  수  있는  가장  긴  연속된  1의  개수를  구하는  프로그램을 작성하라.예를 들어  N=13이고,  입력된  수열이  1,  1,  0,  0,  1,  0,  1,  1,  1,  0,  1,  1,  1  라고  하자.  그러면  10번째  0을  1로  교체하면  연속된  1의  개수는  7개가  된다.  입력으로  먼저  N의  값이  주어지고  이어서  N개의  0  혹은  1이  주어진다.  
+
+#include<stdio.h>//7강 11번
+#pragma warning(disable:4996)
+#define MAX 100
+int main(void) 
+{
+	int n, flat = 0;
+	int data[MAX];
+	int count = 0;
+	int length = 0;
+	scanf("%d", &n);
+	for (int i = 0; i < n; i++)
+		scanf("%d", &data[i]);
+
+	for (int j = 0; j < n; j++)
+	{
+		if (data[j] == 0) 
+		{
+			data[j] = 1;
+			flat++;
+
+			for (int k = 0; k < n; k++) 
+			{
+				if (data[k] == 1) 
+				{
+					count++;
+					if (count > length)
+						length = count;
+				}
+				else if (data[k] == 0)
+					count = 0;
+			}
+			data[j] = 0;
+			count = 0;
+		}
+	}
+	if (flat == 0)
+		printf("%d", n);
+	else
+		printf("%d", length);
+}
+-----------------------------------------------------------------------------------
+
+8강
+
+01. [Puppy’s  Escape]  강아지가    크기의  2차원  배열의  가운데  위치  에서  출발한다.  은  홀수이다.  상,  하,  좌,  우  4방향으로  인접한  셀(cell)들  중에서  방문한  적이  없는  한  셀을  동일한  확률로  랜덤하게  선택하여  한  칸  이동한다.  가령  아래  그림에서  강아지의  현재  위치는  (3,  3)이고  이웃한  위치들  중에서  아직  방문하지  않은  위치는  (2,  3)과  (4,  3)으로  2곳이다.  따라서  두  위치중  하나를  1/2의  확률로  선택하여  이동한다.  배열의  가장자리  셀에  도착하면  탈출에  성공한  것이다.  하지만  아무  곳으로도  이동할  수  없는  상태에  처하면  탈출에  실패한  것이다.  아래  그림의  예에서  만약  위쪽  방향을  선택하여    (2,  3)으로  이동한다면  그  다음에는  어떻게  하더라도  탈출에  성공할  수  없다.  입력으로  하나의  홀수  을  받아서  강아지가  탈출에  성공할  확률을  시뮬레이션으로  계산하는  프로그램을  작성하라.  실험  횟수는  10,000번으로  하라.
+
+#include<stdio.h>//8강1번
+#include<stdlib.h>
+#include<time.h>
+#define max 100
+#pragma warning(disable:4996)
+int main()
+{
+	int n, t = 10000;
+	int a[max][max];
+	int offset[][2] = { {0,-1},{1,0},{0,1},{-1,0} };
+	int count = 0;
+	srand((unsigned)time(NULL));
+	scanf("%d", &n);
+	for (int k = 0; k < t; k++)
+	{
+		int x = n / 2, y = n / 2;
+		for (int i = 0; i < n; i++)
+			for (int j = 0; j < n; j++)
+				a[i][j] = 0;
+
+		int suc = 1;
+		while (x > 0 && x < n - 1 && y>0 && y < n - 1)
+		{
+			int dir = -1,count_a=0;
+			a[x][y] = 1;
+			for (int d = 0; d < 4; d++) {
+				int i = x + offset[d][0];
+				int j = y + offset[d][1];
+				if (i >= 0 && i < n&&j >= 0 && j < n&&a[i][j] == 0) {
+					count_a++;
+					if (rand() % count_a == 0)
+						dir = d;
+				}
+			}
+			if (dir == -1) {
+				suc = 0;
+				break;
+			}
+			x += offset[dir][0];
+			y += offset[dir][1];
+		}
+		if (suc == 1)count++;
+	}
+	printf("%lf\n", (double)count / t);
+}
+
+03. 이항계수  (binomial  coefficient)  는  개  중에서  개를  선택하는  경우의  수이다.    이지만  이  공식을  이용하여  를  계산하는  것은  좋은  방법이  아니다.  왜  그럴까?  일반적으로는  다음의  순환식을  이용하는  것이  더  좋은  방법이다.,    혹은  인  경우,  그렇지  않은  경우이  순환식을  이용하여  의  값을  계산하기  위하여  2차원  배열  A를  사용한다.  배열  A에서  A[n][k]가  의  값을  계산하여  저장할  자리이다.  배열에서  대각선  위쪽은  n보다  k가  큰  경우이므로  무의미하다.    혹은  인  경우에는  이므로  배열의  첫  번째  열과  대각선의  값은  1이다.  순환식에  따르면  이  배열의  임의의  값은  자신의  바로  위쪽  값과  왼쪽-위쪽  대각  방향의  값의  합이다.  우리가  알고  싶은  값이  A[8][5]라면  아래의  그림에서  파란  화살표가  표시하는  순서대로  각  셀의  값을  계산해  나가면  된다.  이  순서로  계산하면  어떤  값을  계산할  때  그  값의  위쪽  값과  왼쪽-위쪽  대각  방향의  값이  항상  먼저  계산되어져  있을  것이기  때문이다.  입력으로  두  양의  정수  를  받아서  이런  방법으로  의  값을  계산하여  출력하는  프로그램을  작성하라.  
+
+#include<stdio.h>//8강3번
+#pragma warning(disable:4996)
+int main()
+{
+	int n, k;
+	int a[101][101];
+	scanf("%d%d", &n, &k);
+	for(int i=0;i<=n;i++)
+		for (int j = 0; j <= i; j++)
+		{
+			if (j == 0 || i == j)
+				a[i][j] = 1;
+			else
+				a[i][j] = a[i - 1][j - 1] + a[i - 1][j];
+		}
+	printf("%d", a[n][k]);
+}
+
+
+04. 데이터  파일 input4.txt에는  하나의    행렬이  저장되어  있다.  파일의  첫  줄에는  행렬의  크기  이  저장되어  있고,  이어진  줄에는  각  줄마다  개의  정수가  저장되어  있다.  이  파일을  읽어서  각  행의  평균과  표준편차,  각  열의  평균과  표준편차를  구해서  아래의  예와  같은  형식으로  출력하는  프로그램을  작성하라. 
+
+#include<stdio.h>//8강 4번
+#include<math.h>
+#define max 100
+#pragma warning(disable:4996)
+int main()
+{
+	int n, a[max][max];
+	FILE*fp = fopen("input4.txt", "r");
+	fscanf(fp, "%d", &n);
+	for (int i = 0; i < n; i++) {
+		int sum = 0, sum3 = 0;
+		double mid, sum2 = 0.0, mid2;
+		for (int j = 0; j < n; j++)
+		{
+			fscanf(fp, "%d ", &a[i][j]);
+			sum += a[i][j];
+			printf("%d ", a[i][j]);
+		}
+		mid = (double)sum / n;//각 행의 평균구하기
+		printf("%lf ", mid);
+		for (int j = 0; j < n; j++)
+			sum2 += (mid - a[i][j])*(mid - a[i][j]);//각행의 표준편차 구하기
+		printf("%lf\n", sqrt(sum2 / n));
+	}fclose(fp);
+	for (int j = 0; j < n; j++) {//각 열의 평균구하기
+		int sum3 = 0; double mid2;
+		for (int i = 0; i < n; i++) {
+			sum3 += a[i][j];
+		} mid2 = (double)sum3 / n;
+		printf("%lf ", mid2);
+	}printf("\n");
+	for (int j = 0; j < n; j++) {//각 열의 표준편차구하기
+		double sum4 = 0.0;
+		int sum3 = 0; double mid2;
+		for (int i = 0; i < n; i++) {
+			sum3 += a[i][j];
+		} mid2 = (double)sum3 / n;
+		for (int i = 0; i < n; i++) {
+			sum4 += (mid2 - a[i][j])*(mid2 - a[i][j]);
+		}
+		printf("%lf ", sqrt(sum4 / n));
+	}
+}
+
+
+06. 데이터  파일  input6.txt에는  하나의    행렬이  저장되어  있다.  파일의  첫  줄에는  행렬의  크기  이  저장되어  있고,  이어진  줄에는  각  줄마다  개의  정수가  저장되어  있다.  이  행렬의  원소들을  아래  그림의  화살표  순서대로  출력하는  프로그램을  작성하라.                                                  출력순서:      0    5    -17    -12    -2    7    6    -25    2    -18    0    -23    6      9    -1    13    
+#include<stdio.h>//8강 6번
+#pragma warning(disable:4996)
+#define max 100
+int main()
+{
+	int n, a[max][max], count[max][max] = { 0 };
+	FILE*fp = fopen("input6.txt", "r");
+	fscanf(fp, "%d", &n);
+	for (int i = 0; i < n; i++)
+		for (int j = 0; j < n; j++)
+			fscanf(fp, "%d", &a[i][j]);
+	fclose(fp); 
+	int k = 1, i = 0, j = 0, l = 0;
+	printf("%d ", a[0][0]);
+	while (1)
+	{
+		if (count[i + 1][j] == 1 && count[i - 1][j] == 1 && count[i][j + 1] == 1 && count[i][j - 1] == 1)
+			 break;
+		if (k % 2 != 0 && i == l)
+		{
+			while (j < n-1&& count[i][j+1] == 0)
+			{
+				j++;
+				printf("%d ", a[i][j]); count[i][j] = 1;
+			}k++;
+		}
+		else if (k % 2 == 0 && j == n - 1)
+		{
+			while (i < n - 1&& count[i + 1][j] == 0)
+			{
+				i++;
+				printf("%d ", a[i][j]); count[i][j] = 1;
+			}k++;
+		}
+		else if (k % 2 != 0 && i == n - 1)
+		{
+			while (j >= l +1&& count[i][j-1] == 0)
+			{
+				j--;
+				printf("%d ", a[i][j]); count[i][j] = 1;
+			}k++;
+		}
+		else if (k % 4 == 0 && j == l)
+		{
+			while (i > l+1&& count[i-1][j]==0)
+			{
+				i--;
+				printf("%d ", a[i][j]); count[i][j] = 1;
+			}k++; l++; n--;
+		}
+	}
+}
+
+
+#include<stdio.h>//8강 7번(물의 총량)
+#include<math.h>
+#define max 100
+#pragma warning(disable:4996)
+int main()
+{
+	int n, a[max], length = 1, b[max], l = 0, tmp[max], water = 0, high[max], m = 0, low[max];
+	scanf("%d", &n);
+	for (int i = 0; i < n; i++)
+		scanf("%d", &a[i]);
+	for (int i = 0; i < n; i++)
+	{
+		if (i == n - 1 || a[i] != a[i + 1])
+			b[l++] = a[i];
+		else
+			length++;
+		if (l % 3 == 0 && b[1] < b[0] && b[0] < b[2] || l % 3 == 0 && b[1] < b[0] && b[0] == b[2])
+		{
+			water += length*b[0] - b[1]; low[m] = b[0]; b[0] = b[2];
+			l = 1; length = 1; high[m] = b[2]; tmp[m++] = i;
+		}
+		else if (l % 3 == 0 && b[1] < b[2] && b[2] < b[0])
+		{
+			water += length*b[2] - b[1]; high[m] = b[0]; low[m] = b[2]; b[0] = b[2];
+			l = 1; length = 1; tmp[m++] = i;
+		}
+		else if (l % 3 == 0)
+		{
+			b[0] = b[1]; b[1] = b[2];
+			length = 1;
+			l = 2;
+		}
+		for (int k = 1; k < m; k++) {
+			if (high[k] < high[k - 1] && high[k - 1] < a[i])
+				water += abs(i - tmp[k - 1] - 1)*(high[k - 1] - high[k]);
+			else if (high[k - 1] < high[k] && high[k] < a[i])
+				water += (i - tmp[k] - 1)*(high[k] - high[k - 1]);
+			else if (high[k - 1] < high[k] && low[k] == low[k - 1])
+				water += (tmp[k] - 1)*(high[k - 1] - low[k]);
+			else if (high[k] < high[k - 1] && low[k] == low[k - 1])
+				water += (tmp[k] - 1)*(high[k] - low[k]);
+		}
+	}
+	printf("%d", water);
+}
+
+
+-------------------------------------------------------------------------------------------------------------
+
+9강
+
+03. 평면상에서  좌표축에  평행한  2개의  직사각형이  입력으로  주어진다.  두  사각형이  교차하는  영역,  즉  두  사각형에  공통으로  포함되는  영역의  면적을  구하는  프로그램을  작성하라.  각각의  사각형은  대각  방향의  두  꼭지점의  좌표로  주어진다.  이  문제를  해결하기  위해서  임의의  두  구간에  대해서  두  구간이  겹치는  영역의  길이를  구하는  함수int  lenOfOverlap(  int  sa,  int  ta,  int  sb,  int  tb  )를  작성하여  이용하라.  이  함수는  구간  [sa,  ta]와  [sb,  tb]의  겹치는  영역의  길이를  계산하여  반환한다.  
+
+#include <stdio.h>//9강 3번
+#pragma warning(disable:4996)
+int lenOfOverlap(int sa, int ta, int sb, int tb);
+int main() {
+	int x1, y1, x2, y2, x3, y3, x4, y4;
+	scanf("%d %d %d %d %d %d %d %d", &x1, &y1, &x2, &y2, &x3, &y3, &x4, &y4);
+	int sx1 = x1, tx1 = x2, sy1 = y1, ty1 = y2, sx2 = x3, tx2 = x4, sy2 = y3, ty2 = y4;
+	if (x1 > x2) { sx1 = x2; tx1 = x1; }
+	if (y1 > y2) { sy1 = y2; ty1 = y1; }
+	if (x3 > x4) { sx2 = x4; tx2 = x3; }
+	if (y3 > y4) { sy2 = y4; ty2 = y3; }
+	int width = lenOfOverlap(sx1, tx1, sx2, tx2);
+	int height = lenOfOverlap(sy1, ty1, sy2, ty2);
+	printf("%d\n", width*height);
+}
+int lenOfOverlap(int sa, int ta, int sb, int tb) {
+	int s = sb, t = ta;
+	if (sa >= sb) s = sa;
+	if (ta >= tb) t = tb;
+	if (s > t) return 0;
+	else return t - s;
+}
+
+
+05. 입력으로  양의  정수들이  주어진다.  각  정수들은  8자리  이내의  정수들이다.  이  정수들을  사전식  순서(lexicographic  order)로  정렬하여  출력하는  프로그램을  작성하라.  예를  들어  입력  정수들이  75,  111,  120,  3456,  9,  12,  67,  91이라면  111,  12,  120,  3456,  67,  75,  9,  91의  순서이다.  입력은  input5.txt 파일에서  읽는다.  정수의  개수는  따로  주어지지  않고  파일의  끝까지  읽어야  한다.  이  문제를  해결하기  위해서  두  정수를  매개변수로  받아서  사전식  순서를  비교하는  함수int  compareLexicographic(int  a,  int  b)를  작성하라.  이  함수는  정수  a와  b를  비교하여  a가  사전식  순서로  앞설  경우에는  -1,  b가  앞설  경우에는  1,  그리고  두  정수가  동일할  경우에는  0을  반환한다.  
+
+#include <stdio.h>//9장 5번
+#pragma warning(disable:4996)
+#define max 100
+int compareLexicographic(int a, int b);
+int main()
+{
+	int data[max],n=0;
+	FILE*fp = fopen("input5.txt", "r");
+	while (fscanf(fp, "%d", &data[n++]) != EOF);
+	fclose(fp);
+	n--;
+	for (int i = 1; i < n; i++)//삽입정렬하는것
+	{
+		int j = i - 1, tmp = data[i];
+		while (j >= 0 && compareLexicographic(tmp, data[j]) == -1)
+		{
+			data[j + 1] = data[j];
+			j--;
+		}
+		data[j + 1] = tmp;
+	}
+	for (int i = 0; i < n; i++)
+		printf("%d ", data[i]);
+}
+int compareLexicographic(int a, int b)
+{
+	int r = a, k = 0;
+	int digits1[max], digits2[max];
+	while (r > 0)
+	{
+		digits1[k++] = r % 10;
+		r /= 10;
+	}
+	int r2 = b, k2 = 0;
+	while (r2 > 0)
+	{
+		digits2[k2++] = r2 % 10;
+		r2 /= 10;
+	}
+	for (int i = k - 1, j = k2 - 1; i >= 0 && j >= 0; i--, j--)
+	{
+		if (digits1[i] < digits2[j])
+			return -1;
+		else if (digits1[i] > digits2[j])
+			return 1;
+	}
+}
+
+
+
+06. 사용자로부터  하나의  다항식을  입력받고  이어서  변수  의  값을  입력받아  다항식의  값을  계산하여  출력하는  프로그램을  작성하라.  예를  들어  다항식이  이라고  가정하면  입력은  먼저  항의  개수  5가  주어지고  이어서  다음과  같이  각  항의  계수와  차수가  순서대로  주어진다.3    5    2    4    -1    2    7    1    -6    0마지막으로  변수  의  값이  주어진다.  계수,  차수,  변수  의  값은  모두  정수라고  가정한다.  
+
+#include<stdio.h>//9강 6번
+#define max 100
+int polynomial(int x);
+#pragma warning(disable:4996)
+void main()
+{
+	int x;
+	scanf("%d", &x);
+	printf("%d",polynomial(x));
+
+}
+int polynomial(int x)//몇차 다항식인가
+{
+	int coefficient[max], v, k = 0, empty[max], o = 0;
+	for(int i=0;i<x*2;i++)
+	{
+		scanf("%d", &v);
+		if (i % 2 == 0)
+		coefficient[k] = v;
+		else
+		{
+			k++;
+			empty[o] = v;
+			o++;
+		}
+	}
+	scanf("%d", &v);
+	int result[max] ,a=1, l = 0;
+	for (o = 0; o < k; o++)
+	{
+		for (int j = 0; j <empty[o]; j++)
+		{
+			a *= v;
+		}result[l] = a;  l++; a = 1;
+	}
+	int res = 0;
+	for (int j = 0; j < k; j++)
+	{
+		res += coefficient[j] * result[j];
+	}
+	return res;
+}
+
+---------------------------------------------------------------------------------------------------
+10강
+
+02. 키보드로  부터  연속해서  정수들을  입력받는다.  정수가  하나  씩  입력될  때  마다  현재까지  입력된  정수들을  오름차순으로  정렬하여  화면에  출력한다.  단,  새로  입력된  정수가  이미  배열에  저장되어  있다면  추가하는  대신  “duplicate  entry”라고  출력한다.  사용자가  -1을  입력하면  프로그램을  종료한다.  이  일을  하기  위해서  다음과  같은  두  함수를  작성하라.  먼저  현재까지  입력된  정수들이  저장되어  있는  배열에  새로  입력된  정수가  이미  존재하는지  검사하여  만약  있으면  그  위치(배열  인덱스)를  반환하고,  없으면  -1을  반환하는  함수  find를  작성하라.  또한  새로  입력된  정수가  duplicate  entry가  아닌  경우에  이  정수를  배열에  오름차순으로  정렬되도록  삽입하는  함수  insert를  작성하라.  그리고  main  함수에서는  이  두  함수를  적절히  이용하여  문제를  해결하라.  Duplicate  entry라고  출력할  때  그  배열에서  그  정수의  위치를  함께  출력하라.  어떤  전역  변수도  사용해서는  안된다. 
+
+#include <stdio.h>//10장 2번
+#pragma warning(disable:4996)
+void insert(int n, int data[]);
+int find(int data[], int n, int k);
+int main()
+{
+	int data[100], n = 0;
+	while (1)
+	{
+		scanf("%d", &data[n]);
+		if (data[n] == -1)
+			break;
+		if (find(data, n, data[n]) == -1)
+			insert(n, data);
+		else
+			printf("%d\n", find(data, n, data[n]));
+		n++;
+	}
+}
+void insert(int n, int data[])
+{
+	for(int i=n-1;i>=0;i--)
+		for(int j=0;j<=i;j++)
+			if (data[j] > data[j + 1])
+			{
+				int tmp = data[j]; data[j] = data[j + 1]; data[j + 1] = tmp;
+			}
+	printf("%d ", data[0]);
+	for (int k = 1; k <= n; k++)
+		if (data[k] != data[k - 1])
+			printf("%d ", data[k]);
+}
+int find(int data[], int n, int k)
+{
+	int i;
+	for(i=0;i<n;i++)
+		if (data[i] == k)
+		{
+			printf("duplicate entry : ");
+			return i;
+		}
+	return -1;
+}
+
+
+
+
+
+03. 입력으로  개의  수직  혹은  수평  선분이  주어진다.  선분들간의  교차점의  좌표를  모두  계산하여  좌표에  대한  오름차순으로  정렬하여  출력하는  프로그램을  작성하라.  좌표가  동일한  경우에는  좌표가  작은  점을  먼저  출력한다.  입력은  input3.txt  파일로부터  받는다.  파일의  첫  줄에는  선분의  개수  이  주어지고,  이어진  N줄에는  각  줄마다  하나의  선분의  시작점과  끝점의  좌표가  주어진다.  수평  선분의  경우  좌표가  작은  점이  먼저  주어지고,  수직  선분의  경우  좌표가  작은  점이  항상  먼저  주어진다.  수직이나  수평이  아닌  선분이  주어지는  경우는  없다.  수평  선분끼리  만나거나  혹은  수직  선분끼리  만나는  경우는  교차점으로  간주하지  않는다.  이  문제를  해결하기  위해서  두  선분이  교차하는지  검사하는  함수intersect를  만들어  사용하라.  하나의  수평선분  과  수직선분  가  교차하는지  검사하는  한  가지  방법은  의  양  끝점이  의  좌우에  나누어져  있고,  또한  의  양끝점이  의  상하에  나누어져  있으면  교차하고,  그렇지  않으면  교차하지  않는다.  매개  변수로  두  선분을  받아서  교차하면  1,  그렇지  않으면  0을  반환하라.  어떤  전역변수도  사용해서는  안된다. 
+
+#include <stdio.h>//10강 3번
+#pragma warning(disable:4996)
+int intersect(int lx1, int ly1, int lx2, int ly2, int vx1, int vy1, int vx2, int vy2);
+void main()
+{
+	int n, a, b, c, d, lx1[100], ly1[100], lx2[100], ly2[100], l = 0, vx1[100], vy1[100], vx2[100], vy2[100], v = 0;
+	FILE*fp = fopen("input3.txt", "r");
+	fscanf(fp, "%d", &n);
+	for(int i=0;i<n;i++)
+	{
+		fscanf(fp, "%d%d%d%d",&a, &b, &c, &d);
+		if (b == d) { lx1[l] = a; ly1[l] = b; lx2[l] = c; ly2[l] = d; l++; }
+		else if (a == c) { vx1[v] = a; vy1[v] = b; vx2[v] = c; vy2[v] = d; v++; }
+	}
+	fclose(fp);
+	int intersect_x[100], intersect_y[100], k = 0;
+	for (int i = 0; i < l; i++)
+		for (int j = 0; j < v; j++)
+			if (intersect(lx1[i], ly1[i], lx2[i], ly2[i], vx1[j], vy1[j], vx2[j], vy2[j]) == 1)
+			{
+				intersect_x[k] = vx1[j]; intersect_y[k] = ly1[i];
+				k++;
+			}
+	for (int i = k-1; i > 0; i--)
+		for (int j = 0; j < i; j++)
+			if (intersect_x[j] > intersect_x[j + 1])
+			{
+				int tmp = intersect_x[j]; intersect_x[j] = intersect_x[j + 1]; intersect_x[j + 1] = tmp;
+				int tmp2 = intersect_y[j]; intersect_y[j] = intersect_y[j + 1]; intersect_y[j + 1] = tmp2;
+			}
+	for (int i = 0; i < k; i++)
+		printf("[%d , %d]\n", intersect_x[i], intersect_y[i]);
+}
+int intersect(int lx1, int ly1, int lx2, int ly2, int vx1, int vy1, int vx2, int vy2)//두선분이 교차하는지
+{
+
+	if (lx1 <= vx1 && vx1 <= lx2 && vy1 <= ly1 && ly1 <= vy2)
+		return 1;
+	return 0;
+}
+
+
+
+05. [Self  avoiding  walk]  2차원  평면에서  원점  (0,0)에서  출발한다.  사용자가  현재의  위치에서  상하좌우  어떤  한  방향으로  얼마  만큼  이동하라는  명령을  내리면  그렇게  이동한다.  명령은  두  음이  아닌  정수로  표현된다.  우선  방향은  0,  1,  2,  3으로  표시하고  0은  y좌표가  증가하는  방향,  1은  x좌표가  증가하는  방향,  2는  y좌표가  감소하는  방향,  그리고  3은  x좌표가  감소하는  방향이다.  예를  들어  2  7은  y좌표가  7만큼  감소하는  위치로  이동하라는  명령이다.  프로그램은  사용자가  현재까지  이동한  궤적을  기억하고  있어야  한다.  사용자가  내린  명령대로  이동했을  때  민약  지금까지  이동한  궤적과  교차하면  invalid  move라고  출력하고  이동  명령을  거부한다.  만약  그렇지  않으면  명령대로  이동하고  이동한  점의  좌표를  출력한다.  사용자가  -1  -1을  입력할  때  까지  이  일을  계속한다.  사용자가  -1  -1을  입력하면  프로그램을  종료한다.  이  문제를  해결하기  위해  사용자가  내린  명령이  invalid  move인지  아닌지  검사하는  함수  check를  작성하라.  전역변수를  사용해서는  안된다.
+
+#include <stdio.h>//10강 5번
+#pragma warning(disable:4996)
+int check(int x, int y, int dir, int move, int count[][100]);
+void main()
+{
+	int x = 0, y = 0, dir, move, count[100][100] = { 0 };
+	while (1)
+	{
+		scanf("%d%d", &dir, &move);
+		if (dir == -1 && move == -1)
+			break;
+		if (check(x, y, dir, move, count) == 0)
+		{
+			if (dir == 0)
+			{
+				for (int i = 0; i < move; i++)
+					count[x][y++] = 1;
+			}
+			else if (dir == 1)
+			{
+				for (int i = 0; i < move; i++)
+					count[x++][y] = 1;
+			}
+			else if (dir == 2)
+			{
+				for (int i = 0; i < move; i++)
+					count[x][y--] = 1;
+			}
+			else if (dir == 3)
+			{
+				for (int i = 0; i < move; i++)
+					count[x--][y] = 1;
+			}
+			printf("%d %d\n", x, y);
+		}
+		else
+			printf("invalid move");
+	}
+}
+int check(int x, int y, int dir, int move, int count[][100])
+{
+	if (dir == 0)
+		for (int i = 0; i <= move; i++)
+		{
+			if (count[x][y] == 1)
+				return 1;
+			y++;
+		}
+	else if (dir == 1)
+		for (int i = 0; i <= move; i++)
+		{
+			if (count[x][y] == 1)
+				return 1;
+			x++;
+		}
+	else if (dir == 2)
+		for (int i = 0; i <= move; i++)
+		{
+			if (count[x][y] == 1)
+				return 1;
+			y--;
+		}
+	else if (dir == 3)
+		for (int i = 0; i <= move; i++)
+		{
+			if (count[x][y] == 1)
+				return 1;
+			x--;
+		}
+	return 0;
+}
+
+
+------------------------------------------------------------------------------
+
+
+11장
+
+
+01.강의에서  다룬  포커  프로그램에서  생략된  함수들을  모두  작성하여  프로그램을  완성하라.  또한  사용자가  카드의  rank와  suit를  잘못  입력하거나  동일한  카드를  중복  입력할  경우  적절한  메시지를  출력하고,다시  입력하도록  프로그램을  수정하라. 
+
+#include <stdio.h>//11강 1번
+#define NUM_RANKS 13
+#define NUM_SUITS 4
+#define NUM_CARDS 5
+int num_in_rank[NUM_RANKS + 1];
+int num_in_suit[NUM_SUITS];
+void read_cards();
+void analyze_hand();
+#pragma warning(disable:4996)
+void main()
+{
+	int n;
+	while (1) {
+		read_cards();
+		analyze_hand();
+		printf("계속하시겠습니까?(YES:1,NO:0)");
+		scanf("%d", &n);
+		if (n == 0)
+			break;
+	}
+}
+void init_data()//초기화시켜줌
+{
+	for (int rank = 0; rank < NUM_RANKS; rank++)
+		num_in_rank[rank] = 0;
+	for (int suit = 0; suit < NUM_SUITS; suit++)
+		num_in_suit[suit] = 0;
+}
+void read_cards()
+{
+	char rank_ch, suit_ch;
+	int rank=0, suit=-1;
+	init_data();
+	int cards_read = 0;
+	while (cards_read < NUM_CARDS) {
+		printf("Enter a card : ");
+		scanf(" %c", &rank_ch);
+		switch(rank_ch) {
+			case 'a':rank = 1; break;
+			case '2':rank = 2; break;
+			case '3':rank = 3; break;
+			case '4':rank = 4; break;
+			case '5':rank = 5; break;
+			case '6':rank = 6; break;
+			case '7':rank = 7; break;
+			case '8':rank = 8; break;
+			case '9':rank = 9; break;
+			case 't':rank = 10; break; 
+			case 'j':rank = 11; break;
+			case 'q':rank = 12; break;
+			case 'k':rank = 13; break;
+		}
+		scanf(" %c", &suit_ch); 
+		switch(suit_ch){
+			case 'c':suit = 0; break;
+			case 'd':suit = 1; break;
+			case 'h':suit = 2; break;
+			case 's':suit = 3; break;
+		}if (rank == 0||suit == -1) {
+			printf("다시입력하세요 : ");
+			continue;
+		}
+		num_in_rank[rank]++;
+		num_in_suit[suit]++;
+		cards_read++;
+	}
+}
+int check_flush(int num_in_suit[])
+{
+	for (int i = 0; i < NUM_SUITS; i++)
+		if (num_in_suit[i]==5)
+			return 1;
+	return 0;
+}
+int check_straight(int num_in_rank[])
+{
+	int j=0, new_rank[100];
+	for (int i = 0; i < NUM_RANKS; i++)
+	{
+		if (num_in_rank[i] == 1)
+			new_rank[j++] = i;
+	}int count = 1;
+	for (int i = 1; i < j; i++)
+		if (new_rank[i] == new_rank[i - 1] + 1)
+			count++;
+	if (count == 5)
+		return 1;
+	return 0;
+}
+int check_four_cards(int num_in_rank[])
+{
+	for (int i = 0; i < NUM_RANKS; i++)
+		if (num_in_rank[i] == 4)
+			return 1;
+	return 0;
+}
+int check_three_cards(int num_in_rank[])
+{
+	for (int i = 0; i < NUM_RANKS; i++)
+		if (num_in_rank[i] == 3)
+			return 1;
+	return 0;
+}
+int count_pair(int num_in_rank[])
+{
+	int count = 0;
+	for (int i = 0; i < NUM_RANKS; i++)
+		if (num_in_rank[i] == 2)
+			count++;
+	return count;
+}
+void analyze_hand()
+{
+	if (check_flush(num_in_suit) == 1) {
+		if (check_straight(num_in_suit) == 1)
+		{
+			printf("straight flush"); return;
+		}
+		printf("flush"); return;
+	}
+	else if (check_four_cards(num_in_rank) == 1)
+	{
+		printf("four cards"); return;
+	}
+	else if( count_pair(num_in_rank)==1)
+	{
+		if (check_three_cards(num_in_rank) == 1)
+		{
+			printf("full house"); return;
+		}printf("pair"); return;
+	}
+	else if (check_straight(num_in_suit) == 1)
+	{
+		printf("straight"); return;
+	}
+	else if(count_pair(num_in_rank) == 2)
+	{
+		printf("two pair"); return;
+	}
+	printf("high card");
+	return;
+}
+
+
+
+
+
+
+
+02. [Gaussian  Elimination]  1차  연립방정식을  푸는  가우스  소거법(Gaussian  elimination)을  수행하는  프로그램을  작성하라.  입력은  data.txt  파일로  부터  읽는다.  파일의  첫  줄에는  변수의  개수  이  주어진다.  이어진  개의  줄에는  각  줄  마다  하나의  방정식이  다음과  같은  형식으로  주어진다.  예를  들어  변수가  이라고  가정하고,  방정식이라면  입력  파일에서  이  방정식은  다음과  같이  개의  실수로  표현된다.주어진  연립방정식을  만족하는  유일한  해가  존재할  경우  다음과  같은  형식으로  출력한다.                  x1  =  2.45                  x2  =  -11.67                  ...                  xn  =  0.03해가  존재하지  않을  경우  “No  solution”이라고  출력하고,  해가  무한히  많이  존재할  경우  “Infinite  solution”이라고  출력한다. 
+
+#include <stdio.h>//11강 2번
+#pragma warning(disable:4996)
+void Gaussian_Elimination(double A[][100], int n);
+void main()
+{
+	int n;
+	double A[100][100];
+	FILE*fp = fopen("data.txt", "r");
+	fscanf(fp, "%d", &n);
+	for (int i = 0; i < n; i++){
+		for (int j = 0; j <= n; j++)
+			fscanf(fp, "%lf", &A[i][j]);
+	}
+	fclose(fp);
+	Gaussian_Elimination(A, n);
+}
+void swap(double A[][100], int n, int i, int j)//행을 바뀌주는 함수
+{
+	for (int k = 0; k <= n; k++){
+		double tmp = A[i][k];
+		A[i][k] = A[j][k];
+		A[j][k] = tmp;
+	}
+}
+void Gaussian_Elimination(double A[][100], int n){
+	for (int i = 0; i < n - 1; i++){
+		if (A[i][i] == 0){
+			for (int j = i + 1; j < n; j++){
+				swap(A, n, i, j);
+				break;
+			}i--;//실제행한건 아니므로
+		}
+		else{
+			double denom = A[i][i];
+			for (int j = 0; j <= n; j++)
+				A[i][j] *= (1 / denom);//0이 아닌 제일 처음을 1로만듬
+			for (int j = i + 1; j < n; j++){
+				double mul = A[j][i];
+				for (int k = 0; k <= n; k++)
+					A[j][k] -= (A[i][k] * mul);
+			}
+		}
+	}
+	double tmp = A[n - 1][n - 1];//가우스 소거
+	for (int i = 0; i <= n; i++) {
+		if (tmp != 0)
+			A[n - 1][i] *= (1 / tmp);
+	}
+	for (int i = n - 1; i > 0; i--)
+		for (int j = i - 1; j >= 0; j--) {
+			double mul = A[j][i];
+			for (int k = i; k <= n; k++) {
+				if (mul != 0)
+					A[j][k] -= (A[i][k] * mul);
+			}
+		}
+	if (A[n - 1][n - 1] == 1){
+		for (int i = 0; i < n; i++) {
+			printf("x%d = %f ", i + 1, A[i][n]);
+			printf("\n");
+		}return;
+	}
+	if (A[0][n - 1] == 0){
+		printf("No solution");
+		return;
+	}
+	printf("Infinite solution");
+	return;
+}
+
+-------------------------------------------------------------------------------------------
+
+
+12장
+
+
+void largeToSmall(char words[],int *check) {//대문자를 소문자로 바꾸는 것
+	int len = strlen(words);
+	int tmp;
+	for (int i = 0; words[i]; i++) {
+		tmp = words[i];
+		if (tmp >= 65 && tmp <= 90)
+			check[i] = tmp + 32;
+		else
+		check[i] = tmp;
+	}
+
+	for (int i = 0; i < len; i++) {
+		printf("%c", check[i]);
+	}
+}
+
+
+
+
+
+
+
+
+01. 입력으로  하나의  문자열을  받은  후  뒤집어서  출력하는  프로그램을  작성하라.  예를  들어  hello를  입력하면  olleh가  출력된다.  
+
+#include<stdio.h>//12장1번
+#define max 100
+#pragma warning(disable:4996)
+char word[max];
+int main()
+{
+	int i;
+	scanf("%s", word);
+	while (1) {
+		for (i = max; i >= 0; i--)
+			if (word[i] == '\0')
+				break;
+		for (int j = i - 1; j >= 0; j--)
+			printf("%c", word[j]);
+		break;
+	}
+}
+
+
+02. 하나의  영문  소문자로  구성된  문자열을  입력받은  후  문자열을  구성하는  문자들을  알파벳  순으로  정렬하여  만들어지는  문자열을  출력하라.  예를  들어  hello가  입력되면  ehllo를  출력한다.
+
+#include <stdio.h>//12장 2번
+#pragma warning(disable:4996)
+char compareLexicographic(char a, char b);
+void main()
+{
+	char words[50]; int n = 0;
+	scanf("%s", words);
+	for (int i = 1; i<5; i++)//삽입정렬하는것
+	{
+		int j = i - 1;
+		char tmp = words[i];
+		while (j >= 0 && compareLexicographic(tmp, words[j]) == tmp)
+		{
+			words[j + 1] = words[j];
+			j--;
+		}
+		words[j + 1] = tmp; n++;
+	}
+	for (int i = 0; i < 5; i++)
+		printf("%c", words[i]);
+}
+char compareLexicographic(char a, char b)//현재와 바로전간의 순서를 정해주는 함수
+{
+	if (a> b)
+		return b;
+	return a;
+
+}
+
+
+
+
+03. 아나그램(anagram)이란  문자들의  순서를  재배열하여  동일하게  만들  수  있는  문자열을  말한다.  대소문자는  구분하지  않는다.  예를  들어서  Silent와  Listen은  아나그램이다.  입력으로  두  문자열을  받아서  아나그램인지  판단하는  프로그램을  작성하라.  
+
+#include <stdio.h>//12장 3번
+#include<string.h>
+#pragma warning(disable:4996)
+void compareLexicographic(const char *words, const char *words_a);
+void largeToSmall(char words[]);
+void main()
+{
+	char words[50], words_a[50];
+	scanf("%s%s", words, words_a);
+	largeToSmall(words);
+	largeToSmall(words_a);
+	compareLexicographic(words, words_a);
+}
+void largeToSmall(char words[]) {
+	for (int i = 0; words[i]; i++) {
+		if (65 <= words[i] && words[i] <= 90)
+			words[i] += 32;
+	}
+}
+void compareLexicographic(const char *words, const char *words_a)//현재와 바로전간의 문자를 비교하는 함수
+{
+	int j;
+	for (int i = 0; words[i]; i++) {//words[i]가 참이면반복(거짓은 종료문자임)
+		for (j = 0; words_a[j]; j++)
+			if (words[i] == words_a[j])
+				break;
+		if (words_a[j] == 0) {
+			printf("no");
+			return;
+		}
+	}
+	printf("yes");
+	return;
+}
+
+
+
+
+
+
+
+04. 입력으로  텍스트파일  input.txt를  읽어서  왼쪽  정렬하여  output.txt  파일로  출력하는  프로그램을  작성하라.  출력  파일의  한  줄은  80  문자를  초과해서는  안되며,  단어를  자르지  않는  한도  내에서  가능한  한  최대한  80  문자에  가깝도록  맞춘다. 
+
+#include <stdio.h>//12강 4번
+#include <string.h>
+#pragma warning(disable:4996)
+int main() {
+	FILE*in_fp = fopen("input.txt", "r");
+	FILE*out_fp = fopen("output.txt", "w");
+	char buffer[100];//output에 출력할 배열
+	int len, sum = 0;
+	while (fscanf(in_fp, "%s", buffer) != EOF) {
+		len = 1 + strlen(buffer);
+		sum += len;//전체 문장 길이
+		if (sum <= 80) {
+			fprintf(out_fp, "%s", buffer);
+			if (sum < 80) {
+				fprintf(out_fp, " ");
+			}
+		}
+		else {
+			fprintf(out_fp, "\n");//한줄이 80자 넘으면 다음줄로 넘어감
+			fprintf(out_fp, "%s ", buffer);
+			sum = len + 1;
+		}
+	}
+	fclose(in_fp);
+	fclose(out_fp);
+}
+
+
+
+
+
+
+
+
+
+
+05. 강의  슬라이드에서  마지막으로  다룬    단어찾기  프로그램을  완성하라.
+
+#include <stdio.h>//12강 5번
+#include <string.h>
+#pragma warning(disable:4996)
+#define MAX_WORD 4000
+#define MAX_LEN 20
+char dict[MAX_WORD][MAX_LEN];//사전에서 읽은 단어들 저장하는 배열
+char grid[MAX_LEN][MAX_LEN];
+int n_words, len;
+void read_dictionary();
+void read_grid();
+char get_char(int i, int j, int dir, int dist);
+int search(int k);
+int main() {
+	read_dictionary();
+	read_grid();
+	for (int i = 0; i < n_words; i++) {
+		int result = search(i);
+		if (result == 1)
+			printf("%s\n", dict[i]);
+	}
+	return 0;
+}
+void read_dictionary() {//사전 파일에 있는 단어들을 받아온다.
+	FILE *fp_a = fopen("dictionary.txt", "r");
+	int i = 0;
+	while (fscanf(fp_a, "%s", dict[i]) != EOF)
+		i++;
+	n_words = i;//사전에 있는 단어의수
+	fclose(fp_a);
+}
+void read_grid() {//입력파일로부터 그리드를 받는다.
+	FILE *fp = fopen("input.txt", "r");
+	int i = 0;
+	while (fscanf(fp, "%s", grid[i]) != EOF)
+		i++;
+	fclose(fp);
+}
+int offsetX[8] = { 0,1,1,1,0,-1,-1,-1 };
+int offsetY[8] = { -1,-1,0,1,1,1,0,-1 };
+char get_char(int i, int j, int dir, int dist) {
+	int newX = i + dist * offsetX[dir];
+	int newY = j + dist*offsetY[dir];
+	return grid[newX][newY];
+
+}
+int search(int k) {//주어진데서 사방으로 돌아서 다음 문자랑 같은지 검사하는것. 같으면 1출력
+	//사전의 i번째 단어를 그리드에서 검색해서 
+	//존재하면 result에 1반환
+	len = strlen(dict[k])+1;
+	int l = 1;
+	for (int i = 0; i < MAX_LEN; i++) {
+		for (int j = 0; j < MAX_LEN; j++) {
+			if (dict[k][0] != grid[i][j])
+				continue;
+			for (int dir = 0; dir < 8; dir++) {
+				int dist = 1, l = 1;
+				while (1) {
+					char ch = get_char(i, j, dir, dist); dist++;
+					if (dist >= len || ch == NULL || ch != dict[k][l])
+						break;
+					 l++;
+				}
+				if (dist >= len)
+					return 1;
+			}
+		}
+	}
+	return 0;
+}
+
+---------------------------------------------------------------------------------
+
+
+
+
+6강 그룹과제
+1번
+int count;
+for(int i=0;i<n;i++)
+ if(i==0||a[i]!=a[i-1])//||일경우,앞이참이면 뒤를 안본다.
+  count++;
+printf("%d",count);
+
+2번
+int count;
+for(int i=0;i<n;i++)
+ if(i==0||a[i]!=a[i-1])//이조건만족할때 데이터를 버리지않고 킵한다.
+  a[m++]=a[i];//배열을 하나더 만들지않고 m을 카운트값이자 배열 인덱스로 사용
+for(int j=0;j<m;j++)
+ printf("%d",a[j]);
+
+3번
+int data[max];
+int n=0,k;
+while(1)
+{
+ scanf("%d",&k);
+ if(k==-1)break;
+ int j=n-1;
+ while(j>=0&&data[j]>=k)//j는 남아있는 값의 인덱스,둘다 참이여야참
+  j--;//배열을 지운다는 것은 전체 살아남는 값의 수를 줄이면된다.
+ data[j+1]=k;
+ n=j+2;
+}
+for(int i=0;i<n;i++)
+ printf("%d",data[i]);
+
+
+----------------------------------------------------------------------
+그룹과제
+
+
+
+
+7장 그룹과제 
+
+1번
+가장많이 시행되는횟수:총 1~n-1까지의 합만큼 시행된다.
+
+2번
+int i=0,j=0,k=0;//교집합구하기
+int c[MAX];
+while(i<m&&j<n){
+if(a[i]<b[j])i++;
+else if(a[i]>b[j])j++;
+else{
+c[k++]=a[i];
+i++;j++;
+}
+}
+이코드가하는일 : 
+이미 오름차순으로정렬되었기 때문에 더이상 교집합의 가능성이 없는 원소를 배제하는 것이다.
+최대 횟수 :M+N번이다.(i나j가 m이나n에 도달하면멈추니까)
+오름차순이아니라면 하나하나 중첩 for문으로 계산:M*N회실행
+
+3번
+
+#include<stdio.h>//차집합(A-b)
+int main() {
+	int i = 0, j = 0, N = 5, M = 6, A[6] = { 1,2,3,4,8,9 }, b[5] = { 0,1,2,4,5 },c[100],k=0;
+
+	while (i < M && j < N) {
+		if (A[i] < b[j]) {//A에만있는 원소들
+			c[k++] = A[i];
+			i++; 
+		}
+		else if (A[i] == b[j]) { i++; j++; }
+		else j++;
+	}
+		while (i < M)
+		{
+			c[k++] = A[i]; i++;
+		} 
+	
+	for (int i = 0; i < k; i++)
+		printf("%d ", c[i]);
+}
+
+
+#include<stdio.h>//합집합(A+b)
+int main() {
+	int i = 0, j = 0, N = 5, M = 6, A[6] = { 1,2,3,4,8,9 }, b[5] = { 0,1,2,4,5 },c[100],k=0;
+
+	while (i < M && j < N) {
+		if (A[i] < b[j]) {//A에만있는 원소들
+			c[k++] = A[i];
+			i++; 
+		}
+		else if (A[i] == b[j]) { c[k++] = b[j]; i++; j++; }
+		else {//B에만있는 원소들
+			c[k++] = b[j];
+			j++;
+		}
+	}
+		while (i < M)
+		{
+			c[k++] = A[i]; i++;
+		} 
+	
+	for (int i = 0; i < k; i++)
+		printf("%d ", c[i]);
+}
+
+
+4번
+N개의 사탕봉지를 오름차순으로 배열 A에 정렬하고 A[i+M-1]-A[i]가 최소가 되는 경우를 구하면된다.
+
+
+
+---------------------------------------------------------------------------------
+그룹과제 9장 4번.
+
+int lenOvelap(int s1, int t1, int s2, int t2) {
+	if (s1 > t1 || s2 > t2)
+		return -1;
+	if (t1 <= s2 || t2 <= s1) return 0;
+	int s = (s1 <= s2 ? s2 : s1);
+	int t = (t1 <= t2 ? t1 : t2);
+	return t - s;
+
+}
+
+
+
+double func(double x,double y,double z){//그룹과제 9장 5번
+if(x<=y)
+if(y<=z) return y;
+else if(x<=z) return z;
+else return x;
+if(z<=y) return y;
+if(x<=z) return x;
+return z;
+}
+다음함수가하는일 : 세수중에서 두번쨰 크기의수를 출력한다.
+
+
+
+#include<stdio.h>//그룹과제 9장 6번
+#include<stdlib.h>
+#include<time.h>
+#define max 100
+#pragma warning(disable:4996)
+int play(int secret_number, int max_count_guesses);
+void initialize_number_generator();
+int choose_secret_number(void);
+int main()
+{
+	int max_count_guesses = 200000000, secret_number,n;
+	while (1)
+	{
+		secret_number = choose_secret_number();
+		printf("시행횟수는%d", play(secret_number, max_count_guesses));
+		printf("그만하려면 -1,계속하려면 1");
+		scanf("%d", &n);
+		if (n == -1)
+			break;
+	}
+}
+int play(int secret_number, int max_count_guesses)
+{
+	int guess, count_guesses = 0;
+	while (1) {
+		printf("enter guess:(1~100)");
+		scanf("%d", &guess);
+		count_guesses++;
+		if (guess == secret_number) {
+			if (max_count_guesses > count_guesses) {
+				printf("축하합니다!");
+				max_count_guesses = count_guesses;
+				return max_count_guesses;
+			}
+		}
+		printf("틀렸습니다. 다시입력하세요.");
+	}
+}
+void initialize_number_generator()
+{
+	srand((unsigned)time(NULL));
+}
+int choose_secret_number(void)
+{
+	int secret_number;
+	secret_number =50;
+	return secret_number;
+}
+------------------------------------------------------------------------------------------------
+--------------------------------------------------------------------------------
+//그룹과제 10장 1번
+
+#include <stdio.h>//그룹과제 10장 5번
+#include<math.h>
+#pragma warning(disable:4996)
+int lenth(int x1, int x2, int y1, int y2, int x3, int x4, int y3, int y4);
+int min(int n, int x1, int x2, int y1, int y2, int x3, int x4, int y3, int y4);
+void main()
+{
+	int count[100][100] = { 0 }, x1, x2, x3, x4, y1, y2, y3, y4;
+	scanf("%d%d%d%d%d%d%d%d", &x1, &y1, &x2, &y2, &x3, &y3, &x4, &y4);
+	printf("두 사각형 사이의 거리는 %d이다.",min(lenth(x1, x2, y1, y2, x3, x4, y3, y4)));
+}
+int lenth(int x1, int x2, int y1, int y2, int x3, int x4, int y3, int y4)
+{
+	if (x1 > x2) { int tmp = x1; x1 = x2; x2 = tmp; }
+	if (x3 > x4) { int tmp = x3; x3 = x4; x4 = tmp; }
+	if (y1 > y2) { int tmp = y1; y1 = y2; y2 = tmp; }
+	if (y3 > y4) { int tmp = y3; y3 = y4; y4 = tmp; }
+	if (y2 < y3)
+	{
+		if (x4 < x1)
+			return 1;
+		else if (x2 < x3)
+			return 3;
+		else
+			return 2;
+	}
+	else if (y1 > y4)
+	{
+		if (x4 < x1)
+			return 7;
+		else if (x2 < x3)
+			return 9;
+		else
+			return 8;
+	}
+	if (x4 < x1)
+		return 4;
+	else if (x2 < x3)
+		return 6;
+	return -1;
+}
+int min(int n, int x1, int x2, int y1, int y2, int x3, int x4, int y3, int y4)
+{
+	if (n == -1)
+		return 0;
+	else if(n==1)
+		return 
+}
+
+
+
+
+
+
+-------------------------------------그룹과제 10장 5번(교수님풀이)-----------------------------------------
+dist(p1,p2)//두점간의 거리
+lenthOverlap(s1,t1,s2,t2)//두(x,y)좌표 사이의 거리-두사각형의 교차하는 면적을 구해 0이면 교차안함.
+calcArea(r1,r2)//두사각형의 교차하는 면적을 구해 0이면 교차안함.
+calcDistBtwn_Pt_And_Line(u,v,w)//한점과 한선분간의 거리이다.(총32가지후보가있따)
+calcDistBtwn_Rects(r1,r2)//사각형사이의 거리는 : 한 사각형의 한점과 다른사각형의 한선분간의 거리의 최솟값이다.(총32가지후보가있따)
+수직인가 수평인가 나누고 점이 사이에있나 바깥에있나계산
+{
+if(calcArea(r1,r2)==0)
+	return 0;
+else {
+	double minDist=INFINITE;
+	for each vertex u of r1
+		for each edge (v,w)of r2
+			d=calcDistBtwn_Pt_And_Line(u,v,w);
+			if(d<minDist)
+				minDIst=d;
+		for each vertex u of r2
+			for each edge (v,w) of r1
+				d=calcDistBtwn_Pt_And_Line(u,v,w);
+				if d<minDist
+					minDist=d;
+		return minDIst; }
+	
+
+
+
+-----------------------그룹과제 11장------------------------------------------------
+#include <stdio.h>//그룹과제 11장 1번
+#include<math.h>
+#include<stdlib.h>
+#pragma warning(disable:4996)
+int board[][19] = { {0,0,0,0,0,0,0,0,0,0} };
+void main()
+{
+	int x, y;
+	scanf("%d%d", &x, &y);
+	int turn = 2;
+	int result = doesWin(x, y, turn);
+}
+int doesWIn(int x, int y, int turn) {
+	for (int dir = 0; dir < 4; dir++) {
+		if (checkDir(x, y, turn ,dir))
+			return 1;
+	}return 0;
+}
+bool checkDir(int x, int y, int turn, int dir){//그 방향으로 오목이완성되는가?를 판단하는 함수.
+	return countInDir(x, y, dir, turn) + countInDir(x, y, (dir + 4) % 8, turn) >= 4;//(자기를 기준으로 한방향으로 2(흰색)의 개수 세고 반대방향으로 세서 자기포함해서 4가되면 승리
+}
+int countInDir(int x, int y, int dir, int turn) {//x,y방향으로 dir방향으로 이어진 흑돌의개수나 백돌의 개수를 세준다.
+	int count = 0;
+	for (int d = 1; d < 19; d++) {
+		int stone = getStone(x, y, dir, d);
+		if (stone == -1 || stone != turn) //-1은 무효한값이거나 다른색 돌이면
+			return count;
+		count++;
+	}
+	return count;
+}
+int offset[8][2] = { {-1,0},{-1,1},{0,1},{1,1},{1,0},{1,-1},{0,-1},{-1,-1} };
+int getStone(int x, int y, int dir, int dist) {//x,y에서 dir방향으로 d칸 떨어진 자리를 읽어온다.
+	int newx = x + dist*offset[dir][0];
+	int newy = y + dist*offset[dir][1];
+	if (newx < 0 || newx >= 19 || newy < 0 || newy >= 19)
+		return -1;//-1은 무효한값
+	return board[newx][newy];
+}
+
+
+
+
+
+
+---------------------------------------------------16 족보---------------------------------------------------------
+#include<stdio.h>//16 족보 1번
+#pragma warning(disable:4996) 
+int main() {
+	int n,data[100],count=1,i;
+	scanf("%d", &n);
+	for (i = 0; i < n; i++)
+		scanf("%d", &data[i]);
+	for (i = 1; i < n; i++) 
+		if (data[i-1] >= data[i]) 
+			count++;
+	printf("%d", count);
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+#include<stdio.h>//16 족보 2번
+#pragma warning(disable:4996) 
+int grid[100][100];
+int offsetX[8] = { 0,1,1,1,0,-1,-1,-1 };
+int offsetY[8] = { -1,-1,0,1,1,1,0,-1 };
+int main() {
+	int n;
+	FILE*fp = fopen("input2.txt", "r");
+	fscanf(fp, "%d", &n);
+	for (int i = 0; i < n; i++)
+		for (int j = 0; j < n; j++)
+			fscanf(fp, "%d", &grid[i][j]);
+	int x, y, count = 0, min_count=5000000;
+	fscanf(fp, "%d%d", &x, &y);
+	fclose(fp);
+	int newX, newY;
+	for (int dir = 0; dir < 8; dir++) {
+		newX = x; newY = y; count = 0;
+		while (0<=grid[newX][newY] && grid[newX][newY]<n) {
+			if (grid[newX][newY] == 1)
+				count++;
+			newX = newX + offsetX[dir];
+			newY = newY + offsetY[dir];
+
+		}
+		if(min_count>count)
+			min_count = count;
+	}
+	printf("%d", min_count);
+}
+
+
+
+
+
+
+
+
+
+
+
+
+#include <stdio.h>//16 족보 3번
+#include <string.h>
+#pragma warning(disable:4996)
+int is_palindrome(char sub[]);
+int main() {
+	char str[1000], long_sub[1000];
+	int N, max_len = 0;
+	FILE *fp = fopen("input3.txt", "r");
+	fscanf(fp, "%d", &N);
+	fscanf(fp, " %s", str);
+	fclose(fp);
+	for (int i = 0; i < N; i++) {
+		char sub[1000] = "";
+		sub[0] = str[i];
+		for (int j = i + 1; j < N; j++) {
+			sub[j - i] = str[j];
+			int result = is_palindrome(sub);
+			if (result != 0 && result > max_len) {
+				max_len = result;
+				strcpy(long_sub, sub);
+			}
+		}
+	}
+	printf("%s\n", long_sub);
+	return 0;
+}
+int is_palindrome(char str[])
+{
+	int len, i;
+	len = strlen(str);
+	for (i = 0; i < len / 2; i++) {
+		if (str[i] != str[len - i - 1])
+			return 0;
+	}
+	return len;
+}
+
+
+#include <stdio.h>//16족보 3번
+#define MAX 100
+#pragma warning(disable:4996)
+int main()
+{
+   char s[MAX];
+   int n;
+   FILE * fp = fopen("input3.txt", "r");
+   fscanf(fp, "%d", &n);
+   for (int i = 0; i<n; i++)
+      fscanf(fp, " %c", &s[i]);
+   fclose(fp);
+   int max = 0;
+   for (int i = 0; i < n; i++)
+   {
+      for (int j = n - 1; j > i; j--)
+      {
+         if (s[i] == s[j])
+         {
+            int  k;
+            for (k = 1; k <= (i + j) / 4 ; k++)
+            {
+               if (s[i+k] == s[j-k])
+               {
+                  if (i + k == j - k) {
+                     if ((i + j) / 2 > max) {
+                        max = (i + j) / 2;
+                        for (int q = i; q <= j; q++)
+                           printf("%c", s[q]);
+                     }
+                  }
+               }
+               else
+                  break;
+            }
+
+         }
+      }
+   }
+
+}
+
+
+#include <stdio.h>//16 족보 4번
+#include <string.h>
+#define MAX 100
+#pragma warning(disable:4996)
+int main()
+{
+	char str[MAX][MAX], tmp[MAX];
+	int n;
+
+	FILE *in_fp = fopen("input4.txt", "r");
+	FILE *out_fp = fopen("sorted.txt", "w");
+
+	fscanf(in_fp, "%d", &n);
+
+	for (int i = 0; i < n; i++)
+		fscanf(in_fp, "%s", &str[i]);
+	for (int i = n - 1; i >= 0; i--) {
+		int k = 0;
+		for (int j = 0; j < i; j++) {
+			if (strcmp(str[j], str[j + 1]) > 0) {
+				strcpy(tmp, str[j]);
+				strcpy(str[j], str[j + 1]);
+				strcpy(str[j + 1], tmp);
+			}
+		}
+	}
+	for (int i = 0; i < n; i++)
+		fprintf(out_fp, "%s\n", str[i]);
+	fclose(in_fp);
+	fclose(out_fp);
+}
+
+
+
+
+
+
+
+
+
+
+
+
+---------------------------------15족보---------------------------------------------
+#include <stdio.h>//15 족보 1번
+#include <string.h>
+#define MAX 100
+int double_number(int a, int b);
+#pragma warning(disable:4996)
+int main()
+{
+	int n, a[MAX],count=0;
+	scanf("%d", &n);
+	for (int i = 0; i < n; i++)
+		scanf("%d", &a[i]);
+	for(int i=0;i<n;i++)
+		for (int j = i + 1; j < n; j++) {
+			if (double_number(a[j], a[i]) == 1)
+				count++;
+		}
+	printf("%d", count);
+}
+int double_number(int a, int b) {
+	int newb = b;
+	while (newb <= a) {
+		if (newb == a)
+			return 1;
+		newb *= newb;
+	}
+	return 0;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+#include <stdio.h>//15 족보 2번
+#include <string.h>
+#define MAX 100
+int length_five(int data[], int n);
+#pragma warning(disable:4996)
+int main()
+{
+	int n,a[MAX];
+	scanf("%d", &n);
+	for (int i = 0; i < n; i++)
+		scanf("%d", &a[i]);
+	if (length_five(a, n) == 1) {
+		printf("YES");
+		return 0;
+	}
+	printf("NO"); return 0;
+}
+int length_five(int data[], int n) {
+	int count = 0;
+	for (int i = 0; i < n; i++) {
+		if (data[i] == 0) {
+			count = 0;
+			continue;
+		}
+		count++;
+		if (count == 5)
+			return 1;
+	}
+	return 0;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+#include <stdio.h>//15 족보 3번
+#include <string.h>
+#define MAX 100
+#pragma warning(disable:4996)
+int main()
+{
+	char str1[MAX], str2[MAX];
+	scanf("%s%s", str1, str2);
+	int i = 0;
+	int len1 = strlen(str1),len2=strlen(str2),count=0;
+	for (int i = 0; i < len1; i++){
+		for (int j = 0; j < len2; j++) {
+			if (str1[i] == str2[j]) {
+				count++;
+			
+			}
+		}
+	}
+	if (count == len1) {
+		printf("YES");
+		return 0;
+	}
+	printf("NO");
+	return 0;
+}
+
+
+
+
+
+
+
+
+
+
+#include<stdio.h>//15 족보 4번
+#pragma warning(disable:4996) 
+int grid[100][100];
+int offsetX[8] = { 0,1,1,1,0,-1,-1,-1 };
+int offsetY[8] = { -1,-1,0,1,1,1,0,-1 };
+int n,MAX;
+int search(int grid[][100], int x, int y, int n);
+int main() {
+	scanf("%d", &n);
+	MAX = n;//끊임없는 반복을 멈추기위함..
+	for (int i = 0; i < n; i++)
+		for (int j = 0; j < n; j++)
+			scanf("%d", &grid[i][j]);
+	int x, y;
+	scanf("%d%d", &x, &y);
+	if (grid[x][y] == 1) {
+		printf("NO");
+		return 0;
+	}
+	search(grid, x, y, n);
+	return 0;
+}
+int count = 0;
+int search(int grid[][100],int x,int y,int n) {
+	if (count > MAX)
+	{
+		printf("NO");
+		return 0;
+	}
+	printf("%d %d ",x, y);
+	if (0 >= x||0>=y|| x>=n-1||y >= n-1) {
+		printf("YES");
+		return 0;
+	}
+	for (int dir = 0; dir < 8; dir++) { 
+		x = x + offsetX[dir];
+		y = y + offsetY[dir];
+			if (grid[x][y] == 0) {
+				count++;
+				return search(grid,x,y,n);
+			}
+			x = x - offsetX[dir];
+			y = y - offsetY[dir];
+		}
+	printf("N0"); return 0;
+}
+
+
+
+
+
+
+
+
+#include<stdio.h>//15 족보 5번
+void max_min(int n, int *data, int *max, int *min);
+#pragma warning(disable:4996) 
+int main() {
+	int max, min;
+	int n, data[100];
+	scanf("%d", &n);
+	for (int i = 0; i < n; i++)
+		scanf("%d", &data[i]);
+	max_min(n, data, &max, &min);
+	printf("최댓값 : %d 최솟값 : %d\n", max, min);
+	return 0;
+}
+void max_min(int n, int *data, int *max, int *min) {
+	*max=data[0], *min = data[0];
+	for (int i = 1; i < n; i++) {
+		if (data[i] < *min)
+			*min = data[i];
+		if (data[i] > *max)
+			*max = data[i];
+	}
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+#include <stdio.h>//15족보 6번
+#include <string.h>
+#define NUM 100
+#pragma warning(disable:4996)
+int main() {
+
+   char save[5000][50] = { 0 };
+   char str[5000][50] = { 0 };
+   int fre[5000] = { 0 };
+   int i = 0;
+   FILE*fp = fopen("input.txt", "r");
+   while (fscanf(fp, "%s", save[i]) != EOF) {
+      i++;
+   }
+   fclose(fp);
+   int num = i;
+   int realnum = 0;
+   for (int i = 0;i<num;i++) {
+      int a = 0;
+      while (a < i) {
+         if (strcmp(save[i], save[a]) == 0)
+            break;
+         a++;
+      }
+      fre[a]++;
+      strcpy(str[a], save[i]);
+      if (realnum < a)
+         realnum = a;
+   }
+
+   int ms = 0;
+   int maxend = 5000;
+   for (int i = 0;i < 5;i++) {
+      int max = 0;
+      int j;
+      for (j = 0;j <= realnum;j++) {
+         if (max < fre[j] && fre[j]<maxend) {
+            max = fre[j];
+            ms = j;
+         }
+      }
+      printf("%s\n", str[ms]);
+      maxend = fre[ms];
+   }
+   return 0;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+용훈--------------------------------------------
+
+
+
+
+
+
+
+------------------1좡----------------------
+
+
+
+1. 입력으로 두 개의 정수 a와 b를 받은 후 ab을 계산하여 출력하는 프로그램을 작성하라.
+ 단 b는 음이 아닌 정수이다 (예: 70 = 1, 25 = 32, 38 = 6561, 115 = 161051) 
+1. 
+
+#include <stdio.h>
+ int main() {
+    int a, b, result = 1;
+    scanf("%d %d", &a, &b);
+    for (int i=0; i<b; i++) {        result *= a;
+    }    printf("%d\n", result); } 
+
+
+2. 섭씨 0도에서 100도까지를 4도 단위로 화씨 온도로 변환하여 출력하는 프로그램을 작성하라.
+ 섭씨 온도를 화씨로 변환하는 규칙은 다음과 같다 (F는 화씨, C는 섭씨 온도).  F = C × 1.8 + 32 
+
+2. 
+#include <stdio.h>
+ int main() {
+    int sum = 0;
+    int tmp;
+    for (int i=0; i<=100; i+=4)
+ {        printf("%d %lf\n", i, i*1.8 + 32.0);    } } 
+
+
+3. 입력으로 하나의 양의 정수 n을 받은 후 다음의 합을 구하여 출력하는 프로그램을 작성하라.
+ (단, 1개의 for 문만을 사용하여 해결하라.) 
+
+3. #include <stdio.h>
+ int main() {
+    int n;
+    scanf("%d", &n);
+    double result = 0;
+    for (int i=1; i<=n; i++) {
+        result += 1.0/i;    }
+    printf("%lf\n", result);
+    return 0; } 
+
+
+
+4. 입력으로 하나의 정수 n?2을 받아서 Fibonacci 수 fn을 계산하여 출력하는 프로그램을 작성 하라.
+ Fibonacci 수열은 다음과 같이 정의된다. (배열을 사용해서는 안된다.)
+
+4. #include <stdio.h>
+ int main() {
+    int f, pre=1, prepre=1;
+    int n;    scanf("%d", &n);
+    for (int i=2; i<=n; i++) {
+        f = pre + prepre;
+        prepre = pre;
+        pre = f;
+    }    printf("%d\n", f);
+ }
+
+
+5. 입력으로 하나의 양의 정수 n을 받은 후 다음의 합을 구하여 출력하는 프로그램을 작성하라.
+ (단, 1개의 for 문만을 사용하여 해결하고, stdio.h이외의 라이브러리를 사용하지 말것) 
+
+
+5. #include <stdio.h>
+ int main() {
+    int n;
+    scanf("%d", &n);
+    double result = 1;
+    int denom = 1;
+    for (int i=1; i<=n; i++) {
+        denom *= 2;
+        result += 1.0/denom;
+    }    
+	printf("%lf\n", result);
+    return 0;
+ } 
+
+
+6. 입력으로 하나의 양의 정수 n을 받은 후 다음의 합을 구하여 출력하는 프로그램을 작성하라.
+ (단, 1개의 for 문만을 사용하여 해결하라.) 
+
+6. #include <stdio.h>
+ int main() {
+    int n;
+    scanf("%d", &n);
+    double result = 0;
+    int denom = 1;
+    for (int i=1; i<=n; i++) {
+        result += 1.0/denom;
+        denom *= (i+1);
+    }
+    printf("%lf\n", result);
+    return 0;
+ } 
+
+
+7. 파이(??)의 값은 다음과 같이 근사적으로 계산할 수 있다.
+  4/1 - 4/3 + 4/5 - 4/7 + 4/9 - 4/11 + … 항의 개수가 많을 수로 실제 ??의 값에 가까워진다.
+ 입력으로 양의 정수 n을 받아서 이 무한 시 리즈의 n번째 항까지 계산하여 출력하는 프로그램을 작성하라.
+ 실제 ??의 값과 얼마나 가까운 지 비교해보라. 하나의 for문 만을 사용해야 하고 if문을 사용해서는 안된다. 
+입력 예 출력 10 3.041840 100 3.131593 10000 3.141493 100000 3.141583 1000000 3.141592
+  of  2 3
+
+7. #include <stdio.h>
+ int main() {
+    int n;
+    scanf("%d", &n);
+    double result = 0;
+    int sign = 1;
+    for (int i=1; i<=n; i++) {
+        result += (sign*4.0/(2.0*(i-1)+1));
+        sign = -sign;
+    }    
+printf("%lf\n", result);
+    return 0;
+ }
+
+
+
+8. 키보드로 부터 10개의 정수들을 연속해서 입력 받는다.
+ 하나의 정수를 입력 받을 때 마다 현 재까지 입력된 정수들의 평균을 계산하여 출력하는 프로그램을 작성하라.
+(단, 1개의 for 문만 을 사용하여 해결하라. 또한 배열을 사용해서는 안된다.) 
+ 
+8. #include <stdio.h> int main() {
+    int sum = 0;
+    int tmp;
+    for (int i=0; i<10; i++) {
+        scanf("%d", &tmp);
+        sum += tmp;
+        printf("%lf ", (double)sum/(double)(i+1));
+    } 
+} 
+
+
+9. 입력으로 하나의 양의 정수 n을 받은 후 화면에 “hello”를 정확히    번 출력하는 프로 그램을 작성하라.
+ 예를 들어 n=5이면 2번, n=8이면 3번, n=24면 4번 출력한다. (단 stdio.h 이외의 어떤 라이브러리도 사용해서는 안된다.)  
+
+9. #include <stdio.h>
+ int main()
+ {    int n;
+    scanf("%d", &n);
+    for (int i = 2; i <= n; i*=2) {
+        printf("hello\n");
+    }
+    return 0;
+ } 
+
+
+
+10. x의 값을 입력으로 받아서 아래와 같이 Taylor series를 사용하여 sin x와 cos x의 값을 계산 하는 프로그램을 작성하라.
+ 하나의 for문 만을 사용해야 하고 if문을 사용해서는 안된다. 100 번째 항까지 계산하라.
+ (각도 x의 단위는 radian이다.) 
+입력 예 출력 1 3 -1 7 8 12 -20 8 9 11 1.0 2.0 1.0 2.5 3.6 5.0 1.428571 2.25 3.0 3.8  -12 0 9 8 21 7 19 -1 10 1 -12.0 -6.0 -1.0 1.25 5.2 5.5 7.428571 6.375 6.777778 6.2 1 2 3 4 5 6 7 8 9 10 1.0 1.5 2.0 2.5 3.0 3.5 4.0 4.5 5.0 5.5 
+  of  3 3
+blog2 nc
+sinx = xx3/3! + x5/5!x7/7! + ... cosx =1x2/2! + x4/4!x6/6! + ...
+
+10. #include <stdio.h>
+ int main() {
+    double x;
+    scanf("%lf", &x);
+    double result1 = 0.0, result2 = 0.0;
+    double val1 = x, val2 = 1.0;
+    int sign = 1;
+    for (int i=1; i<=100; i++) {
+        result1 += sign*val1;
+        result2 += sign*val2;
+        val1 *= x*x/(2.0*i)/(2.0*i+1);
+        val2 *= x*x/(2.0*i-1)/(2.0*i);
+        sign = -sign;
+    }    
+	printf("%lf %lf\n", result1, result2);
+    return 0;
+ }
+
+
+
+-----------------------------2좡-----------------------------------------
+
+1. 삼각형은 어떤 두 변의 길이의 합도 다른 한 변의 길이보다 커야 한다.
+ 이것을 triangular inequality라고 부른다. 입력으로 세 개의 정수를 받아서 삼각형의 세 변의 길이가
+ 될 수 있는 지 검사하여 Yes 혹은 No를 출력하는 프로그램을 작성하라. 
+
+1. #include <stdio.h>
+ int main() {
+    int a, b, c;
+    scanf("%d %d %d", &a, &b, &c);
+    if ( a < b +c && b < a + c && c < a + b )
+        printf("Yes\n");
+    else
+        printf("No\n");
+    return 0;
+ } 
+
+
+2. 입력으로 세 정수 a, b, c를 받은 후 오름차순으로 정렬하여 출력하는 프로그램을 작성하라.
+ 프 로그램은 다음의 형태를 유지해야 한다.
+ (즉, 단지 오름차순으로 출력만 하는 것이 아니라 실제 로 세 변수의 값이 크기 순으로 정렬되어야 한다.) 
+
+#include <stdio.h>
+ int main(void)  {
+    int a, b, c;
+    scanf(“%d %d %d”, &a, &b, &c); 
+      printf(“%d %d %d\n”, a, b, c);
+    return 0;
+ }
+
+2. int main() {
+    int a, b, c;
+    int tmp;
+    scanf("%d %d %d", &a, &b, &c);
+    if ( a > b ) { tmp = a; a = b; b = tmp;
+ 	}    if ( b > c ) { tmp = b; b = c; c = tmp;
+ 		}    if ( a > b ) { tmp = a; a = b; b = tmp;
+ }    
+printf("%d %d %d\n", a, b, c);
+    return 0;
+ } 
+
+
+
+3. 10개의 양의 정수를 키보드로 부터 입력받는다.
+ 입력된 정수들 중에서 짝수 들의 합과 홀수 들의 합의 차이의 절대값을 계산하여 출력하는 프로그램을 작성하라.
+ 배열을 사용해서는 안 된다. 
+  
+3. int main() {
+    int x, even_sum = 0, odd_sum = 0;
+    for (int i=0; i<10; i++) {
+        scanf("%d", &x);
+        if (x % 2 == 0 )
+            even_sum += x;
+        else
+            odd_sum += x;
+    }
+    int result;
+    if (even_sum > odd_sum) result = even_sum - odd_sum;
+    else result = odd_sum - even_sum;
+    printf("%d\n", result);
+    return 0;
+ } 
+
+
+4. 10개의 정수를 키보드로 부터 입력받는다.
+ 새로운 정수가 입력될 때 마다 현재까지 입력된 정 수들 중에서 최대값과 최소값의 차이를 계산하여 출력하는 프로그램을 작성하라.
+ 배열을 사 용해서는 안된다
+
+4. int main() {
+    int x, maxSoFar, minSoFar;
+    scanf("%d", &x);
+    maxSoFar = x;
+    minSoFar = x;
+    printf("%d\n", maxSoFar-minSoFar);
+    for (int i=1; i<10; i++) {
+        scanf("%d", &x);
+        if (x > maxSoFar) maxSoFar = x;
+        if (x < minSoFar) minSoFar = x;
+        printf("%d\n", maxSoFar-minSoFar);
+    }
+    return 0;
+ }
+
+
+5. 두 개의 날짜를 입력받은 후 그 중 첫 번째 날짜가 더 이르면 -1, 두 번째 날짜가 더 이르면 1, 두 날짜가 동일하면 0을 출력하는 프로그램을 작성하라.
+ 각각의 날짜는 년, 월, 일을 나타내는 3개의 정수로 주어진다. 날짜의 유효성을 체크할 필요는 없다.  
+
+5. int main() {
+    int year1, month1, day1;
+    int year2, month2, day2;
+    scanf("%d %d %d", &year1, &month1, &day1);
+    scanf("%d %d %d", &year2, &month2, &day2);
+    if (year1 < year2 || year1 == year2 && month1 < month2 || year1 == year2 && month1 == month2 && day1 < day2)
+        printf("-1");
+    else if (year1 == year2 && month1 == month2 && day1 == day2)
+        printf("0");
+    else 
+       printf("1");
+    return 0;
+ } 
+
+
+6. 두 개의 폐구간 [a, b]와 [c, d]를 입력받는다.
+ a b이고 c d이다. 두 구간이 겹치는지 판단하 여 yes 혹은 no로 출력하는 프로그램을 작성하라.
+ 두 구간이 겹친다는 것은 교집합이 공집합 이 아니라는 의미이다.  
+
+6. int main() {
+    int s1, t1, s2, t2;
+    scanf("%d %d %d %d", &s1, &t1, &s2, &t2);
+    if ( s1 > t1 || s2 > t2 ) {
+        printf("Input error\n");
+        return 0;}
+    if ( t1 < s2 || t2 < s1 )
+        printf("No\n");
+    else        printf("Yes\n");
+    return 0;
+ } 
+
+7. 평면 상의 4점의 좌표가 주어질 때 이 점들을 순서대로 연결하고 마지막 점을 다시 첫 번째 점과 연결하면
+ 좌표 축에 평행한 직사각형이 되는지 판단하는 프로그램을 작성하라.  
+ 
+7. int main() {
+    int x1, y1, x2, y2, x3, y3, x4, y4;
+    scanf("%d %d %d %d %d %d %d %d", &x1, &y1, &x2, &y2, &x3, &y3, &x4, &y4);
+    if ( x1==x2 && y2==y3 && x3==x4 && y4==y1 && y1 != y2 && x2 != x3 || y1==y2 && x2==x3 && y3==y4 && x4==x1 && x1 != x2 && y2 != y3 )
+        printf("Yes\n");
+    else
+        printf("No\n");
+    return 0;
+ }
+ 
+
+
+8. 평면 상의 두 수직 혹은 수평 선분이 서로 교차하는지 검사하는 프로그램을 작성하라.
+ 입력으 로 8개의 정수 a, b, c, d, e, f, g, h가 주어진다. 첫 번째 선분은 점 (a, b)와 (c, d)를 연결하는 선분이고,
+ 두 번째 선분은 (e, f)와 (g, h)를 연결하는 선분이다. 두 선분 중 하나라도 수직 선 분도 아니고 수평 선분도 아닌 경우 Input error라고 출력하라.
+ 어떤 하나의 점이라도 두 선분 에 공통으로 포함되면 두 선분은 교차하는 것이다.  
+
+8. int main() {
+    int x1, y1, x2, y2, x3, y3, x4, y4;
+    scanf("%d %d %d %d %d %d %d %d", &x1, &y1, &x2, &y2, &x3, &y3, &x4, &y4);
+
+/* 두 선분 중 하나라도 수직이나 수평이 아니라면 input error */
+    if ( x1 != x2 && y1 != y2 || x3 != x4 && y3 != y4 ) {
+        printf("Input error\n");
+        return 0;
+    }
+ /* 두 선분이 각각 수직인지 수평인지 검사. 0은 수평, 1은 수직을 표시 */
+    int dir1, dir2;
+   // 0 hori, 1 vert    
+if (x1 == x2) dir1 = 1;
+    else dir1 = 0;
+    if (x3 == x4) dir2 = 1;
+    else dir2 = 0;
+/* 수평선분인 경우 x좌표가 작은 쪽을 (x1,y1)으로, 수직선분인 경우 y좌표가 작은 쪽을 (x1,y1)으로 */
+    if (dir1 == 0 && x1 > x2 || dir1 == 1 && y1 > y2 )
+ {        int tmp = x1; x1 = x2; x2 = tmp;
+        tmp = y1; y1 = y2; y2 = tmp;
+    }
+ /* 수평선분인 경우 x좌표가 작은 쪽을 (x3,y3)로, 수직선분인 경우 y좌표가 작은 쪽을 (x3,y3)로 */
+    if (dir2 == 0 && x3 > x4 || dir2 == 1 && y3 > y4 ) {
+        int tmp = x3; x3 = x4; x4 = tmp;
+        tmp = y3; y3 = y4; y4 = tmp;
+    }
+/* 4가지 경우로 나누어서 따로 처리한다 */ 
+
+   if ( dir1 == 0 && dir2 == 0 ) {
+   // 둘 다 수평선분인 경우
+        if ( y1 != y3 || x3 > x2 || x1 > x4 )
+            printf("No\n");
+        else
+            printf("Yes\n");
+    }
+    else if ( dir1 == 1 && dir2 == 1 ) {
+  // 둘 다 수직 선분인 경우
+        if ( x1 != x3 || y3 > y2 || y1 > y4 )
+            printf("No\n");
+        else
+            printf("Yes\n");
+    }
+    else if ( dir1 == 0 && dir2 == 1) {
+  // 수평-수직인 경우
+        if ( y1 >= y3 && y1 <= y4 && x3 >= x1 && x3 <= x2 )
+            printf("Yes\n");
+        else {
+            printf("No\n");
+        }
+    }    else {    
+// 수직-수평인 경우        
+if ( y3 >= y1 && y3 <= y2 && x1 >= x3 && x1 <= x4 )
+            printf("Yes\n");
+        else
+            printf("No\n");
+    }
+    return 0;
+ }
+ 
+9. 어떤 달의 1일의 요일과 그 달의 일수를 입력으로 받아서 그 달의 달력을 출력하는 프로그램 을 작성하라.
+ 예를 들어 다음과 같이 실행된다.
+Enter number of days in month: 31 Enter starting day of the week (1=Sun, 7=Sat): 
+3      
+ 1   2   3   4   5  6   7
+ 8   9  10  11  12 13  14  
+ 15  16  17  18  19 20  21 
+ 22  23  24  25  26 27  28  
+ 29  30  31
+ 
+9. int main() {
+    int n, dow;
+    printf("Enter number of days in month: ");
+    scanf("%d", &n);
+    printf("Enter starting day of the week (1=Sun, 7=Sat): ");
+    scanf("%d", &dow);
+    for (int i = 2-dow, col = 0; i<=n; i++) {
+        if (i<=0) printf("    ");
+        else printf(“%2d  ", i);
+        col++;
+        if (col%7 == 0)
+   printf("\n");
+    }    
+return 0;
+ }
+
+
+
+
+
+
+
+
+-----------------------3좡------------------------------------
+
+1. 키보드로 부터 양의 정수들을 연속해서 입력받는다. 
+홀수번째 수는 더하고 짝수번째 수는 뺀 다. 합이 0이되는 순간 입력된 정수의 개수를 출력하고 종료한다.
+ 예를 들어 입력이 1 2 2 3 2 의 순서로 들어오면 1-2+2-3+2=0이 되어 5를 출력하고 종료한다. 
+
+1. #include <stdio.h>
+ int main() {
+    int count = 0, k, sum = 0;
+    while(1) {
+        scanf("%d", &k);
+        count++;
+        if (count % 2 == 0) sum += k;
+        else sum -= k;
+        if (sum == 0)
+            break;
+    }
+    printf("%d", count);
+    return 0;
+ } 
+
+int main() {
+    int count = 0, k, sum = 0;
+    scanf("%d", &k);
+    sum += k;
+    count++;
+    while(sum != 0) {
+        scanf("%d", &k);
+        count++;
+        if (count % 2 == 1) sum += k;
+        else sum -= k;
+    }    
+printf("%d", count);
+    return 0;
+ }
+ int main() {
+    int count = 0, k, sum = 0;
+    do {
+        scanf("%d", &k);
+        count++;
+        if (count % 2 == 0) sum += k;
+        else sum -= k;
+    } 
+while(sum != 0);
+    printf("%d", count);
+    return 0;
+ } 
+
+2. 입력으로 하나의 양의 정수 N을 받은 후 이진수로 변환하여 출력하는 프로그램을 작성하라.
+ 프로그램의 골격은 다음과 같다. 
+#include <stdio.h> int main(void) {     int N;     scanf(“%d”, &N); 
+   /* 여기에서 N보다 작거나 같으면서 가장 큰 2의 거듭제곱수 v를 구한다. */ 
+   while (v > 0) {        /* N ≥ v이면 N = N-v가되고  */       /* 1을 출력한다. 그렇지 않으면 */       /* 0을 출력한다. 두 경우 모두 */       /* v는 1/2한다.          */    } } 
+
+
+
+3. 입력으로 두 양의 정수를 받은 후 두 정수의 최대공약수(GCD)를 구해서 출력하는 프로그램 을 작성하라
+. GCD를 구하기 위해서 Euclid 알고리즘을 사용하라.
+ Euclid 알고리즘은 다음의 성질을 이용한다: 두 정수 x, y중에 크거나 같은 쪽을 x라고 하자.
+ 만약 x가 y로 나누어 떨어 지면 GCD는 y이다. 그렇지 않다면 x와 y의 GCD는 x%y와 y의 GCD와 같다. 
+
+3. int main(void) {
+    int p, q;
+    scanf("%d %d", &p, &q);
+    if ( p < q )
+ { int tmp = p; p = q; q = tmp;
+ }
+    while ( p % q != 0 ) {
+        p = p % q;
+        int tmp = p;
+        p = q;
+        q = tmp;
+    }
+    printf("The GCD is %d", q);
+    return 0;
+ } 
+
+int main(void) {
+    int p, q;
+    scanf("%d %d", &p, &q);
+    while( q != 0 ) {
+        int tmp = p;
+        p = q;
+        q = tmp%q;
+    }
+    printf("The GCD is %d", p);
+    return 0;
+ }
+
+
+
+ 
+4. 사용자로 부터 하나의 양의 정수 n을 입력 받은 후 자리를 뒤집어서 출력하는 프로그램을 작 성하라
+. 예를 들어 n=12345이면 54321을 출력하면 된다. 
+
+4. int main(void) {
+    int n;
+    scanf("%d", &n);
+    while ( n > 0 ) {
+        printf("%d", n%10);
+        n /= 10;
+    }
+    return 0;
+ }
+
+
+5. Newton’s method를 이용하여 제곱근을 구하는 프로그램을 작성하라. 가령 x의 제곱근을 구 할 때 Newton’s method는 일단 하나의 초기값 y에서 시작하는데 보통 y=1을 택한다.
+ 그런 다음 y와 x/y의 평균을 계산하여 이것을 y의 새로운 값으로 선택한다. 이 과정을 y와 새로운 y값의 차이가 오차범위 ?이내가 될 때까지 반복한다
+. 은 0.00001 곱하기 그 시점의 새로운 y 의 값으로 하라. 예를 들어 3의 제곱근을 구하는 과정은 다음과 같다.
+
+5. int main(void) {
+    double x, y = 1.0, epsilon;
+    scanf("%lf", &x);
+    while (1) {
+        double newy = ( y + x/y )/2.0;
+        epsilon = 0.00001 * newy;
+        double diff = y - newy;
+        if ( diff < 0 ) diff = -diff;
+        y = newy;
+        if (diff < epsilon)
+            break;
+    }   
+ printf("%lf\n", y);
+    return 0; }
+
+ int main(void) {
+    double x, y = 1.0, epsilon, diff;
+    scanf("%lf", &x);
+    do {
+        double newy = ( y + x/y )/2.0;
+        diff = y - newy;
+        if ( diff < 0 ) diff = -diff;
+        y = newy;
+    } while(diff > 0.00001 * y);
+    printf("%lf\n", y);
+    return 0;
+ } 
+
+
+
+6. 키보드로 부터 2개 이상의 양의 정수들을 연속해서 입력받는다. 단, 동일한 정수가 연속해서 입력되지는 않으며, -1은 입력의 끝을 의미한다
+ (즉 -1 자체는 입력된 정수로 간주하지 않는 다.) 입력된 정수들 중에서 local maxima의 개수를 카운트하여 출력하라. 여기서 local maxima란 
+바로 직전에 입력된 정수보다 크고 바로 다음에 입력된 정수보다도 큰 정수를 의 미한다. 단, 첫 번째 정수는 2번째 정수보다 크면 local maxima이고,
+ 마지막 정수는 바로 이 전의 정수보다 크면 local maxima이다. 
+
+6. int main(void) {
+    int i=0, k, pre = 0, prepre = 0, count = 0;
+    while( 1 ) {
+        scanf("%d", &k);
+        if (k==-1) {
+            if (pre > prepre) count++;
+            break;
+        }
+        if (i == 1 && pre > k) count++;
+        else if (i > 1 && pre > prepre && pre > k) count++;
+        prepre = pre;
+        pre = k;
+        i++;
+    }
+    printf("%d\n", count);
+    return 0;
+ } 
+
+7. 아래의 표는 우리 나라의 소득 구간별 근로소득세율이다. 가령 소득이 1억원이면 소득세는 다음과 같이 계산된다. 
+ 12,000,000 * 6% = 720,000원  34,000,000 * 15% = 5,100,000원          42,000,000 * 24% = 10,080,000원  12,000,000 * 35% = 4,200,000원                              총합: 20,100,000원?
+ of 2 3
+X Y X/Y Y와 X/Y의 평균 ? 3 1 3 2 0.00002 3 2 1.5 1.75 0.0000175 3 1.75 1.71429 1.73214 0.0000173214 3 1.73214 1.73196 1.73205 0.0000173205 3 1.73205 1.73205 1.73205 0.0000173205
+입력 예 출력 24 36 12 1234 5678 2 248 384 8 16 816 16
+입력 예 출력 1 2 1 3 5 9 8 -1 2 1 2 -1 1 9 7 5 7 8 1 3 9 -1 3 1 2 5 4 5 2 7 8 1 2 3 1 2 -1 5
+소득 금액을 입력으로 받아서 소득세를 계산하여 출력하는 프로그램을 작성하라. 
+
+7. int main() {
+    int income, value;
+    double tax = 0;
+    scanf("%d", &income);
+    if ( income > 12000000 ) {
+        tax += 12000000*0.06;
+        income -= 12000000;
+    }
+    else if (income > 0) {
+        tax += income*0.06;
+        income = 0;
+    }
+    if ( income > 34000000 ) {
+        tax += 34000000*0.15;
+        income -= 34000000;
+    }
+    else if (income > 0) {
+        tax += income*0.15;
+        income = 0;
+    }
+    if ( income > 42000000 ) {
+        tax += 42000000*0.24;
+        income -= 42000000;
+    }
+    else if (income > 0) {
+        tax += income*0.24;
+        income = 0;
+    }
+    if ( income > 62000000 ) {
+        tax += 62000000*0.35;
+        income -= 62000000;
+    }
+    else if (income > 0) {
+        tax += income*0.35;
+        income = 0;
+    }
+    if ( income > 350000000 ) {
+        tax += 350000000*0.38;
+        income -= 350000000;
+    }
+    else if (income > 0) {
+        tax += income*0.38;
+        income = 0;
+    }
+    tax += income*0.4;
+    printf("%d\n", (int)tax); }
+
+ int main() {
+    int income;
+    double tax = 0;
+    double rate[] = { 0.06, 0.15, 0.24, 0.35, 0.38, 0.4 };
+    int amount[] = { 12000000, 34000000, 42000000, 62000000, 350000000 };
+    scanf("%d", &income);
+    for (int i=0; i<6 && income > 0; i++) {
+        int val = (i<5 && income > amount[i] ? amount[i] : income);
+        tax += val*rate[i];
+        income -= amount[i];
+    }
+    printf("%lf\n", (int)tax);
+    return 0;
+ } 
+
+
+
+8. 어떤 수열에 대해서 어떤 수도 자신의 이전 값보다 크거나 같을 때 비감소(non-decreasing) 수열이라고 부른다. 반대로 어떤 수도 자신의 이전 값보다 작거나 같을 때 비증가(nonincreasing) 수열이라고 부른다. 단, 길이가 1인 수열은 비감소 수열이면서 동시에 비증가 수 열이다. 하나의 비감소 수열 뒤에 다시 하나의 비증가 수열이 연결된 형태의 수열을 볼록 (convex) 수열이라고 부른다. 예를 들어 1 1 2 3 3 4 4 3 1 1은 볼록 수열이다. 또한 1 2 3 4 5 역시 볼록 수열이다. 반대로 하나의 비증가 수열 뒤에 하나의 비감소 수열이 연결된 형태의 수열을 오목(concave) 수열이라고 부른다. 하나의 수열을 받은 후 이것이 볼록 수열인지, 오 목 수열인지, 둘 다인지, 혹은 둘 다 아닌지 판단하는 프로그램을 작성하라. 입력에서 -1은 수 열의 끝을 의미한다 (즉 -1자체는 수열의 일부가 아니다.) 
+ 
+8. int main() {
+    int status = 0;
+     // 0 unknown, 1 ascending, -1 descending    bool bended = false;
+    int k;
+    scanf("%d", &k);
+    int prev = k;
+    while(k != -1) {
+        scanf("%d", &k);
+        if (k == -1) break;
+        if (status == 0) {
+            if (k > prev) status = 1;
+            else if (k < prev) status = -1;
+        }
+        else if (status == 1) {
+            if (k < prev) {
+                status = -1;
+                if (bended) {
+                    printf("None\n");
+                    return 0;
+                }
+                else
+                    bended = true;
+            }
+        }
+        else if (status == -1) {
+            if (k > prev) {
+                status = 1;
+                if (bended) {
+                    printf("None\n");
+                    return 0;
+                }
+                else
+                    bended = true;
+            }
+        }
+        prev = k;
+    }
+    if (!bended)
+        printf("Both\n");
+    else if (status == -1)
+        printf("Convex\n");
+    else if (status == 1)
+        printf("Concave\n");
+ } 
+
+int main() {
+    int status = 0;
+     // 0 unknown, 1 ascending, -1 descending   
+ int k, bending = 0;
+    scanf("%d", &k);
+    int prev = k;
+    while(k != -1 && bending < 2) {
+        scanf("%d", &k);
+        if (k==-1) break;
+        switch (status) {
+            case 0:
+                if ( k > prev )
+                    status = 1;
+                else if ( k < prev )
+                    status = -1;
+                break;
+            case 1:
+                if ( k < prev ) {
+                    status = -1;
+                    bending++;
+                }
+                break;
+            case -1:
+                if ( k > prev ) {
+                    status = 1;
+                    bending++;
+                }
+                break;
+        }        prev = k;
+    }    if (bending > 1)
+        printf("None\n");
+    else if (bending == 0)
+        printf("Both\n");
+    else if (status == -1)
+        printf("Convex\n");
+    else if (status == 1)
+        printf("Concave\n");
+ }
+
+
+
+
+
+
+
+-------------------------------4좡-------------------------------------
+
+1. 2차원 평면의 1사분면에서 그래프 y=2/3x의 아래쪽에 있고 그래프 y=1/3x의 위쪽에 있으면 서 원점으로부터 거리가 100이하인 정수 좌표 점의 개수는?
+ x-좌표나 y-좌표가 0이거나 그래 프 y=2/3x 혹은 y=1/3x 상에 있는 점도 포함한다.  (정답: 1362) 
+
+1. #include <stdio.h>
+ int main() {
+    int count = 0;
+    for (int x = 0; x <= 100; x++) {
+        for (int y = 0; y <= 100; y++) { 
+           if ( y >= x/3.0 && y <= 2.0*x/3 && x*x + y*y <= 10000)
+                count++;
+        }
+    }    
+printf("%d\n", count);
+ }
+
+ int main() {
+    int count = 0;
+    for (int x = 0; x <= 100; x++) {
+        int y = x/3;
+        if (x%3 != 0) y++;
+        for ( ; y <= 2*x/3; y++) {
+            if ( x*x + y*y <= 10000)
+                count++;
+        }
+    }    
+printf("%d\n", count);
+ }
+
+ int main() {
+    int count = 0;
+    for (int x = 0; x <= 100; x++) {
+         for (int y = (x%3==0 ? x/3 : x/3+1); y <= 2*x/3; y++) {
+            if ( x*x + y*y <= 10000)
+                count++;
+        }
+    }
+    printf("%d\n", count);
+ } 
+
+
+2. 2에서 100 사이의 정수들 중에서 서로 서로소의 관계인 세 정수쌍의 개수를 세는 프로그램을 작성하라. 
+예를 들어 (3, 5, 7)은 서로 서로소이다. (정답:  44142)
+
+2. #include <stdio.h> 
+int main() {
+    int count = 0;
+    for (int a=2; a<=100; a++) {
+        for (int b=a+1; b<=100; b++) {
+            int m = b, n = a;
+            while ( m % n != 0 ) {
+                m = m % n;
+                int tmp = m;
+                m = n;
+                n = tmp;
+            }
+            if ( n > 1 )
+                continue;
+            for (int c=b+1; c<=100; c++) {
+                int m = c, n = a;
+                while ( m % n != 0 ) {
+                    m = m % n;
+                    int tmp = m;
+                    m = n;
+                    n = tmp;
+                }
+                if ( n > 1 )
+                    continue;
+                m = c, n = b;
+                while ( m % n != 0 ) {
+                    m = m % n;
+                    int tmp = m;
+                    m = n;
+                    n = tmp;
+                }
+                if ( n > 1 )
+                    continue;
+                printf("%d %d %d\n", a, b, c);
+                count++;
+            }
+        }
+    }
+    printf("%d\n", count);
+ } 
+
+
+
+
+3. 1에서 N 사이의 정수들을 모두 종이에 적었을 때 사용된 0의 개수가 총 몇개인지 계산하는 프 로그램을 작성하라.
+ 
+3. #include <stdio.h> 
+int main() {
+    int N;
+    scanf("%d", &N);
+    int count = 0;
+    for (int i=1; i<=N; i++) {
+        int k = i;
+        while ( k > 0 ) {
+            if ( k % 10 == 0 ) count++;
+            k /= 10;
+        }
+    }
+    printf("%d\n", count); 
+} 
+
+
+4. 입력으로 하나의 양의 정수 N을 받아서 1~N 사이의 정수들 중 각 자리의 합이 7의 배수인 것 들의 개수를 세어 출력하는 프로그램을 작성하라.
+ 예를 들어 12345의 각 자리의 합은 1+2+3+4+5=15이며 7의 배수가 아니다. 
+
+4. #include <stdio.h>
+ int main() {
+    int N;
+    scanf("%d", &N);
+    int count = 0;
+    for (int i=1; i<=N; i++) {
+        int k = i;
+        int sum = 0;
+        while( k > 0) {
+            sum += (k%10);
+            k /= 10;
+        }
+        if (sum % 7 == 0) count++;
+    }
+    printf("%d\n", count);
+ } 
+
+
+
+5. 원점 (0,0)에서 출발하여 매 스텝마다 동서남북 4방향 중 한 방향을 각각 1/4의 확률로 랜덤하 게 선택하여 1만큼 움직인다.
+ x-좌표나 y-좌표가 N이나 -N에 도달하며 종료한다. 종료할 때 까지 몇 스텝이 걸리는지 실험적으로 판단하는 프로그램을 작성하라
+. 즉 동일한 실험을 T번 반 복하여 가장자리에 도달하는데 걸린 스텝 수의 평균을 구하라. N은 입력으로 주어지고 T는 1000으로 하라. 
+  
+5. #include <stdio.h>
+ #include <stdlib.h>
+ #include <sys/time.h>
+ int main() {
+    int N, T = 1000;
+    srand((unsigned int)time(NULL));
+    scanf("%d", &N);
+    int total = 0;
+    for (int i=0; i<T; i++) {
+        int x = 0, y = 0;
+        int count = 0;
+        while ( x > -N && x < N && y > -N && y < N ) {
+            int rd = rand() % 4;
+            switch (rd) {
+                case 0: x++; break;
+                case 1: x--; break;
+                case 2: y++; break; 
+               case 3: y--; break;
+            }
+            count++;
+        }
+        total += count;
+    }
+    printf("%d\n", total/T);
+ }
+
+
+6. 1693년에 Samuel Pepys는 뉴튼에게 다음 중 어느 쪽이 더 일어날 확률이 높은지 질문하였 다
+: “주사위를 6번 던져서 적어도 한 번 1이 나오는 것과 주사위를 12번 던져서 적어도 두 번 1이 나오는 것”
+. 이 질문에 대한 답을 시뮬레이션을 통해 알아내는 프로그램을 작성하라. 즉 T=1,000,000번의 실험을 반복하여 
+두 사건이 일어난 경우의 수를 각각 카운트하는 프로그램 을 작성하라.  (6번 던져서 적어도 1번 1이 나오는 사건의
+ 확률은 1-(5/6)6   0.6651이고, 12 번 중 적어도 2번 1이 나오는 사건의 확률은 1-(5/6)12-2(5/6)11  0.618667이다.
+ 대략 이 확률에 근접하는 실험 결과가 나오면 정답이다.)
+
+6. #include <stdio.h>
+   #include <stdlib.h>
+   #include <sys/time.h>
+    int main() {
+    int N, T = 1000000;
+    srand((unsigned int)time(NULL));
+    int count1 = 0, count2 = 0;
+    for (int i=0; i<T; i++) {
+        int success1 = 0;
+        for (int k=0; k<6; k++) {
+            int rd = rand() % 6 + 1;
+            if (rd == 1) {
+                success1++;
+                break;
+            }
+        }
+        if (success1)
+            count1++;
+        int success2 = 0;
+        for (int k=0; k<12; k++) {
+            int rd = rand() % 6 + 1;
+            if (rd == 1)
+                success2++;
+        }
+        if (success2 >= 2)
+            count2++;
+    }
+    printf("%lf %lf\n", (double)count1/T, (double)count2/T);
+ } 
+
+
+
+
+7. Monty Hall 문제는 위키피디아에도 한자리를 차지하고 있고 아직도 인터넷 상에서 논쟁이 벌어지곤 하는 유명한 문제이다. 
+1970년대 “Let’s make a deal”이라는 TV쇼에서 유래한 문 제이다. 세 개의 문이 있고 그 중 하나의 문 뒤에는 스포츠카가 있고 
+다른 두 개의 문 뒤에는 염소가 있었다고 한다. 진행자는 어떤 문 뒤에 스포츠카가 있는지 알고 있다. 게임의 참가자 는 먼저 
+3개의 문 중 하나를 선택한다. 그러면 진행자는 나머지 두 개의 문들 중에서 염소가 있는 문을 하나 개방한다. 그런 다음 참가자에서
+ 자신의 선택을 바꿀 기회를 한 번 준다. 즉 자신이 선택한 문과 아직 열리지 않고 남아있는 하나의 문 중에서 선택을 바꿀 기회를 주는 것이다.
+ 이때 참가자가 선택을 바꾸는 것이 이길 확률에 영향을 미칠까? 이 문제에 대한 답을 알기 위한 시뮬레이션 프로그램을 작성하라
+. 즉 T번 실험을 반복하여 선택을 바꾸는 경우와 바꾸지 않는 두 경우의 승률을 계산하는 프로그램을 작성하라.
+
+7. #include <stdio.h>
+ #include <stdlib.h> 
+#include <sys/time.h>
+ int main() {
+    int T = 10000;
+    int n1 = 0, n2 = 0;
+    srand((unsigned int)time(NULL));
+    for (int t=0; t<T; t++) {
+        int car = rand() % 3;
+        int firstChoice = rand() % 3;
+        if (car == firstChoice) n1++;
+        else n2++;
+    }    
+printf("%lf %lf\n", (double)n1/T, (double)n2/T);
+ } 
+
+
+
+
+8. 평면상에서 좌표축에 평행한 2개의 직사각형이 입력으로 주어진다.
+ 두 사각형이 교차하는 영 역, 즉 두 사각형에 공통으로 포함되는 영역의 면적을 구하는 프로그램을 작성하라.
+ 각각의 사각형은 대각 방향의 두 꼭지점의 좌표로 주어진다. 
+  
+8. #include <stdio.h>
+ int main() {
+    int x1, y1, x2, y2, x3, y3, x4, y4;
+    scanf("%d %d %d %d %d %d %d %d", &x1, &y1, &x2, &y2, &x3, &y3, &x4, &y4);
+    int sx1, tx1, sy1, ty1, sx2, tx2, sy2, ty2;
+    if (x1 > x2) { sx1 = x2; tx1 = x1; }
+    else { sx1 = x1; tx1 = x2; }
+    if (y1 > y2) { sy1 = y2; ty1 = y1; }
+    else { sy1 = y1; ty1 = y2; }
+    if (x3 > x4) { sx2 = x4; tx2 = x3; }
+    else { sx2 = x3; tx2 = x4; }
+    if (y3 > y4) { sy2 = y4; ty2 = y3; }
+    else { sy2 = y3; ty2 = y4; }
+
+    int width, height;
+    int s, t;
+    if (sx1 > sx2) s = sx1;
+    else s = sx2;
+    if (tx1 > tx2) t = tx2;
+    else t = tx1;
+    if (s > t ) width = 0;
+    else width = t-s;
+    if (sy1 > sy2) s = sy1;
+    else s = sy2;
+    if (ty1 > ty2) t = ty2;
+    else t = ty1;
+    if (s > t ) height = 0;
+    else height = t-s;
+    printf("%d\n", width*height);
+ } 
+
+
+9. 일 때 x~는 x가 한번 이상 반복되는 모든 이진 수열을 말하고, (xyz)~는 괄호 안에 있는 xyz가 한번 이상 반복되는 모든 이진 수열을 말한다.
+ 예를 들어 1~ = {1, 11, 111, 1111,...} (01)~ = {01, 0101, 010101, 01010101,...} (1001)~ = {1001, 10011001, 100110011001,...} 10~11 = {1011, 10011, 100011, 1000011,...} (10~1)~ = {101, 1001, 10001,...,1011001,..., 100110110001101,...}  
+우리가 식별 하고자 패턴은 다음과 같다.  
+(100~1~)~  
+여기에 속하는 예를 들어보면, 1001, 10000111, 1000111001, 1001100011100011 등이다. 입력으로 N개의 0 혹은 1이 주어질 때,
+이것이 (100~1~)~ 패턴에 해당되는지 아닌지를 판 별하는 프로그램을 작성하라. N은 5,000 이하이고 배열을 사용해서는 안된다. 
+입력 형식: 먼저 이진 수열의 길이 N이 주어지고 다음 줄에는 0 혹은 1이 한 칸씩 띄워져서 N개 주어진다. 
+
+
+
+
+---------------------------5좡------------------------------
+  
+
+
+
+
+1. 먼저 입력될 정수의 개수 n≤100을 입력받고, 이어서 n개의 정수를 입력받아 입력된 순서대로 배열에 저장한다.
+ 그 중 가장 작은 정수와 2번째로 작은 정수를 찾아서 출력하는 프로그램을 작성하라. 정수들 은 입력된 순서대로 배열에 저장되어 있어야 한다.
+ 만약 가장 작은 정수가 2개 이상이라면 그 중 하나 가 2번째로 작은 정수이다. 
+
+
+1. #include <stdio.h> int main() {
+    int data[100];
+    int n = 0;
+    scanf("%d", &n);
+    for (int i=0; i<n; i++)
+        scanf("%d", &data[i]);
+    int smallest = data[0], secondSmallest = data[1];
+    if (data[0] > data[1]) {
+        smallest = data[1];
+        secondSmallest = data[0];
+    }
+    for (int i=2; i<n; i++) {
+        if (data[i] <= smallest) {
+            secondSmallest = smallest;
+            smallest = data[i];
+        }
+        else if (data[i] < secondSmallest)
+            secondSmallest = data[i];
+    }
+    printf("%d %d\n", smallest, secondSmallest);
+ } 
+
+
+2. 먼저 입력될 정수의 개수 n≤100을 입력받고, 이어서 n개의 정수를 받아 평균과 표준편차를 계산하여 출력하는 프로그램을 작성하라.
+ 표준편차는 다음과 같이 정의된다. 루트(square root)를 계산하기 위해 서 math.h를 include하고 sqrt함수를 이용하라. 
+
+2. #include <stdio.h>
+ #include <math.h>
+ int main() {
+    int data[100];
+    int n = 0, sum = 0;
+    scanf("%d", &n);
+    for (int i=0; i<n; i++) {
+        scanf("%d", &data[i]);
+        sum += data[i];
+    }
+    double average = (double)sum / n;
+    double sumSq = 0.0;
+    for (int i=0; i<n; i++)
+        sumSq += (data[i]-average)*(data[i]-average);
+    printf("%lf %lf\n", average, sqrt(sumSq/n));
+ } 
+
+
+3. 생일과 오늘 날짜를 입력받아서 태어나서 오늘까지 몇 일이 지났는지 계산하는 프로그램을 작성하라.
+ 생일과 오늘 날짜는 각각 년, 월, 일을 나타내는 세 정수로 표현한다. 단 2월은 항상 28일까지 있다고 가 정한다
+
+#include <stdio.h>
+ int main() {
+    int daysInMonth[] = { 0, 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31 };
+    int y, m, d, by, bm, bd;
+    scanf("%d %d %d", &by, &bm, &bd);
+    scanf("%d %d %d", &y, &m, &d);
+    int daysThisYearToday = 0;
+    for (int i=1; i<m; i++)
+        daysThisYearToday += daysInMonth[i];
+
+    daysThisYearToday += d;
+    int daysThisYearBirth = 0;
+    for (int i=1; i<bm; i++)
+        daysThisYearBirth += daysInMonth[i];
+    daysThisYearBirth += bd;
+    int daysPassed = (y-by)*365 + daysThisYearToday - daysThisYearBirth;
+    printf("%d\n", daysPassed);
+ } 
+
+
+
+4. 먼저 입력될 정수의 개수 n≤100을 입력받고, 이어서 n개의 정수를 받아 순서대로 배열에 저장한다.
+  그 런 다음 키보드로 부터 다시 하나의 정수 k를 입력받은 후 먼저 n개의 정수들 중에 서 k에 가장 가까운,
+ 즉 k와의 차이의 절대값이 가장 작은 정수를 찾아 출력하는 프로그램을 작성하라. 
+
+
+4. #include <stdio.h> 
+int main() {
+    int data[100];
+    int n = 0, sum = 0, k;
+    scanf("%d", &n);
+    for (int i=0; i<n; i++)
+        scanf("%d", &data[i]);
+    scanf("%d", &k);
+    int minDiff = (k-data[0] > 0 ? k-data[0] : data[0] - k);
+    int minIndex = 0;
+    for (int i=1; i<n; i++) {
+        int diff = (k-data[i] > 0 ? k-data[i] : data[i] - k);
+        if (diff < minDiff) {
+            minDiff = diff;            minIndex = i;
+        }
+    }
+    printf("%d\n", data[minIndex]); 
+}
+
+
+
+5. input5.txt파일로 부터 정수들을 읽어서 배열에 순서대로 저장한다. 
+정수의 개수는 따로 주어지지 않으 며 파일의 끝까지 읽어야 한다. 정수의 개수는 100개 이하이다.
+ 그런 다음 모든 값들을 한 칸씩 뒤로 이 동하고 대신 맨 마지막 값을 맨 앞으로 이동하라.
+ 이것을 circular right shift라고 부른다. 이렇게 한 후 모든 정수들을 배열에 저장된 순서로 출력하라. 
+
+5. #include <stdio.h>
+ int main() {
+    int data[100];
+    int n = 0;
+    FILE *fp = fopen("input5.txt", "r");
+    while(!feof(fp))
+        fscanf(fp, "%d", &data[n++]);
+    fclose(fp);
+    int last = data[n-1];
+    for (int i=n-1; i>0; i--)
+        data[i] = data[i-1];
+    data[0] = last;
+    for (int i=0; i<n; i++)
+        printf("%d ", data[i]);
+ } 
+
+
+
+
+6. input6.txt파일로 부터 정수들을 읽어서 배열에 순서대로 저장한다.
+ 정수의 개수는 따로 주어지지 않으 며 파일의 끝까지 읽어야 한다. 정수의 개수는 100개 이하이다.
+ 그런 다음 배열에 저장된 정수들의 순 서를 뒤집는 프로그램을 작성하라. 예를 들어 입력된 정수들이 5, 6, 1, 2였다면 먼저 이 순서대로 배열 data에 저장해야 한다.
+ 그런 다음 순서가 2, 1, 6, 5가 되도록 뒤집어야 한다. 이 과정에서 배열 data이 외의 다른 추가 배열을 사용해서는 안된다. 뒤집어진 순서대로 출력한다. 
+
+6. #include <stdio.h>
+ int main() {
+    int data[100];
+    int n = 0, k;
+    FILE *fp = fopen("input6.txt", "r");
+    while(fscanf(fp, "%d", &k) != EOF)
+        data[n++] = k;
+    fclose(fp);
+    for (int i=0; i<n/2; i++) {
+        int tmp = data[i];
+        data[i] = data[n-i-1];
+        data[n-i-1] = tmp;
+    }
+    for (int i=0; i<n; i++)
+        printf("%d ", data[i]);
+ } 
+
+
+
+7. 우선 input7.txt파일로 부터 정수들을 읽어서 배열 data에 순서대로 저장한다.
+ 정수의 개수는 따로 주 어지지 않으며 파일의 끝까지 읽어야 한다. 정수의 개수는 100개 이하이다.
+ 배열에 저장된 정수들 중에 서 자신보다 먼저 나온 모든 정수들 보다 크거나 같은 정수를 리더(leader)라고 부른다.
+ 그리고 첫 번째 정수는 무조건 리더이다. 배열에서 리더가 아닌 모든 정수를 삭제하고 리더들만 남겨두는 프로그램을 작성하라.
+ 리더들은 배열의 맨 앞에서 부터 빈 칸 없이 저장되어야 한다. 이 과정에서 배열 data이외의 다른 추가 배열을 사용해서는 안된다
+. 먼저 리더들의 개수를 출력하고 이어서 리더들을 순서대로 화면 으로 출력하라.  
+
+
+7. #include <stdio.h>
+ int main() {
+    int data[100];
+    int n = 0, k; 
+   FILE *fp = fopen("input7.txt", "r");
+    while(fscanf(fp, "%d", &k) != EOF)
+        data[n++] = k;
+    fclose(fp);
+    int t = 0, maxSoFar = data[0];
+    for (int i=1; i<n; i++) {
+        if (data[i] >= maxSoFar) {
+            maxSoFar = data[i];
+            t++;
+            data[t] = data[i];
+        }
+    }
+    printf("%d ", t+1);
+    for (int i=0; i<=t; i++)
+        printf("%d ", data[i]);
+ }
+
+
+
+8. 입력 파일 input8_1.txt과 input8_2.txt로 부터 정수들을 읽어서 각각 배열 data1과 data2에 순서대로 저장한다.
+ 정수의 개수는 따로 주어지지 않고 파일의 끝까지 읽어야 하며, 두 파일에 저장된 정수의 개 수는 동일하고, 100개 이하이다.
+ 이제 배열 data1과 data2에 저장된 정수들을 새로운 배열 data3로 모
+  of  2 3
+입력 예 출력 6 1 9 8 2 5 12 7 8 6 -5 -1 -4 -1 -12 -9 20 -1 8 1 2 3 4 5 6 7 8 5 5 10 1 4 0 4 4 -11 4 1 1 6 -8 -11 12 73 28 1 9 37 46 -92 -8 37 0 0 12 24 28
+입력 예 (INPUT5.TXT) 출력 1 2 3 4 5 5 1 2 3 4  1 2 3 4 5 6 7 8 9 10 10 1 2 3 4 5 6 7 8 9 
+입력 예 (INPUT7.TXT) 출력 1 2 3 4 5 6 7 8 9 10 10: 1 2 3 4 5 6 7 8 9 10 1 1 1 1 1 5: 1 1 1 1 1 10 1 4 0 4 4 -11 4 1 1 6 -8 1: 10 6 -5 -1 -4 20 -1 -12 -9 20 3: 6 20 20 12 0 28 1 9 37 46 -92 -8 37 0 0 12 124 5: 12 28 37 46 124 
+입력 예 (INPUT6.TXT) 출력 1 2 3 4 5 5 4 3 2 1  1 2 3 4 5 6 7 8 9 10 10 9 8 7 6 5 4 3 2 1 
+두 합쳐라. 이때 두 배열에 저장된 정수들이 번갈아가며 배열 data3에 저장되어야 한다. 예를 들어 data1 에 1, 5, 2, 7, 9가 저장되어 있고, data2에 5, 6, 7, 8, 9가 저장되어 있다면 data3에는 1, 5, 5, 6, 2, 7, 7, 8, 9, 9의 순서로 저장되어야 한다. 배열 data3에 저장된 정수들을 순서대로 출력하라. 
+
+
+8. #include <stdio.h> 
+int main() {
+    int data1[100], data2[100], data3[200];
+    int n = 0;
+    FILE *fp1 = fopen("input8_1.txt", "r");
+    FILE *fp2 = fopen("input8_2.txt", "r"); 
+   while(!feof(fp1)) {
+        fscanf(fp1, "%d", &data1[n]);
+        fscanf(fp2, "%d", &data2[n++]);
+    }
+    fclose(fp1);
+    fclose(fp2);
+    for (int i=0; i<n; i++) {
+        data3[2*i] = data1[i];
+        data3[2*i+1] = data2[i];
+    }
+    for (int i=0; i<2*n; i++)
+        printf("%d\n", data3[i]);
+ }
+
+ 
+
+
+
+
+9. 평면상의 n개의 점의 좌표가 입력파일 input9.txt에 저장되어 있다.
+ 파일의 각 라인마다 한 점의 x좌표 와 y좌표가 저장되어 있다. 모든 점들의 중점(center)을 찾고, 
+각각 점들이 중점으로 부터 떨어진 거리의 평균을 계산하는 프로그램을 작성하라.
+ 여기서 중점이란 모든 점들의 x좌표의 평균과 y좌표의 평균을 자신의 x, y좌표로 하는 점을 의미한다.
+ 먼저 중점의 x좌표와 y좌표를 출력하고, 줄을 바꿔서 중점에서 떨어진 거리의 평균을 출력하라. 
+  
+9. #include <stdio.h> 
+#include <math.h> 
+int main() {
+    int x[100], y[100];
+    int n = 0;
+    int sumX = 0, sumY = 0;
+    FILE *fp = fopen("input9.txt", "r");
+    while(!feof(fp)) {
+        fscanf(fp, "%d %d", &x[n], &y[n]);
+        sumX += x[n];
+        sumY += y[n];
+        n++;
+    }
+    fclose(fp);
+    double centerX = (double)sumX/n;
+    double centerY = (double)sumY/n;
+    double sumDist = 0.0;
+    for (int i=0; i<n; i++)
+        sumDist += sqrt( (x[i]-centerX)*(x[i]-centerX) + (y[i]-centerY)*(y[i]-centerY) );
+   printf("%lf %lf %lf", centerX, centerY, sumDist/n); 
+}
+
+ 
+
+
+
+
+------------------------6좡------------------------------
+
+
+1. 키보드로 부터 연속해서 정수들을 입력받는다.
+ 정수가 하나 씩 입력될 때 마다 현재까지 입력된 정수들 을 오름차순으로 정렬하여 화면에 출력한다
+ 단, 새로 입력된 정수가 이미 배열에 저장되어 있다면 추 가하는 대신 “duplicate entry”라고 출력한다.
+ 사용자가 -1을 입력하면 프로그램을 종료한다. 
+
+
+1. #include <stdio.h>
+ #define MAX 100
+ int main() {
+    int data[MAX];
+    int n = 0, k;
+    while(1) {
+        scanf("%d", &k);
+        if (k==-1) break;
+        int duplicate = false;
+        for (int i=0; i<n; i++) {
+            if (data[i] == k) {
+                duplicate = true;
+                break; 
+           }
+        }
+        if (duplicate) {
+            printf("duplicate entry\n");
+            continue;
+        }
+        int i=n-1;
+        while(i>=0 && data[i] > k) {
+            data[i+1] = data[i];
+            i--;
+        }
+        data[i+1] = k;
+        n++;
+        for (i=0; i<n; i++)
+            printf("%d ", data[i]);
+        printf("\n"); 
+   }
+ } 
+
+
+
+
+
+2. 두 개의 입력 파일 input1.txt와 input2.txt에 각각 정수들이 이미 오름차순으로 정렬된 상태로 저장되 어 있다.
+ 먼저 input1.txt 파일에 있는 정수들을 읽어 배열 data1에 순서대로 저장하고, input2.txt에 있 는 정수들을 읽어 배열 data2에 순서대로 저장한다
+. 두 배열에 저장된 정수들을 배열 data3로 합쳐서 하나의 정렬된 배열을 만들어 출력하라. 두 파일에 저장된 정수들은 각각 최대 1000개 이다.
+
+
+int main() {
+     int data1[1000], data2[1000], data3[2000];
+     int n1 = 0, n2 = 0, n3 = 0;
+     FILE *fp1 = fopen(“input1.txt”, “r”);
+     FILE *fp2 = fopen(“input2.txt”, “r”);
+     while (!feof(fp1))  fscanf(fp1, “%d”, &data1[n1++]);
+     while (!feof(fp2))  fscanf(fp2, “%d”, &data2[n2++]);
+     fclose(fp1); fclose(fp2);
+ 
+    /* 배열 data1과 data2에 오름차순으로 정렬되어 저장된 모든 정수들을 배열 data3에 오름차순으로 정렬이 되도록 저장하라. */ 
+    for (int i=0; i<n3; i++)
+    /* n3 = n1 + n2 */
+         printf(“%d\n”, data3[i]);
+ }
+
+
+
+
+2. 
+
+#include <stdio.h> 
+int main() {
+    int data1[1000], data2[1000], data3[2000];
+    int n1 = 0, n2 = 0, n3 = 0;
+    FILE *fp1 = fopen("input2-1.txt", "r");
+    FILE *fp2 = fopen("input2-2.txt", "r");
+    while (!feof(fp1))  fscanf(fp1, "%d", &data1[n1++]);
+    while (!feof(fp2))  fscanf(fp2, "%d", &data2[n2++]);
+    fclose(fp1);
+ fclose(fp2);
+    int i=0, j=0;
+    while( i<n1 && j <n2) {
+        if (data1[i] <= data2[j])
+            data3[n3++] = data1[i++];
+        else
+            data3[n3++] = data2[j++];
+    }
+    while(i<n1) data3[n3++] = data1[i++];
+    while(j<n2) data3[n3++] = data2[j++];
+    for (int i=0; i<n3; i++)
+        printf("%d\n", data3[i]);
+ } 
+
+
+
+
+3. 선택정렬(selection sort) 알고리즘은 다음과 같다. 배열 data에 data[0]에서 data[n-1]까지 n개의 정수가 저장되어 있다.
+ 먼저 data[0] ~ data[n-1] 사이의 정수들 중에서 가장 큰 정수를 찾는다. 그 것을 data[k]라고 가정해보자. 그러면 data[k]와 data[n-1]을 swap한다.
+ 이제 가장 큰 정수가 data[n-1], 즉 맨 마지막 위치에 저장되었으므로 그 값에 대해서는 더 이상 생각할 필요가 없다. 이제 data[0] ~ data[n-2] 중에서 최대값을 찾는다.
+ 그 값을 data[p] 라고 하자. 그러면 다시 data[p] 와 data[n-2]를 swap하고 data[n-2]에 대해서는 잊어버려도 된다. 이런 식으로 계속하면 마지막에 는 data[0]와 data[1] 
+중에 최대값을 data[1]과 swap하면 전체의 정렬이 완료된다. 이 알고리즘을 구현하라. 즉 input3.txt에 저장된 정수들을 읽어서 순서대로 배열에 저장한 
+후 selection sort 알고리 즘으로 정렬하여 출력하는 프로그램을 작성하라. 
+
+3. #include <stdio.h>
+ int main() {
+    int data[100], n = 0;
+    FILE *fp = fopen("input3.txt", "r");
+    while (!feof(fp))
+         fscanf(fp, "%d", data[n++]);
+    fclose(fp);
+    for (int i=n-1; i>0; i--) {
+        int maxIndex = 0;
+        for (int j=1; j<=i; j++)
+            if (data[j] > data[maxIndex])
+                maxIndex = j;
+        int tmp = data[i];
+        data[i] = data[maxIndex];
+        data[maxIndex] = tmp;
+    }
+    for (int i=0; i<n; i++)
+        printf("%d\n", data[i]);
+ } 
+
+
+
+
+
+4. 사용자로부터 n개의 정수를 입력받아 크기순으로 정렬한 후 중복된 수를 제거하고 출력하는 프로그램 을 작성하라. 
+입력 형식은 먼저 n의 값이 주어지고 이어서 n개의 정수들이 주어진다. 예를 들어 n=8이 고 입력된 정수들이 4 7 4 12 4 10 9 7이었다면 출력은 4 7 9 10 12이다.
+ (추가: 실제 배열에서 중복된 값들을 모두 제거해야한다. 즉 배열에 값은 그대로 두고 출력할 때만 제외하고 출력하는 식으로 해서는 안된다.)
+
+4. #include <stdio.h>
+ int main() {
+    int data[100], n;
+    scanf("%d", &n);
+    for (int i=0; i<n; i++)
+        scanf("%d", &data[i]);
+    /* insertion sort */ 
+   for (int i=1; i<n; i++) {
+        int tmp = data[i];
+        int j = i-1;
+        while( j>=0 && data[j] > tmp ) {
+            data[j+1] = data[j];
+            j--;
+        }
+        data[j+1] = tmp;
+    } 
+   /* remove duplicate entries */
+    int k=0;
+    for (int i=1; i<n; i++) {
+        if (data[i] != data[k])
+            data[++k] = data[i];
+    }
+    for (int i=0; i<=k; i++)
+        printf("%d\n", data[i]);
+ }
+
+
+
+
+5. 입력으로 n개의 구간(interval)이 주어진다. 각 구간은 구간의 시작점과 끝점으로 표현된다. 이 구간들을 시작점이 빠른 순서대로 정렬하여 출력하는 프로그램을 작성하라.
+ 시작점이 같은 경우 끝점이 빠른 것 을 먼저 출력한다. 입력 형식은 먼저 n의 값이 주어지고, 이어서 각 구간의 시작점과 끝점이 차례대로 주 어진다.
+ 각 구간의 시작점과 끝점은 정수이고, 끝점은 항상 시작점보다 크거나 같다. 
+
+5. #include <stdio.h>
+ #define MAX 100
+ int main() {
+    int n = 0, start[MAX], end[MAX];
+    scanf("%d", &n);
+    for (int i=0; i<n; i++) {
+        scanf("%d", &start[i]);
+        scanf("%d", &end[i]);
+    }
+    for (int i=n-1; i>0; i--) {
+        for (int j=0; j<i; j++) {
+            if (start[j]>start[j+1] || start[j]==start[j+1] && end[j]>end[j+1]){
+                int tmp = start[j];
+                start[j] = start[j+1];
+                start[j+1] = tmp;
+                tmp = end[j];
+                end[j] = end[j+1];
+                end[j+1] = tmp;
+            }
+        }
+    }
+    for (int i=0; i<n; i++)
+        printf("%d %d\n", start[i], end[i]);
+ } 
+
+
+
+
+
+6. 입력으로 두 개의 양의 정수를 받는다. 그런 다음 두 정수를 사전식 순서(lexicographic order)로 출력 하는 프로그램을 작성하라. 
+예를 들어 두 정수가 75와 111이라면  75는 7로 시작하므로 사전식 순서에 서는 1로 시작하는 111보다 나중에 나와야 한다. 즉 111, 75의 순서로 출력해야 한다. 
+
+6. #include <stdio.h> 
+int main() {
+    int a, b;
+    int digits1[20], digits2[20];
+    scanf("%d %d", &a, &b);
+    int p = a, k = 0;
+   // k is the number of digits of a
+    while(p > 0) {
+        digits1[k++] = p%10;
+        p /= 10;
+    } 
+   int q = b, h = 0; 
+ // h is the number of digits of b
+    while(q > 0) {
+        digits2[h++] = q%10;
+        q /= 10;
+    }
+    for (int i = k-1, j = h-1; i >= 0 && j >= 0; i--, j--) {
+        if (digits1[i] < digits2[j]) {
+            printf("%d %d\n", a, b);
+            return 0;
+        }
+        else if (digits1[i] > digits2[j]) {
+            printf("%d %d\n", b, a);
+            return 0; 
+       }
+    }    if ( k <= h ) printf("%d %d\n", a, b);
+    else printf("%d %d\n", b, a);
+ }
+
+ 
+
+
+
+7. 입력으로 양의 정수들이 주어진다. 각 정수들은 8자리 이내의 정수들이다. 
+이 정수들을 사전식 순서 (lexicographic order)로 정렬하여 출력하는 프로그램을 작성하라.
+ 예를 들어 입력 정수들이 75, 111, 120, 3456, 9, 12, 67, 91이라면 111, 12, 120, 3456, 67, 75, 9, 91의 순서이다. 
+입력은 input6.txt 파일 에서 읽는다. 정수의 개수는 따로 주어지지 않고 파일의 끝까지 읽어야 한다.
+ 
+
+7. #include <stdio.h>
+ #define MAX 100
+ int main() {
+    int data[MAX], n=0;
+    int digits1[8], digits2[8];
+    FILE *fp = fopen("input6.txt", "r");
+    while (!feof(fp)) fscanf(fp, "%d", &data[n++]);
+    fclose(fp);
+    /* insertion sort */ 
+   for (int i=1; i<n; i++) {
+        int p = data[i], k = 0;
+          while(p > 0) {
+            digits1[k++] = p%10;
+            p /= 10;
+        }
+        int j = i-1, tmp = data[i];
+        while( j >= 0 ) {
+            int q = data[j], h = 0;
+             while(q > 0) {
+                digits2[h++] = q%10;
+                q /= 10;
+            } 
+           int winner = 0;
+            for (int x = k-1, y = h-1; x >= 0 && y >= 0; x--, y--) { 
+               if (digits1[x] < digits2[y]) {
+                    winner = 1;
+                    break;
+                }
+                else if (digits1[x] > digits2[y]) {
+                    winner = 2;
+                    break; 
+               }
+            }
+            if (winner == 1 || winner == 0 && k < h ) {
+                data[j+1] = data[j];
+                j--;
+            } 
+           else { 
+               break;            }
+ 
+       }
+        data[j+1] = tmp;
+    }
+    for (int i=0; i<n; i++)
+        printf("%d ", data[i]); 
+}
+
+
+
+
+
+7장.
+
+1. 수열에서 큰 값이 작은 값보다 앞서 나오는 경우 두 값을 역전된(inverted) 쌍이라고 부른다. 
+예를 들어 수열 4, 2, 1, 1, 3에는 (4, 2), (4, 1), (4, 1), (4, 3), (2, 1), (2, 1)의 총 6개의 역전된 쌍이 있다. 수열을 입력으로 받아서 역전된 쌍의 개수를 카운트하여 출력하는 프로그램을 작성하라. 키보드로부터 먼저 정수의 개수 N을 입력받고,
+ 이어서 N개의 정수를 입력 받는다. 
+
+1. 
+#include <stdio.h> 
+#define MAX 100 
+int main() {
+    int data[MAX];
+    int N, count=0;
+    scanf("%d", &N);
+    for (int i=0; i<N; i++)
+	 scanf("%d", &data[i]);
+    for (int i=0; i<N; i++) {
+        for (int j=i+1; j<N; j++) {
+            if (data[i] > data[j] ) {
+                printf("%d %d\n", data[i], data[j]);
+                count++;
+            }
+        }
+    }
+    printf("%d\n", count); 
+} 
+
+
+
+2. [3-SUM] N개의 정수를 입력받고 추가로 다시 하나의 정수 K를 입력받는다.
+ N개의 정수들 중 3개를 뽑아서 그 합이 K가 되는 경우의 수를 구하여 출력하는 프로그램을 작성하라.
+ 입력에 중복된 정수들이 있을 수 있으며 하나의 정수를 2번 이상 뽑는 것은 허용하지 않는다. 
+예를 들어 N=5, K=6이고 입력된 정수들이 1, 2, 1, 4, 3이면 (1, 1, 4), (1, 2, 3), (2, 1, 3)의 3가지 경우가 존재한다.
+ 키보드로부터 먼저 정수의 개수 N을 입력받고, 이어서 N개의 정수를 입력 받은 후, 마지막으로 정수 K를 입력 받는다. 
+
+#include <stdio.h> 
+#define MAX 100 
+int main() {
+    int data[MAX];
+    int N, K, count=0;
+    scanf("%d", &N);
+    for (int i=0; i<N; i++)
+	 scanf("%d", &data[i]);
+    scanf("%d", &K);
+    for (int i=0; i<N; i++) {
+        for (int j=i+1; j<N; j++) {
+            for (int k=j+1; k<N; k++) {
+                if (data[i] + data[j] + data[k] == K) {
+                    printf("%d %d %d\n", data[i], data[j], data[k]);
+                    count++;
+                }
+            } 
+       }
+    }
+    printf("%d\n", count);
+ } 
+
+
+
+3. 입력으로 하나의 수열이 주어진다. 이 중 오름차순으로 정렬되어 있는 가장 긴 구간을 찾아서 그 구간 의 길이를
+ 출력하는 프로그램을 작성하라. 예를 들어 수열이 2, 3, -2, -2, -2, 7, 7, 9, 10, 10, 9, -3라 면 밑줄 친 구간이 가장 긴 구
+간이고 그 길이는 8이다. 입력은 키보드로부터 받으며 먼저 수열의 길이 N이 주어지고 이어서 N개의 정수들이 주어진다.  
+
+#include <stdio.h> 
+#define MAX 100 
+int main() {
+    int data[MAX]; 
+   int N, maxLen = 1;
+    scanf("%d", &N);
+    for (int i=0; i<N; i++)
+        scanf("%d", &data[i]);
+    for (int i=0; i<N; i++) {
+        for (int j=i; j<N; j++) {
+  of  1 5
+            bool inc = true;
+            for (int k=i+1; inc && k<=j; k++) {
+                if (data[k] < data[k - 1])
+                    inc = false;            }
+            if (inc && j-i+1 > maxLen )
+                maxLen = j-i+1;
+        }
+    }
+    printf("%d\n", maxLen);
+ }
+
+/* faster version */
+ int main() {
+    int data[MAX];
+    int N, maxLen = 1;
+    scanf("%d", &N);
+    for (int i=0; i<N; i++)
+        scanf("%d", &data[i]);
+    int len = 1;
+    for (int i=1; i<N; i++) {
+        if (data[i-1] <= data[i])
+            len++;
+        else
+            len = 1;
+        if (len > maxLen)
+            maxLen = len;
+    }
+    printf("%d\n", maxLen);
+ }
+
+
+
+
+4. 입력으로 N개의 음이 아닌 1자리 정수들이 주어진다. 이 중 8개 이하의 연속된 정수들을 순서대로 결 합하여 만들 수 있는 가장 큰 소수를 찾아 출력하라. 여기서 순서대로 결합한다는 말은 예를 들어 1, 1, 3을 정수 113으로 해석한다는 의미이다.
+ 가령 N=6이고 입력된 정수들이 4,  1,  0,  1,  1,  3 이라면 연속된 정수들을 결합하여 만들 수 있는 소수들은 41, 101, 11, 113, 13, 3, 41011 등이 있고 이 중 가장 큰 값은 41011이다. 
+단, 어떤 소수도 만들어지지 않는 경우에는 0을 출력한다. 입력은 먼저 N 의 값이 주어지고
+ 이어서 N개의 1자리 음이 아닌 정수가 주어진다. 
+
+
+#include <stdio.h>
+ #define MAX 100 int main() {
+    int data[MAX];
+    int N;
+    scanf("%d", &N);
+    for (int i=0; i<N; i++)
+	  scanf("%d", &data[i]);
+    int maxPrime = 0;
+    for (int i=0; i<N; i++) {
+        int value = 0;
+        for (int j=i; j<N; j++) {
+            value = value * 10 + data[j];
+            if (value < 2) continue;
+            bool prime = true; 
+           for (int k=2; prime && k*k<=value; k++) { 
+               if (value % k == 0)
+                    prime = false; 
+           }
+            if (prime) printf("%d ", value);
+            if (prime && value > maxPrime ) 
+               maxPrime = value;
+        }
+    }
+    printf("\n%d\n", maxPrime); 
+}
+
+5. 입력으로 N개의 정수와 또 하나의 정수 K가 주어진다. N개의 정수들 중에서 합이 K를 초과하지 않으 면서 가장 긴
+ 구간을 찾아 그 구간의 길이를 출력하는 프로그램을 작성하라.
+ 키보드로부터 먼저 정수의 개수 N을 입력받고, 이어서 N개의 정수를 입력 받은 후, 마지막으로 정수 K를 입력 받는다. 
+
+
+5. #include <stdio.h> 
+#define MAX 100 int main() {
+    int data[MAX];
+    int N, K, maxLen=0;
+    scanf("%d", &N);
+    for (int i=0; i<N; i++)
+	 scanf("%d", &data[i]);
+    scanf("%d", &K);
+    for (int i=0; i<N; i++) {
+        int sum = 0;
+        for (int j=i; j<N; j++) { 
+           sum += data[j]; 
+           if (sum <= K && j-i+1 > maxLen)
+                maxLen = j-i+1;
+        } 
+   }
+    printf("%d\n", maxLen);
+ }
+ /* faster version */ 
+int main() {
+    int data[MAX];
+    int N, K, maxLen=0;
+    scanf("%d", &N); 
+   for (int i=0; i<N; i++) 
+	scanf("%d", &data[i]);
+    scanf("%d", &K);
+    int sum = 0, i=0;
+    for (int j=0; j<N; j++) {
+        sum += data[j]; 
+       while (sum > K) { 
+           sum -= data[i]; 
+           i++; 
+       } 
+       if (j >= i && j-i+1 > maxLen)
+            maxLen = j-i+1;
+    }
+    printf("%d\n", maxLen);
+ } 
+
+
+
+
+6. 입력으로 N개의 폐구간(closed interval)이 주어진다. 이중 겹치는 길이가 가장 긴 두 구간을 찾아서 출 력하는 프로그램을 작성하라. 예를 들어  N=4이고 입력된 구간들이 [0, 3], [3, 6], [2, 7], [4, 5]라면 구 간 [3, 6]과 [2, 7]이 겹치는 길이는 4
+이고 가장 길다. 입력은 input6.txt 파일로부터 받는다.
+ 파일의 각 줄마다 하나의 구간의 시작점과 끝점이 주어진다. 각 구간의 끝점은 항상 시작점보다 크거나 같다. 
+
+
+6. #include <stdio.h>
+ #define MAX 100
+ int main() {
+    int s[MAX], t[MAX];
+    int n = 0;
+    FILE *fd = fopen("input6.txt", "r");
+    while(!feof(fd)) {
+        fscanf(fd, "%d %d", &s[n], &t[n]);
+        n++;
+    }
+    fclose(fd); 
+   int maxLen = 0, maxi, maxj;
+    for (int i=0; i<n; i++) {
+        for (int j=i+1; j<n; j++) {
+            int lateS = (s[i] <= s[j] ? s[j] : s[i] );
+            int earlyT = (t[i] <= t[j] ? t[i] : t[j] );
+            int len = ( lateS >= earlyT ? 0 : earlyT - lateS );
+            if (len > maxLen) {
+                maxLen = len;
+                maxi = i;
+                maxj = j; 
+           } 
+       } 
+   } 
+   printf("[%d, %d], [%d, %d]\n", s[maxi], t[maxi], s[maxj], t[maxj]);
+ } 
+
+
+
+7. 입력으로 N개의 수직 혹은 수평 선분이 주어진다. 선분들간의 교차점의 좌표를 모두 계산하여 x좌표에 대한 오름차순으로 정렬하여 출력하는 프로그램을 작성하라. x좌표가 동일한 경우에는 y좌표가 작은 점 을 먼저 출력한다. 입력은 input7.txt 파일로부터 받는다. 파일의 첫 줄에는 선분의 개수 N이 주어지고, 이어진 N줄에는 각 줄마다 하나의 선분의 시작점과 끝점의 좌표가 주어진다. 수평 선분의 경우 x좌표가 작은 점이 먼저 주어지고, 수직 선분의 경우 y좌표가 작은 점이 항상 먼저 주어진다. 수직이나 수평이 아 닌 선분이 주어지는 경우는 없다. 수평 선분끼리 만나거나 혹은 수직 선분끼리 만나는 경우는 교차점으 로 간주하지 않는다. 
+  
+
+7. #include <stdio.h>
+ #define MAX 100 
+int main() {
+    int x1[MAX], y1[MAX], x2[MAX], y2[MAX];
+    bool isVertical[MAX];
+    int xx[MAX], yy[MAX];
+    int nIntersection = 0;
+    int n = 0;
+    FILE *fd = fopen("input7.txt", "r");
+    while(!feof(fd)) {
+        fscanf(fd, "%d %d %d %d", &x1[n], &y1[n], &x2[n], &y2[n]);
+        if (x1[n] == x2[n]) isVertical[n] = true; 
+       else isVertical[n] = false;
+       n++;
+    } 
+   fclose(fd);
+    for (int i=0; i<n; i++) {
+        for (int j=i+1; j<n; j++) { 
+           if (isVertical[i] && !isVertical[j]) {
+                if (x1[j]<=x1[i]&&x2[j]>=x1[i]&&y1[i]<=y1[j]&&y2[i]>=y1[j] ) {
+                    xx[nIntersection] = x1[i];
+                    yy[nIntersection++] = y1[j];
+                }
+            } 
+           else if (!isVertical[i] && isVertical[j]) {
+                if (x1[i]<=x1[j]&&x2[i]>=x1[j]&&y1[j]<=y1[i]&&y2[j]>=y1[i] ) { 
+                   xx[nIntersection] = x1[j];
+                    yy[nIntersection++] = y1[i];
+                } 
+           }
+        } 
+   } 
+   
+/* insertion sort */  
+
+  for (int i=1; i<nIntersection; i++) {
+        int tmpx = xx[i];        int tmpy = yy[i];
+        int j = i-1;
+        while ( j>=0 && (xx[j] > tmpx || xx[j] == tmpx && yy[j] > tmpy )) {
+            xx[j+1] = xx[j]; 
+           yy[j+1] = yy[j];
+            j--;
+        }
+        xx[j+1] = tmpx;
+        yy[j+1] = tmpy;
+    }
+    for (int i=0; i<nIntersection; i++)
+        printf("[%d, %d]\n", xx[i], yy[i]); 
+} 
+
+
+
+8. 7개의 1~13 사이의 정수를 키보드로부터 입력받아 straight가 성립하는지 판단하는 프로그램을 작성 하라. straight란 7개의 정수들 중 어떤 5개가 연속된 숫자인 경우를 말한다. 예를 들어서 입력된 정수가 5, 2, 5, 11, 4, 3, 6이면 이들 중 2, 3, 4, 5, 6이 있으므로 straight가 성립한다. 
+
+8. #include <stdio.h> 
+int main() {
+    int hand[14] = { 0 };
+    int tmp;
+    for (int i=0; i<7; i++) {
+        scanf("%d", &tmp);
+        hand[tmp] = 1;
+    }
+    int sum = 0;
+    for (int i=1; i<=13; i++) {
+        if (hand[i] == 0) sum = 0;
+        else sum++;
+        if (sum == 5) { 
+           printf("YES\n");
+            return 1;
+        }
+    }
+    printf("NO\n");
+ }
+ 
+
+
+
+8장.
+
+
+1. [Puppy’s Escape] 강아지가   크기의 2차원 배열의 가운데 위치  에서 출발한다.  은 홀 수이다. 상,하,좌,우 4방향으로 인접한 셀(cell)들 중에서 방문한 적이 없는 한 셀을 동일한 확률로 랜덤 하게 선택하여 한 칸 이동한다. 가령 아래 그림에서 강아지의 현재 위치는 (3,3)이고 이웃한 위치들 중 에서 아직 방문하지 않은 위치는 (2,3)과 (4,3)으로 2곳이다. 따라서 두 위치중 하나를 1/2의 확률로 선 택하여 이동한다. 배열의 가장자리 셀에 도착하면 탈출에 성공한 것이다. 하지만 아무 곳으로도 이동할 수 없는 상태에 처하면 탈출에 실패한 것이다. 아래 그림의 예에서 만약 위쪽 방향을 선택하여 이동한 다면 그 다음에 어떻게 하더라도 탈출에 성공할 수는 없다. 입력으로 하나의 홀수  을 받아서 강 아지가 탈출에 성공할 확률을 시뮬레이션으로 계산하는 프로그램을 작성하라. 실험 횟수는 10,000번으 로 하라. 
+
+
+1. #include <stdio.h> 
+#include <stdlib.h> 
+#include <time.h> int main() {
+    int N, T = 10000;
+    int array[100][100];
+    int offset[4][2] = { {0, -1}, {1, 0}, {0, 1}, {-1, 0} };
+    int succCount = 0;
+    srand((unsigned int)time(NULL));
+    scanf("%d", &N); 
+   for (int t = 0; t < T; t++) {
+        
+/* initialize x, y, and the array for each experiment */
+        int x = N/2, y = N/2;
+        for (int i = 0; i < N; i++) {
+            for (int j = 0; j < N; j++)
+                array[i][j] = 0;
+        }
+        bool success = true;
+        while (x > 0 && x < N-1 && y > 0 && y < N-1 ) {
+            int direction = -1;
+            int nAvailableDirs = 0;
+            array[x][y] = 1; 
+           for (int d = 0; d < 4; d++) {
+                int newx = x + offset[d][0];
+                int newy = y + offset[d][1]; 
+               if (newx>=0&&newx<N&&newy>=0&&newy<N&&array[newx][newy]==0) {
+                    nAvailableDirs++; 
+                   if (rand() % nAvailableDirs == 0) 
+                       direction = d;
+                }
+            }
+            if (direction == -1) {
+                success = false;
+                break;
+            }
+            x += offset[direction][0];
+            y += offset[direction][1]; 
+       }
+        if (success) succCount++;
+    } 
+   printf("%lf\n", (double)succCount/T);
+ }
+
+
+2. 1번 문제를 3차원 배열에서 다루는 프로그램을 작성하라. 즉   크기의 3차원 배열의 가운데 위치  에서 출발한다. 
+
+
+2. #include <stdio.h>
+ #include <stdlib.h> 
+#include <time.h> 
+int main() { 
+   int N, T = 10000; 
+   int array[100][100][100]; 
+   int offset[6][3] = {{0, -1, 0}, {1, 0, 0}, {0, 1, 0}, {-1, 0, 0},{0, 0, 1},{0, 0, -1} }; 
+   int succCount = 0; 
+    srand((unsigned int)time(NULL));
+    scanf("%d", &N);
+    for (int t = 0; t < T; t++) {
+        /* initialize x, y, z, and the array for each experiment */ 
+       int x = N/2, y = N/2, z = N/2; 
+       for (int i = 0; i < N; i++) {
+            for (int j = 0; j < N; j++)
+                for (int k = 0; k < N; k++)
+                    array[i][j][k] = 0; 
+       } 
+       bool success = true;
+        while (x > 0 && x < N-1 && y > 0 && y < N-1 && z > 0 && z < N-1) {
+            int direction = -1; 
+           int nAvailableDirs = 0; 
+           array[x][y][z] = 1; 
+           for (int d = 0; d < 6; d++) { 
+               int newx = x + offset[d][0]; 
+               int newy = y + offset[d][1];
+                int newz = z + offset[d][2]; 
+               if (newx>=0 && newx<N && newy>=0 && newy<N && newz>=0 
+                           && newz < N && array[newx][newy][newz] == 0) {
+                    nAvailableDirs++; 
+                   if (rand() % nAvailableDirs == 0) 
+                       direction = d;
+                } 
+           } 
+           if (direction == -1) { 
+               success = false; 
+               break; 
+           }
+            x += offset[direction][0];
+            y += offset[direction][1]; 
+           z += offset[direction][2];
+        }
+        if (success) succCount++;
+    } 
+   printf("%lf\n", (double)succCount/T); 
+} 
+
+
+3. 이항계수 (binomial coefficient)  는  개 중에서  개를 선택하는 경우의 수이다.이
+지만 이 공식을 이용하여  를 계산하는 것은 좋은 방법이 아니다. 왜 그럴까? 일반적으로는 다음의 순환식을 이용하는 것이 더 좋은 방법이다. 혹은  인 경우, 그렇지 않은 경우이 순환식을 이용하여  의 값을 계산하기 위하여 2차원 배열 A를 사용한다. 배열 A에서 A[n][k]가  의 값을 계산하여 저장할 자리이다. 배열에서 대각선 위쪽은 n보다 k가 큰 경우이므로 무의미하다.   혹은  인 경우에는  이므로 배열의 첫 번째 열과 대각선의 값은 1이다. 순환식에 따르 면 이 배열의 임의의 값은 자신의 바로 위쪽 값과 왼쪽-위쪽 대각 방향의 값의 합이다. 우리가 알고 싶 은 값이 A[8][5]라면 아래의 그림에서 파란 화살표가 표시하는 순서대로 각 셀의 값을 계산해 나가면 된다. 이 순서로 계산하면 어떤 값을 계산할 때 그 값의 위쪽 값과 왼쪽-위쪽 대각 방향의 값이 항상 먼 저 계산되어져 있을 것이기 때문이다. 입력으로 두 양의 정수  를 받아서 이런 방법으 로  의 값을 계산하여 출력하는 프로그램을 작성하라.  
+
+
+3. #include <stdio.h>
+ int main() {
+    int n, k;
+    int table[101][101] = { 0 };
+    scanf("%d %d", &n, &k);
+    for (int i = 0; i <= n; i++) {
+        for (int j = 0; j <= i; j++ ) {
+            if ( j == 0 || i == j )
+                table[i][j] = 1; 
+           else
+                table[i][j] = table[i-1][j-1] + table[i-1][j];
+        }
+    }
+    printf("%d\n", table[n][k]);
+
+ }
+
+
+ 
+
+
+4. 데이터 파일 input4.txt에는 하나의   행렬이 저장되어 있다. 파일의 첫 줄에는 행렬의 크기  이 저장되어 있고, 이어진  줄에는 각 줄마다  개의 정수가 저장되어 있다. 이 파일을 읽어서 각 행의 평 균과 표준편차, 각 열의 평균과 표준편차를 구해서 아래의 예와 같은 형식으로 출력하는 프로그램을 작 성하라.
+
+
+4. #include <stdio.h> 
+#include <math.h> 
+int main() {
+    int N;
+    int mat[100][100];
+    int colSum[100] = { 0 }, rowSum[100] = { 0 };
+    double colVar[100] = { 0.0 }, rowVar[100] = { 0.0 }; 
+   FILE *fp = fopen("input4.txt", "r");
+    fscanf(fp, "%d", &N); 
+   for (int i = 0; i < N; i++) {
+        for (int j = 0; j < N; j++ ) {
+            fscanf(fp, "%d", &mat[i][j]); 
+       }
+    }
+    fclose(fp);
+    for (int i = 0; i < N; i++) {
+        for (int j = 0; j < N; j++ ) {
+            colSum[j] += mat[i][j];
+            rowSum[i] += mat[i][j];
+        }
+    }
+    for (int i = 0; i < N; i++) {
+        for (int j = 0; j < N; j++ ) {
+            double colDiff = mat[i][j] - (double)colSum[j]/N;
+            double rowDiff = mat[i][j] - (double)rowSum[i]/N; 
+           colVar[j] += (colDiff*colDiff); 
+           rowVar[i] += (rowDiff*rowDiff); 
+       }
+    }
+    for (int i = 0; i < N; i++) {
+        for (int j = 0; j < N; j++ ) {
+            printf("%d ", mat[i][j]); 
+       }
+        printf("%lf %lf\n", (double)rowSum[i]/N, sqrt(rowVar[i]/N)); 
+   } 
+   for (int j = 0; j < N; j++ )
+        printf("%lf ", (double)colSum[j]/N);
+    printf("\n"); 
+   for (int j = 0; j < N; j++ )
+        printf("%lf ", sqrt(colVar[j]/N));
+    printf("\n");
+ } 
+
+
+
+
+5. 데이터 파일 input5.txt에는 하나의   행렬이 저장되어 있다. 파일의 첫 줄에는 행렬의 크기  이 저장되어 있고, 이어진  줄에는 각 줄마다  개의 정수가 저장되어 있다. 이 행렬에서 각 원 소의 합이 최대가 되는 부분 행렬을 찾아서 그 최대 합을 출력하는 프로그램을 작성하라. 예를 들어 다 음의 행렬에서 합이 최대가 되는 부분 행렬은 사각형으로 둘러싼 부분이고 그 합은 32이다. 부분 행렬 이 반드시 정방행렬일 필요는 없다.
+
+
+5. #include <stdio.h> 
+int main() {
+    int N;
+    int mat[100][100];
+    FILE *fp = fopen("input5.txt", "r"); 
+   fscanf(fp, "%d", &N);
+    for (int i = 0; i < N; i++) {
+        for (int j = 0; j < N; j++ ) {
+            fscanf(fp, "%d", &mat[i][j]);
+        } 
+   } 
+   fclose(fp); 
+   int maxSum = mat[0][0];
+    for (int sx = 0; sx < N; sx++) {
+        for (int ex = sx; ex < N; ex++) {
+            for (int sy = 0; sy < N; sy++) {
+                for (int ey = sy; ey < N; ey++) {
+                   int sum = 0;
+                    for (int i = sx; i <= ex; i++) {
+                        for (int j = sy; j <= ey; j++) 
+                           sum += mat[i][j];
+                    }
+                    if (sum > maxSum) maxSum = sum; 
+               }
+            }
+        } 
+   } 
+   printf("%d\n", maxSum); 
+} 
+
+
+
+6. 데이터 파일 input6.txt에는 하나의   행렬이 저장되어 있다. 파일의 첫 줄에는 행렬의 크기  이 저장되어 있고, 이어진  줄에는 각 줄마다  개의 정수가 저장되어 있다. 이 행렬의 원소들 을 아래 그림의 화살표처럼 zigzag 순서대로 출력하는 프로그램을 작성하라.
+
+
+6. #include <stdio.h> 
+int main() {
+    int N;
+    int mat[100][100];
+    FILE *fp = fopen("input6.txt", "r");
+    fscanf(fp, "%d", &N);
+    for (int i = 0; i < N; i++) {
+        for (int j = 0; j < N; j++ ) {
+            fscanf(fp, "%d", &mat[i][j]);
+        } 
+   }
+    fclose(fp); 
+   for (int i = 0; i < N; i++) {
+        int j = ( i%2 == 0 ? 0 : N-1);
+        while (j >= 0 && j < N ) { 
+           printf("%d ", mat[i][j]);
+            if ( i%2 == 0 ) j++;
+            else j--; 
+       }
+    }
+ }
+
+ 
+
+
+9장.
+
+
+1. 2에서 100 사이의 정수들 중에서 서로 서로소의 관계인 세 정수쌍의 개수를 세는 프로그램을 작성하라. 예를 들어 (3, 5, 7)은 서로 서로소이다. 임의의 두 양의 정수 a와 b가 서로소인지 검 사하는 함수 int isRelativePrime(int a, int b) 를 작성하고 이 함수를 이용하여 문제를 해결하라.  이 함수는 a와 b가 서로소이면 1을, 아니면 0을 반환하도록 작성하라. (정답:  44142)
+
+
+1. #include <stdio.h>
+ bool isRelativePrime(int a, int i);
+ int main() {
+    int count = 0;
+    for (int a=2; a<=100; a++) {
+        for (int b=a+1; b<=100; b++) {
+            if ( !isRelativePrime(b, a) )
+                continue; 
+           for (int c=b+1; c<=100; c++) {
+                if (isRelativePrime(c, a) && isRelativePrime(c, b)) {
+                    printf("%d %d %d\n", a, b, c);
+                    count++; 
+               }
+            }
+        } 
+   }
+    printf("%d\n", count);
+ }
+ bool isRelativePrime(int m, int n) {
+    while ( m % n != 0 ) {
+        m = m % n; 
+       int tmp = m;
+        m = n; 
+       n = tmp;
+    }
+    return n==1; 
+} 
+
+
+
+2. 주사위를 N번 던져서 1이 적어도 k번 나오는 확률을 실험적으로 계산하는 함수double evalProbBySim( int N, int k, int T ) 를 작성하라. 여기서 T는 실험의 횟수이고 T=1,000,000번으로 실행한다. 이 함수를 이용하 여 k=1,2,…,6에 대해서 주사위를 6k번 던져서 1이 k번 이상 나올 확률이 각각 어떻게 되는 지 계산하여 출력하는 프로그램을 작성하라. (6번 던져서 적어도 1번 1이 나오는 사건의 확률 은 1-(5/6)6 0.6651이고, 12번 중 적어도 2번 1이 나오는 사건의 확률은 1-(5/6)12-2(5/ 6)110.618667이다. 대략 이 확률에 근접하는 실험 결과가 나오면 정답이다.)  
+
+
+2. #include <stdio.h> 
+#include <stdlib.h>
+ #include <time.h> 
+double evalProbBySim(int N, int k, int T);
+ int main() {
+    int N, T = 1000000;
+    srand((unsigned int)time(NULL));
+    for (int k = 1; k<=6; k++) {
+        printf("%d: %lf\n", k, evalProbBySim(6*k, k, T));
+    }
+ } 
+double evalProbBySim(int N, int k, int T) {
+    int count = 0; 
+   for (int i=0; i<T; i++) {
+        int hit = 0;
+        for (int t=0; t<N; t++) {
+            int rd = rand() % 6 + 1;
+            if (rd == 1)
+                hit++;
+        }
+        if (hit >= k)
+            count++;
+    }
+    return  (double)count/T; 
+
+
+3.  평면상에서 좌표축에 평행한 2개의 직사각형이 입력으로 주어진다. 두 사각형이 교차하는 영 역, 즉 두 사각형에 공통으로 포함되는 영역의 면적을 구하는 프로그램을 작성하라. 각각의 사각형은 대각 방향의 두 꼭지점의 좌표로 주어진다. 이 문제를 해결하기 위해서 임의의 두 구간에 대해서 두 구간이 겹치는 영역의 길이를 구하는 함수 int lenOfOverlap( int sa, int ta, int sb, int tb )를 작성하여 이용하라. 이 함수는 구간 [sa, ta]와 [sb, tb]의 겹치는 영역의 길이를 계 산하여 반환한다. 
+
+
+3. #include <stdio.h>
+ int lenOfOverlap( int sa, int ta, int sb, int tb );
+ int main() {
+    int x1, y1, x2, y2, x3, y3, x4, y4;
+    scanf("%d %d %d %d %d %d %d %d", &x1, &y1, &x2, &y2, &x3, &y3, &x4, &y4);
+    int sx1, tx1, sy1, ty1, sx2, tx2, sy2, ty2;
+    if (x1 > x2) { sx1 = x2; tx1 = x1; }
+    else { sx1 = x1; tx1 = x2; }
+    if (y1 > y2) { sy1 = y2; ty1 = y1; }
+    else { sy1 = y1; ty1 = y2; }
+    if (x3 > x4) { sx2 = x4; tx2 = x3; }
+    else { sx2 = x3; tx2 = x4; }
+    if (y3 > y4) { sy2 = y4; ty2 = y3; }
+    else { sy2 = y3; ty2 = y4; }
+    int width = lenOfOverlap(sx1, tx1, sx2, tx2);
+    int height = lenOfOverlap(sy1, ty1, sy2, ty2);
+    printf("%d\n", width*height); 
+} 
+int lenOfOverlap( int sa, int ta, int sb, int tb ) {
+    int s, t;
+    if (sa >= sb) s = sa;
+    else s = sb; 
+   if (ta >= tb) t = tb;
+    else t = ta; 
+   if ( s > t ) return 0;
+    else return t-s; 
+} 
+
+
+
+4. 입력으로 n개의 구간(interval)이 주어진다. 각 구간은 구간의 시작점과 끝점으로 표현된다. 이 구간들을 시작점이 빠른 순서대로 정렬하여 출력하는 프로그램을 작성하라. 시작점이 같은 경우 끝점이 빠른 것 을 먼저 출력한다. 입력 형식은 먼저 n의 값이 주어지고, 이어서 각 구간의 시작점과 끝점이 차례대로 주 어진다. 각 구간의 시작점과 끝점은 정수이고, 끝점은 항상 시작점보다 크거나 같다. 매개변수로 두 구간 을 받아서 누가 먼저 출력되어야 하는지 판정하는 함수 int compareInts( int sa, int ta, int sb, int tb) 를 작성하고 이용하라. 이 함수는 두 구간 [sa, ta]와 [sb, tb]를 비교하여 [sa, ta]가 먼저 출입력 예 출력 1 1 4 4 1 1 2 3 2 0 4 5 0 1 1 3 3 4 0 4 5 0 4 6 2 1 6 0 0 5 4 -1 1 8 8 15 5 0 0 4 3 -1 2 6 4 1 1 3 4 3 1 4 4 0 4 4 1 1 2 2 3 3 1 of  1 2 입력되어야 할 경우 -1, [sb, tb]가 먼저 출력되어야 할 경우 1, 두 구간이 동일할 경우에 0을 반환한다
+
+
+4. #include <stdio.h> 
+#define MAX 100 
+int compareInts( int sa, int ta, int sb, int tb);
+ int main() {
+    int n = 0, start[MAX], end[MAX];
+    FILE *fp = fopen("input4.txt", "r");
+    while (!feof(fp)) { 
+       fscanf(fp, "%d", &start[n]);
+        fscanf(fp, "%d", &end[n++]);
+    }
+    fclose(fp);
+    for (int i=n-1; i>0; i--) {
+        for (int j=0; j<i; j++) {
+            if ( compareInts(start[j], end[j], start[j+1], end[j+1]) > 0 ) {
+                int tmp = start[j];
+                start[j] = start[j+1];
+                start[j+1] = tmp;
+                tmp = end[j]; 
+               end[j] = end[j+1];
+                end[j+1] = tmp;
+            } 
+       }
+    }
+    for (int i=0; i<n; i++) 
+       printf("%d %d\n", start[i], end[i]);
+ }
+ int compareInts( int sa, int ta, int sb, int tb ) { 
+   if (sa > sb || sa == sb && ta > tb) return 1; 
+   else if ( sa == sb && ta && tb ) return 0;
+    else return -1; 
+} 
+
+
+
+5.입력으로 양의 정수들이 주어진다. 각 정수들은 8자리 이내의 정수들이다. 이 정수들을 사전식 순서 (lexicographic order)로 정렬하여 출력하는 프로그램을 작성하라. 예를 들어 입력 정수들이 75, 111, 120, 3456, 9, 12, 67, 91이라면 111, 12, 120, 3456, 67, 75, 9, 91의 순서이다. 입력은 input5.txt 파일 에서 읽는다. 정수의 개수는 따로 주어지지 않고 파일의 끝까지 읽어야 한다. 이 문제를 해결하기 위해 서 두 정수를 매개변수로 받아서 사전식 순서를 비교하는 함수                          int compareLexicographic(int a, int b) 를 작성하라. 이 함수는 정수 a와 b를 비교하여 a가 사전식 순서로 앞 설 경우에는 -1, b가 앞설 경우 에는 1, 그리고 두 정수가 동일할 경우에는 0을 반환한다. 
+
+5. #include <stdio.h> 
+#define MAX 100 
+int  compareLexicographic(int p, int q) {
+    int digits1[20], digits2[20];
+    int k = 0;
+   // number of digits of p 
+   while(p > 0) {
+        digits1[k++] = p%10;
+       p /= 10; 
+   }
+    int h = 0;
+  // h is # of digits of q
+    while(q > 0) {
+        digits2[h++] = q%10;
+        q /= 10;
+    }
+    for (int x = k-1, y = h-1; x >= 0 && y >= 0; x--, y--) {
+        if (digits1[x] < digits2[y]) {
+            return -1;
+        }
+        else if (digits1[x] > digits2[y]) {
+            return 1;
+        }
+    }
+   if ( k > h ) return 1;
+    else if ( k < h ) return -1; 
+   else return 0; } int main() { 
+   int data[MAX], n=0;
+    FILE *fp = fopen("input5.txt", "r"); 
+   while (!feof(fp)) fscanf(fp, "%d", &data[n++]);
+    fclose(fp); 
+   
+/* insertion sort */
+
+    for (int i=1; i<n; i++) {
+        int j = i-1, tmp = data[i];
+        while( j >= 0 && compareLexicographic(tmp, data[j]) < 0) {
+            data[j+1] = data[j];
+            j--; 
+       } 
+       data[j+1] = tmp; 
+   }
+    for (int i=0; i<n; i++)
+        printf("%d ", data[i]); 
+} 
+
+
+
+
+10장.
+
+1. 정수 수열에서 어떤 정수가 자신보다 앞에 나온 모든 정수들 보다 크거나 같으면 리더(leader)라고 부 른다. 첫 번째 정수는 무조건 리더이다. 입력 파일로부터 정수들을 읽어서 리더들만 배열에 저장한 후 출력하는 프로그램을 작성하라. 이 문제를 해결하기 위해서 새로운 정수가 입력될 때 마다 이 정수가 리더인지 아닌지 판단한 하는 함수를 작성하다. 이 함수를 호출하여 리더이면 배열에 저장하고 아니면 버린다. 먼저 리더들의 개수를 출력하고 이어서 리더들을 순서대로 화면으로 출력하라. 전역변수를 사 용해서는 안된다. 입력은 input1.txt 파일로부터 받고, 입력 파일에서 정수의 개수는 주어지지 않고 파 일의 끝까지 읽어야 한다. 
+
+
+1. #include <stdio.h>
+ #define MAX 100
+ bool isLeader(int data[], int n, int k);
+ int main() {
+    int data[MAX];
+    int n = 0, k;
+    FILE *fp = fopen("input10_1.txt", "r");
+    while(!feof(fp))  { 
+       fscanf(fp, "%d", &k); 
+       if (isLeader(data, n, k)) 
+           data[n++] = k; 
+   } 
+   fclose(fp);
+    printf("%d: ", n);
+    for (int i=0; i<n; i++)
+        printf("%d ", data[i]); 
+}
+ //bool isLeader(int data[], int n, int k) 
+{
+ //    for (int i=0; i<n; i++) 
+//        if (data[i] > k) 
+//            return false; 
+//    return true; 
+//
+} bool isLeader(int data[], int n, int k) {
+    return  (n == 0 || data[n-1] <= k); 
+}
+
+
+
+
+2. 키보드로 부터 연속해서 정수들을 입력받는다. 정수가 하나 씩 입력될 때 마다 현재까지 입력된 정수들 을 오름차순으로 정렬하여 화면에 출력한다. 단, 새로 입력된 정수가 이미 배열에 저장되어 있다면 추 가하는 대신 “duplicate entry”라고 출력한다. 사용자가 -1을 입력하면 프로그램을 종료한다. 이 일을 하기 위해서 다음과 같은 두 함수를 작성하라. 먼저 현재까지 입력된 정수들이 저장되어 있는 배열에 새로 입력된 정수가 이미 존재하는지 검사하여 만약 있으면 그 위치(배열 인덱스)를 반환하고, 없으면 -1을 반환하는 함수 find를 작성하라. 또한 새로 입력된 정수가 duplicate entry가 아닌 경우에 이 정수 를 배열에 오름차순으로 정렬되도록 삽입하는 함수 insert를 작성하라. 그리고 main 함수에서는 이 두 함수를 적절히 이용하여 문제를 해결하라. Duplicate entry라고 출력할 때 그 배열에서 그 정수의 위치 를 함께 출력하라. 어떤 전역 변수도 사용해서는 안된다. 
+
+
+2. #include <stdio.h>
+ #define MAX 100 
+int find(int data[], int n, int k);
+ void insert(int data[], int n, int k);
+ int main() {
+    int data[MAX];
+    int n = 0, k;
+    while(1) {
+        scanf("%d", &k);
+        if (k==-1) break;
+        int index = find(data, n, k); 
+       if (index != -1)
+            printf("duplicate entry: %d\n", index); 
+       else {
+            insert(data, n, k);
+            n++;
+            for (int i=0; i<n; i++)
+                printf("%d ", data[i]);
+            printf("\n");
+        }
+    }
+ } 
+void insert(int data[], int n, int k) {
+    int i=n-1; 
+   while(i>=0 && data[i] > k) {
+        data[i+1] = data[i]; 
+       i--;
+    } 
+   data[i+1] = k; 
+} 
+int find(int data[], int n, int k) { 
+   for (int i=0; i<n; i++)
+        if (data[i] == k) 
+           return i; 
+   return -1; 
+} 
+
+
+
+3.  입력으로 N개의 수직 혹은 수평 선분이 주어진다. 선분들간의 교차점의 좌표를 모두 계산하여 x좌표에 대한 오름차순으로 정렬하여 출력하는 프로그램을 작성하라. x좌표가 동일한 경우에는 y좌표가 작은 점 을 먼저 출력한다. 입력은 input3.txt 파일로부터 받는다. 파일의 첫 줄에는 선분의 개수 N이 주어지고, 이어진 N줄에는 각 줄마다 하나의 선분의 시작점과 끝점의 좌표가 주어진다. 수평 선분의 경우 x좌표가 작은 점이 먼저 주어지고, 수직 선분의 경우 y좌표가 작은 점이 항상 먼저 주어진다. 수직이나 수평이 아 닌 선분이 주어지는 경우는 없다. 수평 선분끼리 만나거나 혹은 수직 선분끼리 만나는 경우는 교차점으 로 간주하지 않는다. 이 문제를 해결하기 위해서 두 선분이 교차하는지 검사하는 함수 intersect를 만들 어 사용하라. 매개 변수로 두 선분을 받아서 교차하면 1, 그렇지 않으면 0을 반환하라. 어떤 전역변수도 사용해서는 안된다. 
+
+3. #include <stdio.h> 
+#define MAX 100
+bool intersect( int p, int q, int x1[], int y1[], int x2[], int y2[]);
+ void insertion_sort(int n, int xx[], int yy[]) 
+int findAllIntersections(int n, int x1[], int y1[], int x2[],int y2[], int xx[], int yy[]); 
+
+int main() {
+    int x1[MAX], y1[MAX], x2[MAX], y2[MAX];
+    int xx[MAX], yy[MAX];
+    int n = 0;
+    FILE *fd = fopen("input10_3.txt", "r");
+    while(!feof(fd)) {
+        fscanf(fd, "%d %d %d %d", &x1[n], &y1[n], &x2[n], &y2[n]);
+        n++;
+    }
+    fclose(fd);
+    int count = findAllIntersections( n, x1, y1, x2, y2, xx, yy );
+    insertion_sort( count, xx, yy );
+    for (int i=0; i<count; i++)
+        printf("[%d, %d]\n", xx[i], yy[i]);
+ }
+int findAllIntersections(int n, int x1[], int y1[], int x2[], int y2[], int xx[], int yy[]) {
+    int count = 0;
+    for (int i=0; i<n; i++) {
+        for (int j=i+1; j<n; j++) {
+            if (!intersect( i, j, x1, y1, x2, y2)) continue;
+            if (x1[i] == x2[i]) {
+   // i  vertical and j horizontal
+                xx[count] = x1[i];
+                yy[count++] = y1[j];
+            }
+            else  {  
+// i horizontal and j vertical
+                xx[count] = x1[j];
+                yy[count++] = y1[i];
+            }
+        }
+    } 
+   return count;
+ } 
+/* decide whether p-th and q-th line segments intersect */ 
+bool intersect( int p, int q, int x1[], int y1[], int x2[], int y2[]) {
+    if (x1[p] == x2[p] && x1[q] == x2[q] || y1[p] == y2[p] && y1[q] == y2[q])  
+//  both horizontal or both vertical
+        return false;
+    if (x1[p] == x2[p] && x1[q] <= x1[p] && x2[q] >= x1[p] && y1[p] <= y1[q] && y2[p] >= y1[q] ) 
+  // p is vertical
+        return true; 
+   else if (x1[p] <= x1[q] && x2[p] >= x1[q] && y1[q] <= y1[p]  && y2[q] >= y1[p])
+        return true;
+    return false;
+ }
+ void insertion_sort(int count, int xx[], int yy[]) {
+    for (int i=1; i<count; i++) {
+        int tmpx = xx[i];
+        int tmpy = yy[i];
+        int j = i-1;
+        while ( j>=0 && (xx[j] > tmpx || xx[j] == tmpx && yy[j] > tmpy )) {
+            xx[j+1] = xx[j];
+            yy[j+1] = yy[j];
+            j--;
+        }
+        xx[j+1] = tmpx;
+        yy[j+1] = tmpy;
+    }
+ } 
+
+
+
+4. 두 개의 입력 파일 input4_1.txt와 input4_2.txt에 각각 정수들이 이미 오름차순으로 정렬된 상태로 저 장되어 있다. 먼저 input4_1.txt 파일에 있는 정수들을 읽어 배열 data1에 순서대로 저장하고, input4_2.txt에 있는 정수들을 읽어 배열 data2에 순서대로 저장한다. 두 배열에 저장된 정수들을 배열 data3로 합쳐서 하나의 정렬된 배열을 만들어 출력하라. 두 파일에 저장된 정수들은 각각 최대 1000개 이다. 이 문제를 해결하기 위해서 data1과 data2에 있는 정수들을 data3에 정렬된 상태로 저장해주는 함수 merge를 작성하여 이용하라.
+int main() {
+     int data1[1000], data2[1000], data3[2000];
+     int n1 = 0, n2 = 0, n3 = 0;
+     FILE *fp1 = fopen(“input1.txt”, “r”);
+     FILE *fp2 = fopen(“input2.txt”, “r”);
+     while (!feof(fp1))  fscanf(fp1, “%d”, &data1[n1++]);
+     while (!feof(fp2))  fscanf(fp2, “%d”, &data2[n2++]); 
+    fclose(fp1); 
+	fclose(fp2); 
+/* 여기에서 배열 data3에 정렬하여 저장하기 위해서 함수 merge를 호출한다. */ 
+    for (int i=0; i<n3; i++)
+    /* n3 = n1 + n2 */
+         printf(“%d\n”, data3[i]); 
+} 
+
+
+
+4. #include <stdio.h> 
+#define MAX 2000
+ int merge(int n1, int data1[], int n2, int data2[], int data3[]);
+ int main() {    int data1[MAX], data2[MAX], data3[MAX];
+    int n1 = 0, n2 = 0;    FILE *fp1 = fopen("input4-1.txt", "r");
+    FILE *fp2 = fopen("input4-2.txt", "r");
+    while (!feof(fp1))
+  fscanf(fp1, "%d", &data1[n1++]);
+    while (!feof(fp2))  fscanf(fp2, "%d", &data2[n2++]);
+    fclose(fp1); fclose(fp2); 
+   int n3 = merge( n1, data1, n2, data2, data3);
+    for (int i=0; i<n3; i++)
+        printf("%d\n", data3[i]);
+ } 
+int merge(int n1, int data1[], int n2, int data2[], int data3[]) {
+    int i = 0, j = 0, k = 0;
+    while( i < n1 && j < n2) {
+        if (data1[i] <= data2[j])
+            data3[k++] = data1[i++];
+        else
+            data3[k++] = data2[j++];
+    }
+    while(i<n1) data3[k++] = data1[i++];
+    while(j<n2) data3[k++] = data2[j++];
+    return k;
+ } 
+
+
+
+
+5. [Self avoiding walk] 2차원 평면에서 원점 (0,0)에서 출발한다. 사용자가 현재의 위치에서 상하좌우 어 떤 한 방향으로 얼마 만큼 이동하라는 명령을 내리면 그렇게 이동한다. 명령은 두 음이 아닌 정수로 표 현된다. 우선 방향은 0, 1, 2, 3으로 표시하고 0은 y좌표가 증가하는 방향, 1은 x좌표가 증가하는 방향, 2 는 y좌표가 감소하는 방향, 그리고 3은 x좌표가 감소하는 방향이다. 예를 들어 2 7은 y좌표가 7만큼 감 소하는 위치로 이동하라는 명령이다. 프로그램은 사용자가 현재까지 이동한 궤적을 기억하고 있어야 한 다. 사용자가 내린 명령대로 이동했을 때 민약 지금까지 이동한 궤적과 교차하면 invalid move라고 출력 하고 이동 명령을 거부한다. 만약 그렇지 않으면 명령대로 이동하고 이동한 점의 좌표를 출력한다. 사용 자가 -1 -1을 입력할 때 까지 이 일을 계속한다. 사용자가 -1 -1을 입력하면 프로그램을 종료한다. 이 문제를 해결하기 위해 사용자가 내린 명령이 invalid move인지 아닌지 검사하는 함수 check를 작성하 라. 전역변수를 사용해서는 안된다.
+
+
+5. #include <stdio.h> 
+#define MAX 1000 
+bool check(int n, int traj[][2], int x, int y);
+ bool intersect(int x1, int y1, int x2, int y2, int x3, int y3, int x4, int y4); 
+int main() {
+    int offset[][2] = { {0, 1}, {1, 0}, {0, -1}, {-1, 0}};
+    int n = 1;
+    int trajectory[MAX][2];// trajectory
+    int dir, dist, lastDir = -1;
+    int x = 0, y = 0;    // current position
+    trajectory[0][0] = 0, trajectory[0][1] = 0;
+    while(1) {
+        scanf("%d %d", &dir, &dist);
+        if (dir == -1) break;
+        int nextX = x + dist*offset[dir][0];
+        int nextY = y + dist*offset[dir][1];
+        if (lastDir!=-1 && (dir+2)%4==lastDir || !check(n, trajectory, nextX, nextY))
+            printf("invalid move\n");
+        else { 
+           trajectory[n][0] = x = nextX;
+            trajectory[n++][1] = y = nextY;
+            lastDir = dir;
+            printf("%d %d\n", x, y);
+        }
+    }
+ }
+ bool check(int n, int traj[][2], int x, int y) {
+    for (int i=1; i<n-1; i++)
+        if (intersect(traj[i-1][0], traj[i-1][1], traj[i][0],traj[i][1], traj[n-1][0], traj[n-1][1], x, y))            		return false;
+    return true;
+ } 
+bool intersect(int x1, int y1, int x2, int y2, int x3, int y3, int x4, int y4) {
+    bool vert12 = (x1 == x2), vert34 = (x3 == x4);    if (vert12 && y1 > y2) {
+        int tmp = y1; y1 = y2; y2 = tmp;
+    }
+    else if (!vert12 && x1 > x2) {
+        int tmp = x1; x1 = x2; x2 = tmp;
+    }
+    if (vert34 && y3 > y4) { 
+       int tmp = y3; y3 = y4; y4 = tmp;
+	}
+    else if (!vert34 && x3 > x4) {
+        int tmp = x3; x3 = x4; x4 = tmp;
+    }
+    if (vert12 && vert34)
+        return !(x1 != x3 || y2 < y3 || y4 < y1);
+    else if (vert12 && !vert34)
+        return  (x3 <= x1 && x1 <= x4 && y1 <= y3 && y3 <= y2);
+    else if (!vert12 && vert34)
+        return (x1 <= x3 && x3 <= x2 && y3 <= y1 && y1 <= y4);
+    else
+        return !(y1 != y3 || x2 < x3 || x4 < x1); 
+}

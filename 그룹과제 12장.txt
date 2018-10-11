@@ -1,0 +1,39 @@
+#include <stdio.h>//그룹과제 11장 1번
+#include<math.h>
+#include<stdlib.h>
+#pragma warning(disable:4996)
+int board[][19] = { {0,0,0,0,0,0,0,0,0,0} };
+void main()
+{
+	int x, y;
+	scanf("%d%d", &x, &y);
+	int turn = 2;
+	int result = doesWin(x, y, turn);
+}
+int doesWIn(int x, int y, int turn) {
+	for (int dir = 0; dir < 4; dir++) {
+		if (checkDir(x, y, turn ,dir))
+			return 1;
+	}return 0;
+}
+bool checkDir(int x, int y, int turn, int dir){//그 방향으로 오목이완성되는가?를 판단하는 함수.
+	return countInDir(x, y, dir, turn) + countInDir(x, y, (dir + 4) % 8, turn) >= 4;//(자기를 기준으로 한방향으로 2(흰색)의 개수 세고 반대방향으로 세서 자기포함해서 4가되면 승리
+}
+int countInDir(int x, int y, int dir, int turn) {//x,y방향으로 dir방향으로 이어진 흑돌의개수나 백돌의 개수를 세준다.
+	int count = 0;
+	for (int d = 1; d < 19; d++) {
+		int stone = getStone(x, y, dir, d);
+		if (stone == -1 || stone != turn) //-1은 무효한값이거나 다른색 돌이면
+			return count;
+		count++;
+	}
+	return count;
+}
+int offset[8][2] = { {-1,0},{-1,1},{0,1},{1,1},{1,0},{1,-1},{0,-1},{-1,-1} };
+int getStone(int x, int y, int dir, int dist) {//x,y에서 dir방향으로 d칸 떨어진 자리를 읽어온다.
+	int newx = x + dist*offset[dir][0];
+	int newy = y + dist*offset[dir][1];
+	if (newx < 0 || newx >= 19 || newy < 0 || newy >= 19)
+		return -1;//-1은 무효한값
+	return board[newx][newy];
+}

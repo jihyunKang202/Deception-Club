@@ -1,0 +1,23 @@
+dist(p1,p2)//두점간의 거리
+lenthOverlap(s1,t1,s2,t2)//두(x,y)좌표 사이의 거리-두사각형의 교차하는 면적을 구해 0이면 교차안함.
+calcArea(r1,r2)//두사각형의 교차하는 면적을 구해 0이면 교차안함.
+calcDistBtwn_Pt_And_Line(u,v,w)//한점과 한선분간의 거리이다.(총32가지후보가있따)
+calcDistBtwn_Rects(r1,r2)//사각형사이의 거리는 : 한 사각형의 한점과 다른사각형의 한선분간의 거리의 최솟값이다.(총32가지후보가있따)
+수직인가 수평인가 나누고 점이 사이에있나 바깥에있나계산
+{
+if(calcArea(r1,r2)==0)
+	return 0;
+else {
+	double minDist=INFINITE;
+	for each vertex u of r1
+		for each edge (v,w)of r2
+			d=calcDistBtwn_Pt_And_Line(u,v,w);
+			if(d<minDist)
+				minDIst=d;
+		for each vertex u of r2
+			for each edge (v,w) of r1
+				d=calcDistBtwn_Pt_And_Line(u,v,w);
+				if d<minDist
+					minDist=d;
+		return minDIst; }
+	

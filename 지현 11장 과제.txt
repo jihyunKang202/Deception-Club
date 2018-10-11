@@ -1,0 +1,220 @@
+#include <stdio.h>//11강 1번
+#define NUM_RANKS 13
+#define NUM_SUITS 4
+#define NUM_CARDS 5
+int num_in_rank[NUM_RANKS + 1];
+int num_in_suit[NUM_SUITS];
+void read_cards();
+void analyze_hand();
+#pragma warning(disable:4996)
+void main()
+{
+	int n;
+	while (1) {
+		read_cards();
+		analyze_hand();
+		printf("계속하시겠습니까?(YES:1,NO:0)");
+		scanf("%d", &n);
+		if (n == 0)
+			break;
+	}
+}
+void init_data()//초기화시켜줌
+{
+	for (int rank = 0; rank < NUM_RANKS; rank++)
+		num_in_rank[rank] = 0;
+	for (int suit = 0; suit < NUM_SUITS; suit++)
+		num_in_suit[suit] = 0;
+}
+void read_cards()
+{
+	char rank_ch, suit_ch;
+	int rank=0, suit=-1;
+	init_data();
+	int cards_read = 0;
+	while (cards_read < NUM_CARDS) {
+		printf("Enter a card : ");
+		scanf(" %c", &rank_ch);
+		switch(rank_ch) {
+			case 'a':rank = 1; break;
+			case '2':rank = 2; break;
+			case '3':rank = 3; break;
+			case '4':rank = 4; break;
+			case '5':rank = 5; break;
+			case '6':rank = 6; break;
+			case '7':rank = 7; break;
+			case '8':rank = 8; break;
+			case '9':rank = 9; break;
+			case 't':rank = 10; break; 
+			case 'j':rank = 11; break;
+			case 'q':rank = 12; break;
+			case 'k':rank = 13; break;
+		}
+		scanf(" %c", &suit_ch); 
+		switch(suit_ch){
+			case 'c':suit = 0; break;
+			case 'd':suit = 1; break;
+			case 'h':suit = 2; break;
+			case 's':suit = 3; break;
+		}if (rank == 0||suit == -1) {
+			printf("다시입력하세요 : ");
+			continue;
+		}
+		num_in_rank[rank]++;
+		num_in_suit[suit]++;
+		cards_read++;
+	}
+}
+int check_flush(int num_in_suit[])
+{
+	for (int i = 0; i < NUM_SUITS; i++)
+		if (num_in_suit[i]==5)
+			return 1;
+	return 0;
+}
+int check_straight(int num_in_rank[])
+{
+	int j=0, new_rank[100];
+	for (int i = 0; i < NUM_RANKS; i++)
+	{
+		if (num_in_rank[i] == 1)
+			new_rank[j++] = i;
+	}int count = 1;
+	for (int i = 1; i < j; i++)
+		if (new_rank[i] == new_rank[i - 1] + 1)
+			count++;
+	if (count == 5)
+		return 1;
+	return 0;
+}
+int check_four_cards(int num_in_rank[])
+{
+	for (int i = 0; i < NUM_RANKS; i++)
+		if (num_in_rank[i] == 4)
+			return 1;
+	return 0;
+}
+int check_three_cards(int num_in_rank[])
+{
+	for (int i = 0; i < NUM_RANKS; i++)
+		if (num_in_rank[i] == 3)
+			return 1;
+	return 0;
+}
+int count_pair(int num_in_rank[])
+{
+	int count = 0;
+	for (int i = 0; i < NUM_RANKS; i++)
+		if (num_in_rank[i] == 2)
+			count++;
+	return count;
+}
+void analyze_hand()
+{
+	if (check_flush(num_in_suit) == 1) {
+		if (check_straight(num_in_suit) == 1)
+		{
+			printf("straight flush"); return;
+		}
+		printf("flush"); return;
+	}
+	else if (check_four_cards(num_in_rank) == 1)
+	{
+		printf("four cards"); return;
+	}
+	else if( count_pair(num_in_rank)==1)
+	{
+		if (check_three_cards(num_in_rank) == 1)
+		{
+			printf("full house"); return;
+		}printf("pair"); return;
+	}
+	else if (check_straight(num_in_suit) == 1)
+	{
+		printf("straight"); return;
+	}
+	else if(count_pair(num_in_rank) == 2)
+	{
+		printf("two pair"); return;
+	}
+	printf("high card");
+	return;
+}
+
+
+
+
+
+
+
+
+
+#include <stdio.h>//11강 2번
+#pragma warning(disable:4996)
+void Gaussian_Elimination(double A[][100], int n);
+void main()
+{
+	int n;
+	double A[100][100];
+	FILE*fp = fopen("data.txt", "r");
+	fscanf(fp, "%d", &n);
+	for (int i = 0; i < n; i++){
+		for (int j = 0; j <= n; j++)
+			fscanf(fp, "%lf", &A[i][j]);
+	}
+	fclose(fp);
+	Gaussian_Elimination(A, n);
+}
+void swap(double A[][100], int n, int i, int j)//행을 바뀌주는 함수
+{
+	for (int k = 0; k <= n; k++){
+		double tmp = A[i][k];
+		A[i][k] = A[j][k];
+		A[j][k] = tmp;
+	}
+}
+void Gaussian_Elimination(double A[][100], int n){
+	for (int i = 0; i < n - 1; i++){
+		if (A[i][i] == 0){
+			for (int j = i + 1; j < n; j++){
+				swap(A, n, i, j);
+				break;
+			}i--;//실제행한건 아니므로
+		}
+		else{
+			double denom = A[i][i];
+			for (int j = 0; j <= n; j++)
+				A[i][j] *= (1 / denom);//0이 아닌 제일 처음을 1로만듬
+			for (int j = i + 1; j < n; j++){
+				double mul = A[j][i];
+				for (int k = 0; k <= n; k++)
+					A[j][k] -= (A[i][k] * mul);
+			}
+		}
+	}
+	double tmp = A[n - 1][n - 1];//가우스 소거
+	for (int i = 0; i <= n; i++) {
+		if (tmp != 0)
+			A[n - 1][i] *= (1 / tmp);
+	}
+	for (int i = n - 1; i > 0; i--)
+		for (int j = i - 1; j >= 0; j--) {
+			double mul = A[j][i];
+			for (int k = i; k <= n; k++) {
+				if (mul != 0)
+					A[j][k] -= (A[i][k] * mul);
+			}
+		}
+	if (A[n - 1][n - 1] == 1){
+		for (int i = 0; i < n; i++) {
+			printf("x%d = %f ", i + 1, A[i][n]);
+			printf("\n");
+		}return;
+	}
+	if (A[0][n - 1] == 0){
+		printf("No solution");
+		return;
+	}
+	printf("Infinite solution");
+	return;
+}

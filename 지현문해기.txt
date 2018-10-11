@@ -1,0 +1,1394 @@
+#include<stdio.h>//1강 1번(pow만들기)
+#pragma warning(disable:4996)
+int main()
+{
+	int a, b,sum=1;
+	scanf("%d%d", &a, &b);
+	for (int i = 0; i < b; i++)
+		sum *= a;
+	printf("%d", sum);
+}
+
+#include<stdio.h>//1강 2번(섭씨를 화씨로 바꾸기)
+#pragma warning(disable:4996)
+int main()
+{
+	double f, c;
+	scanf("%lf", &c);
+	f = c*1.8 + 32.0;
+	printf("%lf", f);
+}
+
+#include<stdio.h>//1강 3번(분모가 증가하는 수열의 합)
+#pragma warning(disable:4996)
+int main()
+{
+	int n;
+	double sum = 0.0;
+	scanf("%d", &n);
+	for (int i = 1; i <= n; i++)
+		sum += (double)(1.0 / i);
+	printf("%f", sum);
+}
+
+#include<stdio.h>//1강 4번(재귀함수)
+#pragma warning(disable:4996)
+int padovan(int x);
+int main()
+{
+	int n;
+	scanf("%d", &n);
+	printf("%d", padovan(n));
+}
+int padovan(int x)
+{
+	if (x == 0 || x == 1)
+		return 1;
+	else
+		return padovan(x - 1) + padovan(x - 2);
+}
+
+#include<stdio.h>//1강 5번(재귀함수)
+#pragma warning(disable:4996)
+int padovan(int x);
+int main()
+{
+	int n;
+	scanf("%d", &n);
+	printf("%d", padovan(n));
+}
+int padovan(int x)
+{
+	if (x == 0 || x == 1||x==2)
+		return 1;
+	else
+		return padovan(x - 2) + padovan(x - 3);
+}
+
+#include<stdio.h>//1강 6번(분모의 지수승이 커질때)
+#pragma warning(disable:4996)
+int main()
+{
+	int n;
+	double sum = 1, denom = 1;
+	scanf("%d", &n);
+	for (int i = 1; i <= n; i++)
+	{
+		denom *= 2.0;
+		sum += 1.0 / denom;
+	}
+	printf("%f", sum);
+}
+
+#include<stdio.h>//1강 7번(분모의 지수승이 커지고,마이너스 값 번갈아 나올때)
+#pragma warning(disable:4996)
+int main()
+{
+	int n;
+	double sum = 1, denom=1 ;
+	scanf("%d", &n);
+	for (int i = 1; i <= n; i++)
+	{
+		denom *= -2.0;
+		sum += 1.0 / denom;
+	}
+	printf("%f", sum);
+}
+
+#include<stdio.h>//1강 8번(분모의 팩토리얼 승이 커질때)
+#pragma warning(disable:4996)
+int fac(int x);
+int main()
+{
+	int n;
+	double sum = 0 ;
+	scanf("%d", &n);
+	for (int i = 1; i <= n; i++)
+	{
+		sum += (double)1.0 / fac(i);
+	}
+	printf("%f", sum);
+}
+int fac(int x)
+{
+	int sum = 1;
+	for (int j = 1; j <= x; j++)
+		sum *= j;
+	return sum;
+}
+
+#include<stdio.h>//1강 9번(파이 값 계산)
+#pragma warning(disable:4996)
+int main()
+{
+	int n;
+	double sum = 0,denom,k=-1;
+	scanf("%d", &n);
+	for (int i = 1; i <= n; i++)
+	{
+		k*=-1;
+		sum += k*(4.0 / (2 * i - 1));
+	}
+	printf("%f", sum);
+}
+
+#include<stdio.h>//1강 10번(로그 2의 몇승 값 계산)
+#pragma warning(disable:4996)
+int main()
+{
+	int n;
+	scanf("%d", &n);
+	for (int i = 1; i <= n / 2; i *= 2)
+		printf("hello ");
+}
+
+#include<stdio.h>//1강 11번(연속적으로 2로 나눈 몫을 출력)
+#pragma warning(disable:4996)
+int main()
+{
+	int n;
+	scanf("%d", &n);
+	while (n > 1)
+	{
+		n /= 2;
+		printf("%d ", n);
+	}
+}
+
+#include<stdio.h>//1강 12번(입력받을때 마다 평균 출력)
+#pragma warning(disable:4996)
+int main()
+{
+	int N,sum=0;
+	double val;
+	for (int i = 1; i <= 10; i++)
+	{
+		scanf("%d", &N);
+		sum += N;
+		val = (double)sum / i;
+		printf("%f\n", val);
+	}
+}
+
+#include<stdio.h>//1강 13번(통장복리계산)
+#pragma warning(disable:4996)
+int main()
+{
+	double r,money,sum=0;
+	scanf("%lf", &r);
+	for (int i = 1; i <= 12; i++)
+	{
+		scanf("%lf", &money);
+		sum +=money+(money+sum)*r;
+		printf("%lf\n", sum);
+	}
+}
+
+#include<stdio.h>//1강 14번(math.h안쓰고 싸인코싸인 함수 구하기)
+#pragma warning(disable:4996)
+int main()
+{
+	double sinx,o;
+	double cosx = 1.0;
+	double pact = 1.0;
+	double result;
+	double pact_a = 1.0;
+	double result_a = 1.0;
+	printf("x값을 입력하시오:");
+	scanf_s("%lf", &o);
+	sinx = o;
+	result = o;
+	for (int i = 1; i < 100; i++)
+	{
+		pact = pact*(2.0*i + 1.0)*(2.0*i);
+		result = result*o*o*(-1.0);
+		sinx = sinx + result / pact;
+
+		pact_a = pact_a*(2.0*i - 1)*(2.0*i);
+		result_a = result_a* o*o*(-1.0);
+		cosx += result_a / pact_a;
+	}
+	printf("sin값은 %f이고 cos값은 %f이다.", sinx, cosx);
+	return 0;
+}
+
+#include<stdio.h>//2강 1번(가정:삼각형이 되는지 안되는지)
+#pragma warning(disable:4996)
+int main()
+{
+	int a, b, c,tmp;//a<b&&b<c로 가정한다.
+	scanf("%d%d%d", &a, &b, &c);
+	if (a > b) { tmp = a; a = b; b = tmp; }
+	if (b > c) { tmp = b; b = c; c = tmp; }
+	if (a > b) { tmp = a; a = b; b = tmp; }
+	if (a + b > c)
+		printf("Yes");
+	else
+		printf("No");
+}
+#include<stdio.h>//2강 2번(가정:오름차순 나열)
+#pragma warning(disable:4996)
+int main()
+{
+	int a, b, c, tmp;//a<b&&b<c로 가정한다.
+	scanf("%d%d%d", &a, &b, &c);
+	if (a > b) { tmp = a; a = b; b = tmp; }
+	if (b > c) { tmp = b; b = c; c = tmp; }
+	if (a > b) { tmp = a; a = b; b = tmp; }
+	printf("%d %d %d", a, b, c);
+}
+
+
+#include<stdio.h>//2강 3번(짝수의 합과 홀수의 합간의 차이의 절댓값)
+#pragma warning(disable:4996)
+int main()
+{
+	int n,even=0,odd=0;
+	for (int i = 0; i < 10; i++)
+	{
+		scanf("%d", &n);
+		if (n % 2 == 0)
+			even += n;
+		else
+			odd += n;
+	}
+	printf("%d",abs(even - odd));
+}
+
+#include<stdio.h>//2강 4번(음이 아닌정수들 중에서 최솟값)
+int main()
+{
+	int n;
+	int a = 2147483647;
+	for (int i = 1; i <= 10; i++)
+	{
+		scanf_s("%d", &n);
+		if (n >= 0)
+		{
+			if (n >a)
+				a = a;
+			else
+				a = n;
+		}
+	}
+	printf("최솟값은%d", a);
+	return 0;
+}
+
+#include<stdio.h>//2강 5번(입력된 수들중 최솟값과 최댓값의 차이)
+#pragma warning(disable:4996)
+int main()
+{
+	int min, max,n;
+	scanf("%d", &min);
+	printf("0\n");
+	scanf("%d", &max);
+	if (min > max) { int tmp = min;  min = max; max = min; }//(min<max로 가정하고 푼다)
+	printf("%d\n", max - min);
+	for (int i = 3; i <= 10; i++)
+	{
+		scanf("%d", &n);
+		if (n > max)
+			max = n;
+		else if (n < min)
+			min = n;
+		printf("%d\n", max - min);
+	}
+	return 0;
+}
+
+#include<stdio.h>//2강 6번(날짜:어느 날짜가 더 이른가?)
+int main()
+{
+	int year, month, day, year_a, month_a, day_a;
+	printf("두날짜를 입력하시오(년,월,일):");
+	scanf_s("%d%d%d%d%d%d", &year, &month, &day, &year_a, &month_a, &day_a);
+	if (year > year_a)
+		printf("1");
+	else if (year < year_a)
+		printf("-1");
+	else
+	{
+		if (month > month_a)
+			printf("1");
+		else if (month < month_a)
+			printf("-1");
+		else
+		{
+			if (day > day_a)
+				printf("1");
+			else if (day < day_a)
+				printf("-1");
+			else
+				printf("0");
+		}
+	}
+	return 0;
+}
+
+#include<stdio.h>//2강 7번(교차:두원이 교차 하는가?)
+#include<math.h>
+#pragma warning(disable:4996)
+int main()
+{
+	double x, y, r, x1, y1, r1;
+	scanf("%lf%lf%lf%lf%lf%lf",&x,&y,&r,&x1,&y1,&r1);
+	if (r1 > r) { double tmp = r1; r1 = r; r = tmp; }
+	if (sqrt((x - x1)*(x - x1) + (y - y1)*(y - y1)) <= r + r1 && (r - sqrt((x - x1)*(x - x1) + (y - y1)*(y - y1)) <= r1))
+		printf("yes");
+	else
+		printf("no");
+
+}
+
+#include<stdio.h>//2강 8번(4개점이 폐구간안에 속하는지)
+int main()
+{
+	int a, b, c, d;
+	printf("폐구간 [a, b]와[c,d]를 입력하시오");
+	scanf_s("%d%d%d%d", &a, &b, &c, &d);
+	if (c <= b&&d >= a&&a <= b&&c <= d)
+		printf("yes");
+	else if (b<a || c>d)
+		printf("Input error");
+	else
+		printf("no");
+	return 0;
+}
+
+#include<stdio.h>//2강 9번문제(직사각형:4점의 좌표가 주어질때 사각형이 직사각형이되는가?)
+int main()
+{
+	int ax, ay, j = 0, k = 0, a, b;
+	int bx, by;
+	scanf_s("%d%d", &ax, &ay);
+	a = ax;
+	b = ay;
+	for (int i = 1; i <= 3; i++)
+	{
+
+		scanf_s("%d%d", &bx, &by);
+		if (ax == bx)//x좌표는 동일하고 y좌표는 다른경우(세로)
+			j++;
+		else if (ay == by)//y좌표는 동일하고 x좌표는 다른경우(가로)
+			k++;
+		ax = bx; ay = by;
+	}
+	if (ax == a)
+		j++;
+	else if (ay == b)
+		k++;
+	if (j == 2 && k == 2)//직사각형이되려면 가로면 2개 세로면 2개가 있어야함으로.
+		printf("Yes");
+	else
+		printf("No");
+	return 0;
+}
+
+#include<stdio.h>//2강 10번(길이:입력된 점들을 다 이은 길이)
+#include<math.h>
+int main()
+{
+	int n;
+	double sum = 0;
+	double a, b;
+	double z, k;
+	scanf_s("%d", &n);
+	scanf_s("%lf%lf", &z, &k);
+	a = z;
+	b = k;
+	int i;
+	int s = 0;//두점사이 길이를 계산하는 횟수
+	for (i = 1; i < n; i++)
+	{
+		double x, y;
+		scanf_s("%lf%lf", &x, &y);
+		if (a == x || b == y)
+		{
+			sum += sqrt((x - a)*(x - a) + (y - b)*(y - b));
+			a = x;
+			b = y;
+			s++;
+		}
+		else
+			break;
+	}
+	if (s < n - 1)
+		printf("Input error");
+	else
+		printf("%f", sum);
+	return 0;
+}
+
+#include<stdio.h>//2강 11번(방향함수:좌회전,우회전,직전,유턴을 출력) 
+int input(int, int, int, int);
+void judge(int, int, int, int, int);
+int j, j1;
+int straight = 0, u_turn = 0, left = 0, right = 0;
+int main(void)
+{
+	int x, y, x1, y1;
+	scanf_s("%d %d", &x, &y);
+	for (int i = 0; i < 2; i++) {
+		scanf_s("%d %d", &x1, &y1);
+
+		if (input(x, y, x1, y1) == 1)
+			return 0;
+		else
+			judge(i, x, y, x1, y1);
+		x = x1;
+		y = y1;
+	}
+	if (left == 1)
+		printf("left");
+	else if (right == 1)
+		printf("right");
+	else if (straight == 1)
+		printf("straight");
+	else
+		printf("u_turn");
+	return 0;
+}
+int input(int x, int y, int x1, int y1) //두점이 같은 x좌표나 같은 y좌표둘중 하나도 안가질경우
+{
+	if ((x != x1 && y != y1) == 1) {
+		printf("input error");
+		return 1;
+	}
+	return 0;
+}
+void judge(int i, int x, int y, int x1, int y1) //방향 함수를 세운다.
+{
+	if (x == x1 && y < y1) j = 0;
+	else if (x == x1 && y > y1) j = 2;
+	else if (y == y1 && x < x1) j = 1;
+	else j = 3;
+	if (i != 0)
+	{
+		if (j1 == j) straight += 1;
+		if (j1 + 2 == j || j1 - 2 == j) u_turn += 1;
+		if (j1 + 1 == j || (j1 - j) == 3) right += 1;
+		if (j1 - 1 == j || (j - j1) == 3) left += 1;
+	}
+	j1 = j;
+}
+
+#include<stdio.h>//2강 12번(방향함수:좌회전,우회전,직전,유턴의 개수) 
+int input(int, int, int, int);
+void judge(int, int, int, int, int);
+int j, j1;
+int straight = 0, u_turn = 0, left = 0, right = 0;
+int main(void)
+{
+	int x, y, x1, y1, n;
+	scanf_s("%d", &n);
+	scanf_s("%d %d", &x, &y);
+	for (int i = 0; i < n - 1; i++) {
+		scanf_s("%d %d", &x1, &y1);
+
+		if (input(x, y, x1, y1) == 1)
+			return 0;
+		else
+			judge(i, x, y, x1, y1);
+		x = x1;
+		y = y1;
+	}
+	printf("%d %d %d %d\n", left, straight, right, u_turn);
+	return 0;
+}
+int input(int x, int y, int x1, int y1) //두점이 같은 x좌표나 같은 y좌표둘중 하나도 안가질경우
+{
+	if ((x != x1 && y != y1) == 1) {
+		printf("input error");
+		return 1;
+	}
+	return 0;
+}
+void judge(int i, int x, int y, int x1, int y1) 
+{
+	if (x == x1 && y < y1) j = 0;
+	else if (x == x1 && y > y1) j = 2;
+	else if (y == y1 && x < x1) j = 1;
+	else j = 3;
+	if (i != 0)
+	{
+		if (j1 == j) straight += 1;
+		if (j1 + 2 == j || j1 - 2 == j) u_turn += 1;
+		if (j1 + 1 == j || (j1 - j) == 3) right += 1;
+		if (j1 - 1 == j || (j - j1) == 3) left += 1;
+	}
+	j1 = j;
+}
+
+#include<stdio.h>//2강 14번 문제(두선분이 교차하는지 아닌지)
+int main()
+{
+	int a, b, c, d, e, f, g, h;
+	scanf_s("%d%d%d%d%d%d%d%d", &a, &b, &c, &d, &e, &f, &g, &h);
+	if (a > c || f > h)//b==d,e==g를 가정하고 문제를 푼다.
+		;
+	else
+	{
+		if (b <= h&&f <= b&&a <= e&&e <= c)
+			printf("yes");
+		else
+			printf("no");
+	}
+	return 0;
+}
+
+#include<stdio.h>//2강 15번문제(달력)
+#pragma warning(disable:4996)
+int main()
+{
+	int days, day1;
+	int i;
+	scanf("%d%d", &days, &day1);
+	for (int j = 1; j < day1; j++)
+		printf("      ");
+	for (i = 1; i <= 7 - day1 + 1; i++)
+	{
+		if (i<8 - day1)
+			printf("%d     ", i);
+		else
+			printf("%d     \n", i);
+
+	}
+	while (i <= days)
+	{
+		if (i == 8 - day1 + 7 || i == 8 - day1 + 14 || i == 8 - day1 + 21 || i == 8 - day1 + 28)
+			printf("%d    \n", i);
+		else
+			printf("%d    ", i);
+		i++;
+	}
+	return 0;
+}
+
+#include<stdio.h>//3강 1번(홀수와 짝수의 합이 동일하면 그땨index출력)
+int main()
+{
+	int i = 0, sum1 = 0, sum2 = 0;
+	while (1)
+	{
+		if (sum1 == sum2&&sum1!=0&&sum2!=0)
+			break;
+		else
+		{
+			int n;
+			scanf_s("%d", &n);
+			if (n % 2 == 0)
+				sum2 += n;
+			else
+				sum1 += n;
+			i++;
+		}
+	}
+	printf("%d", i );
+	return 0;
+}
+
+#include<stdio.h>//3강 2번(이진수 출력:양의정수 n을 입력 받은후 이진수로 변환)
+int main()
+{
+	int n, v = 1, i = 0;
+	scanf_s("%d", &n);
+	while (v <= n)
+	{
+		v = v * 2;
+	}
+	while (v > 0)
+	{
+		if (n >= v)
+		{
+			n = n - v;
+			printf("1");
+		}
+		else if (i != 0)
+			printf("0");
+		else if (n == 0)
+			printf("0");
+		v = v / 2;
+		i++;
+	}
+}
+
+#include<stdio.h>//3강 3번(최대공약수 구하기)
+int main()
+{
+	int x, y, gcd, a, b;
+	scanf_s("%d%d", &x, &y);
+	if (x < y) { int tmp = x; x = y; y = tmp; }
+	if (x > y&&x >= 0 && y >= 0)
+	{
+		if (x%y == 0)
+			gcd = y;
+		else
+		{
+			while (x%y != 0)
+			{
+				a = x;
+				b = y;
+				x = y;
+				y = a%b;
+			}
+			gcd = y;
+		}
+	}
+	printf("%d", gcd);
+	return 0;
+}
+
+#include<stdio.h>//3강 4번(역순서:정수 자리뒤집기)
+int main()
+{
+	int n,sum=0;
+	scanf_s("%d", &n);
+	while (n > 0)
+	{
+		sum = n % 10;
+		printf("%d", sum);
+		n /= 10;
+	}
+}
+
+#include<stdio.h>//3강 5번(두번째로 큰 수 : 입력된수들중 가장 큰수와 두번째로 큰수)
+int main()
+{
+	int n, n1, n2, max, max2;
+	scanf_s("%d", &n);
+	n1 = n;
+	scanf_s("%d", &n);
+	n2 = n;
+	if (n1 >= n2)
+	{
+		max = n1;
+		max2 = n2;
+	}
+	else
+	{
+		max = n2;
+		max2 = n1;
+	}
+	while (1)
+	{
+		scanf_s("%d", &n);
+		if (n == -1)
+			break;
+		else 
+		{
+			if (n > max)
+			{
+				int tmp = max; max = n; max2 = tmp;
+			}
+			else if (n >= max2)
+				max2 = n;
+		}
+	}
+	printf("%d %d", max, max2);
+	return 0;
+}
+
+#include<stdio.h>//3강 6번(제곱근 구하는 프로그램)
+int main()
+{
+	double y=1.0, x, e,y1,a;
+	scanf_s("%lf", &x);
+	while (1)
+	{
+		y1 = (y + (x / y)) / 2.0;
+		e = y1*0.00001;
+		double diff=y1 - y;
+		if (diff < 0)
+			diff = -diff;
+		y = y1;
+		if (diff < e)
+			break;
+	}
+	printf("%lf\n",y);
+	return 0;
+}
+
+#include<stdio.h>//3강 7번(local minima의 개수)
+int main()
+{
+	int n, n1, n2, local_minima = 0;
+	scanf_s("%d", &n);
+	n1 = n;
+	scanf_s("%d", &n);
+	n2 = n;
+	if (n2 >= n1)
+		local_minima += 1;
+	while (1)
+	{
+		scanf_s("%d", &n);
+		if (n == -1)
+			break;
+		if (n2 <= n1&&n2 <= n)
+			local_minima += 1;
+		n1 = n2;
+		n2 = n;
+	}
+	if (n2 <= n1)
+		local_minima += 1;
+	printf("%d", local_minima);
+	return 0;
+}
+
+#include<stdio.h>//3강 8번(세금 구하기)
+int main()
+{
+	double n, tax;
+	scanf_s("%lf", &n);
+	if (n <= 12000000)
+		tax = n*0.06;
+	else if (n <= 46000000)
+		tax = 12000000 * 0.06 + (n - 12000000)*0.15;
+	else if (n <= 88000000)
+		tax = 12000000 * 0.06 + (46000000 - 12000000)*0.15 + (n - 46000000)*0.24;
+	else if (n <= 150000000)
+		tax = 12000000 * 0.06 + (46000000 - 12000000)*0.15 + (88000000 - 46000000)*0.24 + (n - 88000000)*0.35;
+	else if (n <= 500000000)
+		tax = 12000000 * 0.06 + (46000000 - 12000000)*0.15 + (88000000 - 46000000)*0.24 + (150000000 - 88000000)*0.35 + (n - 150000000)*0.38;
+	else
+		tax = 12000000 * 0.06 + (46000000 - 12000000)*0.15 + (88000000 - 46000000)*0.24 + (150000000 - 88000000)*0.35 + (500000000 - 150000000)*0.38 + (n - 500000000)*0.4;
+	printf("%lf", tax);
+	return 0;
+}
+
+#include<stdio.h>//3강 9번문제(비증가 비감소 수열 판정)
+int main()
+{
+	int n, n2, result = 0, result1 = 0, k = 0, j = 0, a, b, c, d;//j는 이전수보다 증가k는 감소를의미(1은참 0은거짓으로 간주)
+	scanf_s("%d%d", &n2, &n);
+	if (n2 != n)
+	{
+		c = n2;
+		d = n;//c와d는 처음으로 연속해서 입력된 서로 다른 정수(c<d)
+	}
+	else {
+		while (n2 == n)
+		{
+			n2 = n;
+			scanf_s("%d", &n);
+		}
+		c = n2; d = n;
+	}
+	while (n != -1)
+	{
+		if (n > n2)
+		{
+			result += 1;
+			a = n2;
+			b = n;//a와b는 마지막으로 연속해서 입력된 서로 다른 정수(a<b)
+
+		}
+		else if (n < n2)
+		{
+			result -= 1;
+			a = n2;
+			b = n;
+		}
+		if (result1 > result&&n < n2)//n이감소하면
+		{
+			if (k == 1)
+			{
+				k = k;
+				if (j == 1)
+					k += 1;
+			}
+			else if (k == 0)
+			{
+				k = k + 1;
+			}
+
+		}
+		else if (result1 < result&&n>n2)//n이증가하면
+		{
+			if (j == 1)
+			{
+				j = j;
+				if (k == 1)
+					j += 1;
+			}
+			else if (j < 1)
+			{
+				j = j + 1;
+			}
+		}
+		n2 = n;
+		result1 = result;
+		scanf_s("%d", &n);
+	}
+	if ((j == 1 && k == 0) || (j == 0 && k == 1) || (j == 0 && k == 0))
+		printf("both");
+	if (k + j == 2)
+	{
+		if (k == 1 && a > b)
+			printf("convex");
+		else if (j == 1 && a < b)
+			printf("concave");
+	}
+	if (j + k >= 3)
+	{
+		if (j == 2 && k == 1 && c < d&&a<b)
+			printf("None");
+		else if (j == 2 && k == 1 && c < d&&a>b)
+			printf("convex");
+		else if (j == 2 && k == 1 && c > d)
+			printf("concave");
+		if (j == 1 && k == 2 && c > d&&a>b)
+			printf("None");
+		else if (j == 1 && k == 2 && c > d&&a<b)
+			printf("concave");
+		else if (j == 1 && k == 1 && c < d)
+			printf("convex");
+	}
+	return 0;
+}
+
+#include <stdio.h>//4강 1번(정수 점의 개수:이차원 평면의 1사분면 그래프)
+int main() 
+{
+	int count = 0;
+	for (int x = 0; x <= 100; x++) {
+		for (int y = 0; y <= 100; y++) {
+			if (y >= x / 3.0 && y <= 2.0*x / 3 && x*x + y*y <= 10000)
+				count++;
+		}
+	}
+	printf("%d\n", count);
+}
+
+#include <stdio.h> //4강 2번(2~100까지 서로소인 서로다른 세개의 정수쌍의 개수)
+int main() {
+	int count = 0;
+	for (int a = 2; a <= 100; a++) {
+		for (int b = a + 1; b <= 100; b++) {
+			int m = b, n = a;
+			while (m % n != 0) {
+				m = m % n;
+				int tmp = m;
+				m = n;
+				n = tmp;
+			}
+			if (n > 1)
+				continue;
+			for (int c = b + 1; c <= 100; c++) {
+				int m = c, n = a;
+				while (m % n != 0) {
+					m = m % n;
+					int tmp = m;
+					m = n;
+					n = tmp;
+				}
+				if (n > 1)
+					continue;
+				m = c, n = b;
+				while (m % n != 0) {
+					m = m % n;
+					int tmp = m;
+					m = n;
+					n = tmp;
+				}
+				if (n > 1)
+					continue;
+				printf("%d %d %d\n", a, b, c);
+				count++;
+			}
+		}
+	}
+	printf("%d\n", count);
+}
+
+#include<stdio.h>//4강 3번(n까지의 x,y좌표를 출력하는데 y좌표가 증가하는 순서대로 출력.같을경우x좌표가 짝수이면 증가하는순서,홀수이면 감소하는 순서대로 출력)
+int main()
+{
+	int n;
+	int x;
+	scanf_s("%d", &n);
+	for (int y = 0; y <= n; y++)
+	{
+		if (y % 2 == 0) 
+		{
+			for (x = 0; x <= n; x++)
+				printf("(%d,%d)\n", x, y);
+		}
+		if (y % 2 != 0)
+		{
+			for (x = n; x >= 0; x--)
+				printf("(%d,%d)\n", x, y); 
+		}
+	}
+	return 0;
+}
+
+#include<stdio.h>//4강 4번(x,y좌표 합의 오름차순으로 출력+같을경우 x좌표의 오름차순으로 출력)
+int main()
+{
+	int x, y, k;
+	scanf_s("%d", &k);
+	for (int sum = 0; sum <= k; sum++)
+		for (x = 0; x <= sum; x++)
+			for (y = sum - x; y >= 0 && x + y <= k; y--)
+			{
+				printf("(%d,%d)\n", x, y);
+				break;
+			}
+	return 0;
+}
+
+#include<stdio.h>//4강 5번(n까지 종이에 쓸때 0이 몇번 포함되는가)
+#pragma warning(disable:4996)
+int main()
+{
+	int n, count = 0;
+	scanf("%d", &n);
+	for (int i = 1; i <= n; i++)
+	{
+		int k = i;
+		while (k > 0)
+		{
+			if (k % 10 == 0)
+			{
+				count++;
+			}
+			k = k / 10;
+		}
+	}
+	printf("%d", count);
+	return 0;
+}
+
+#include<stdio.h>//4강6번문제(1~n까지 수들중 각자리 합이 7의배수인 것들의 개수) 
+int main()
+{
+	int n, count = 0, sum, i, j;
+	scanf_s("%d", &n);
+	for (i = 1; i <= n; i++)
+	{
+		sum = 0; j = i;
+		while (j>0)
+		{
+			sum += j % 10;
+			j = j / 10;
+		}
+		if (sum % 7 == 0)
+			count++;
+	}
+	printf("%d", count);
+}
+
+#include<stdio.h>//4강 7번문제(동서남북 가다가 x나y가 절댓값n에 도달하면 종료)
+#include<stdlib.h>
+#include<time.h>
+int main()
+{
+	int n, x = 0, y = 0, count = 0, t, c;
+	scanf_s("%d", &n);
+	srand((unsigned)time(NULL));
+	for (t = 1; t <= 1000; t++)
+	{
+		while (x != n && y != n&&x != -n&&y != -n)
+		{
+			c = rand() % 4;//0은 동,1은 서,2는 남,3은 북을 의미
+			if (c == 0) { x++; count++; }
+			else if (c == 1) { x--; count++; }
+			else if (c == 2) { y--; count++; }
+			else { y++; count++; }
+		}
+		x = 0; y = 0;
+	}
+	printf("%d", count / 1000);
+	return 0;
+}
+
+#include<stdio.h>//4강 8번 문제(뉴튼의 주사위 법칙,확률)
+#include<stdlib.h>
+#include<time.h>
+int main()
+{
+	int b=0,b2=0;
+	srand((unsigned)time(NULL));
+	for (int t = 1; t <= 1000000; t++)
+	{
+		int count_a = 0, count = 0;
+		for (int i = 1; i <= 6; i++) //주사위를 6번던져서 적어도한번 1이 나오는것
+		{
+			int  c = rand() % 6;
+			if (c == 1)
+				count_a++;
+		}
+		if (count_a >= 1)
+			b++;
+		for (int j = 1; j <= 12; j++)//주사위를 12번 던져서 적어도 1이 두번이상 나오는 것
+		{
+			int  c = rand() % 6;
+			if (c == 1)
+				count++;
+		}
+		if (count >= 2)
+			b2++;
+	}
+	printf("6번던져서 적어도1이 한번 나올 경우의수는 %d이고 확률은 %lf \n12번던져서 1이적어도2번이상 나올 경우의 수는 %d 확률은 %lf이다.", b,(double)b/1000000,  b2,(double)b2/1000000);
+	return 0;
+}
+
+
+#include<stdio.h>//4강 10번(두 직사각형의 겹치는 면적)
+int main()
+{
+	int a, b, c, d, a2, b2, c2, d2, x = 0, y = 0;
+	scanf_s("%d%d%d%d%d%d%d%d", &a, &b, &c, &d, &a2, &b2, &c2, &d2);//a<c, b<d, a2<c2, b2<d2라고 가정한다.
+	if (d<b) { int k; k = d; d = b; b = k; }
+	if (d2 < b2) { int k; k = d2; d2 = b2; b2 = k; }
+	if (c < a) { int k; k = c; c = a; a = k; }
+	if (c2 < a2) { int k; k = c2; c2 = a2; a2 = k; }
+	for (int i = a; i <= c; i++)
+	{
+		for (int j = a2; j <= c2; j++) {
+			if (i == j)
+				x++;
+		}
+	}
+	for (int i = b; i <= d; i++) {
+		for (int j = b2; j <= d2; j++) {
+			if (i == j)
+				y++;
+		}
+	}
+	printf("%d", (x - 1)*(y - 1));
+	return 0;
+}
+#include<stdio.h>//5강1번문제(k보다 작거나 같으면서 가장 큰 정수를 찾아 인덱스,정수의 값,k와의 차의 절댓값)
+#include<stdlib.h>
+int main()
+{
+	int data[100];
+	int n, count = 0, index = 0, tmp = 0;
+	int i, j;
+	scanf_s("%d", &n);
+	for (j = 0; j < n; j++)
+		scanf_s("%d", &data[j]);
+	int small = data[0];
+	int k;
+	scanf_s("%d", &k);
+	for (i = 1; i < n; i++)
+	{
+		if (small != data[i])
+		{
+			if (small < data[i] && data[i] < k)
+			{
+				small = data[i]; count++; index = i;
+			}
+			else if (data[i] == k)
+			{
+				small = data[i]; count++; index = i; break;
+			}
+			else;
+		}
+		else
+			;
+	}
+	if (count != 0)
+		printf("%d %d %d", index, small, abs(k - small));
+	else
+		printf("-1");
+}
+
+#include<stdio.h>//5 강2번문제(가장작은정수와 두번째로 작은정수)
+int main()
+{
+	int n,i;
+	scanf_s("%d", &n);
+	int data_pos = 0;
+	int data[500];
+	for (int j = 0; j < n; j++)
+		scanf_s("%d", &  data[j]);
+	int min = data[0]; int sec_min = data[1];//data[0]<data[1]로 가정
+	if (data[0] > data[1]) { min = data[1]; sec_min = data[0]; }
+	for (i = 2; i < n; i++)
+	{
+		if (data[i] <= min)
+		{
+			sec_min = min; min = data[i];
+		}
+		else if (data[i] < sec_min)sec_min = data[i];
+	}
+	printf("%d %d", min, sec_min);
+	return 0;
+}
+#include<stdio.h>
+#include<math.h>//5 강3번문제(평균,표준편차)
+int main()
+{
+	double n,sum=0.0,SD=0.0;
+	scanf_s("%lf", &n);
+	double data[100];
+	for (int i = 0; i < n; i++)
+	{
+		scanf_s("%lf", &data[i]);
+		sum += data[i];
+	}
+	for (int i = 0; i < n; i++)
+	{
+		SD += (data[i] - sum / n)*(data[i] - sum / n);
+	}
+	printf("%lf %lf", sum / n, sqrt((1.0 / n)*SD));
+	return 0;
+}
+#include<stdio.h>//5 강4번문제(n에서 0~9까지의 digit가 얼만큼 등장했는가)
+int main()
+{
+	int n, r;
+	scanf_s("%d", &n);
+	int data[10] = { 0 };
+	while (1)
+	{
+		if (n <= 0)
+			break;
+		else
+		{
+			r = n % 10;
+			data[r] += 1;
+			n = n / 10;
+		}
+	}
+	for (int i = 0; i < 10; i++)
+		printf("%d ", data[i]);
+	return 0;
+}
+
+#include<stdio.h>//5강 5번문제(날짜:태어난 날부터 현재까지 살아온 날짜의 수)
+#define max 3
+int main()
+{
+ int month[12] = { 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31 };
+ int birthday[max];
+ int today[max];
+ for (int i = 0; i < 3; i++)
+  scanf_s("%d", birthday[i]);
+ for (int j = 0; j < 3; j++)
+  scanf_s("%d", today[j]);
+ int sum = 0;
+ sum += (today[0] - birthday[0]) * 365;
+ if (birthday[1] < today[1])
+ {
+  for (int k = 0; k < today[1] - birthday[1] ;k++)
+   sum += month[birthday[1]+k-1];//
+  if (birthday[2] < today[2])
+   sum += (today[2] - birthday[2]);
+  else if (birthday[2] == today[2])
+   ;
+  else
+   sum -= (birthday[2] - today[2]);
+ }
+ else if (birthday[1] == today[1])
+ {
+  if (birthday[2] < today[2])
+   sum += today[2] - birthday[2];
+  else if (birthday[2] == today[2])
+   ;
+  else
+   sum -= (birthday[2] - today[2]);
+ }
+ else
+ {
+  for (int k = 0; k < birthday[1] - today[1]; k++)
+   sum -= month[birthday[1] - k-1];//
+  if (birthday[2] < today[2])
+   sum += today[2] - birthday[2];//
+  else if (birthday[2] > today[2])
+   sum -= birthday[2] - today[2]-1;//
+  else
+   ;
+ }
+ printf("%d", sum);
+ return 0;
+}
+
+#include<stdio.h>//5강 6번문제(n개의 정수 중에서 k와의 절댓값이 가장작은 정수 출력)
+#include<stdlib.h>
+#pragma warning(disable:4996)
+#define max 100
+int main()
+{
+	int n;
+	int data[max];
+	scanf("%d", &n);
+	int i;
+	int index;
+	for (i = 0; i < n; i++)
+		scanf("%d", &data[i]);
+	int k;
+	scanf("%d", &k);
+	int closer = abs(k - data[0]);
+	for (int j = 1; j < i; j++)
+	{
+		if (abs(k - data[j]) < closer)
+		{
+			closer = abs(k - data[j]);
+			index = data[j];
+		}
+	}
+	printf("%d", index);
+}
+
+
+#include<stdio.h>//5강 7번문제(한칸씩 미루기)
+#pragma warning(disable:4996)
+#define MAX 100
+int main()
+{
+	int data[MAX];
+	int i = 0;
+	FILE*fp = fopen("input7.txt", "r");
+	while (fscanf_s(fp, "%d", &data[i]) != EOF)//파일 끝이면 EOF를 보여준다.
+		i++;
+	fclose(fp);
+	int pre = data[i-1];
+	for (int j = i-1; j >0; j--)
+		data[j] = data[j - 1];
+	data[0] = pre;
+	for (int k = 0; k < i; k++)
+		printf("%d ", data[k]);
+}
+
+#include<stdio.h>//5강 8번문제(배열순서뒤집기)
+#pragma warning(disable:4996)
+#define max 100
+int main()
+{
+	int data[max];
+	int i = 0;
+	FILE*fp = fopen("input7.txt", "r");
+	while (fscanf_s(fp, "%d", &data[i]) != EOF)
+		i++;
+	fclose(fp);
+	for (int j = 0; j < i / 2; j++)
+	{
+		int tmp = data[j]; data[j] = data[i - j - 1]; data[i - j - 1] = tmp;
+	}
+	for (int k = 0; k < i; k++)
+		printf("%d ", data[k]);
+}
+
+#include<stdio.h>//5강 9번문제(리더 개수 출력:자신보다 먼저 나온 모든 정수들보다 크거나 같은 정수)
+#pragma warning(disable:4996)
+#define max 100
+int main()
+{
+	int data[max];
+	int reader[max];
+	int i = 0;
+	FILE*fp = fopen("input7.txt", "r");
+	while (fscanf(fp, "%d", &data[i]) != EOF)
+		i++;
+	fclose(fp);
+	reader[0] = data[0];
+	int k = 0;//readerr함수의 index=k,data 배열의 index가 j,data배열의 전체 수가 i
+	for (int j = 1; j <= i; j++)
+	{
+		if (k < i&&data[j] >= reader[k])
+		{
+			k++;
+			reader[k] = data[j];
+		}
+	}
+	printf("%d:", k + 1);
+	for (int q = 0; q < k + 1; q++)
+		printf("%d ", reader[q]);
+}
+
+#include<stdio.h>//5강 10번문제(주식)
+#pragma warning(disable:4996)
+int main()
+{
+	int data[500];
+	int i = 0;
+	FILE*fp = fopen("input10.txt","r" );
+	while (fscanf(fp, "%d", &data[i]) != EOF)
+		i++;
+	fclose(fp);
+	int first = data[0];
+	int index = 0, index_a = 0, sum = 0, buy = 0, sell = 0, count;
+	for (int j = 1; j < i; j++)
+	{
+		if (first < data[j] && buy == 0)
+		{
+			index_a = j - 1;
+			buy++;
+		}//사야하는날
+		else if (first > data[j] && sell == 0 && buy == 1)
+		{
+			index = j - 1;
+			sell++;
+		}//팔아야하는날
+		if (buy == 0 && sell == 0 && count == 0)//이전의 사고 판 거래흔적이 없고 지금도 거래를 안했을때
+			sum = 0;
+		else if (buy == 1 && sell == 1)
+		{
+			sum += data[index] - data[index_a];
+			buy = 0; sell = 0; count = 1;
+		}
+		first = data[j];
+	}
+	if (buy == 1 && sell == 0)//사놓고 계속올라서 팔지못했을때
+		sum += data[i - 1] - data[index_a];
+	printf("%d", sum);
+}
+
+#include<stdio.h>//5강 11번문제(두 배열의 수가 번갈아 가면서 나오게)
+#define max 100
+int main()
+{
+ int data1[max];
+ int data2[max];
+ int i = 0,j=0;
+ FILE*fp = fopen("input11_1.txt", "r");
+ while (fscanf(fp, "%d", &data1[i]) != EOF)
+  i++;
+ fclose(fp);
+ FILE*fp = fopen("input11_2.txt", "r");
+ while (fscanf(fp, "%d", &data2[j]) != EOF)
+  j++;
+ fclose(fp);
+ if (i == j)
+ {
+  for (int k = 0; k < i; k++)
+   printf("%d %d ", data1[k], data2[k]);
+ }
+} 
+
+#include<stdio.h>//5강12번(두 배열:모든점의 중점 좌표와 그 중점과 모든점들의 거리 평균)
+#include<math.h>
+#define max 100
+int main()
+{
+ FILE*fp = fopen("input12.txt", "r");
+ int i = 0;
+ double x[max];
+ double y[max];
+ double xsum = 0.0, ysum = 0.0, legth = 0.0;
+ double n1=1, n2=1;
+ while (1) {
+  if (n1 == EOF || n2 == EOF)//EOF는 0이다.
+   break;
+  n1 = fscanf(fp, "%lf", &x[i]);
+  n2 = fscanf(fp, "%lf", &y[i]);
+  i++;
+ }
+ fclose(fp);
+ for (int j = 0; j < i; j++)
+ {
+  xsum += x[j];
+  ysum += y[j];
+ }
+ double xmid = (double)xsum / i;
+ double ymid = (double)ysum / i;
+ printf("%lf %lf", xmid, ymid);
+ for (int k = 0; k < i; k++)
+  legth += sqrt((x[k] - xmid)*(x[k] - xmid) + (y[k] - ymid)*(y[k] - ymid));
+ printf("%lf", (double)legth / i);
+ return 0;
+} 
